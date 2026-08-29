@@ -1,0 +1,15 @@
+{
+  "name": "ton-wallet-service",
+  "version": "1.0.0",
+  "description": "TON HD Wallet Service for payment processing",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@ton/ton": "^13.9.0",
+    "@ton/crypto": "^3.2.0",
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  }
+}
