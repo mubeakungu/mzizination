@@ -1,0 +1,1715 @@
+/* Cashier Button - Dark Theme Overrides */
+.btn-cashier {
+    background: linear-gradient(360deg, #6366f1, #818cf8) !important;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    color: white !important;
+}
+
+.btn-cashier:hover {
+    background: linear-gradient(360deg, #818cf8, #a5b4fc) !important;
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+/* Cashier Modal - Dark Theme Overrides */
+.cashier-modal {
+    background: #1e293b;
+    border-color: #334155;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.cashier-head {
+    border-bottom-color: #334155;
+}
+
+.cashier-title {
+    color: #f1f5f9;
+}
+
+.cashier-close {
+    color: #94a3b8;
+}
+.cashier-close:hover {
+    color: #f1f5f9;
+}
+
+.cashier-tabs {
+    border-bottom-color: #334155;
+}
+
+.cashier-tab {
+    color: #94a3b8;
+}
+.cashier-tab:hover {
+    color: #f1f5f9;
+}
+.cashier-tab.active {
+    color: #60a5fa;
+    border-bottom-color: #60a5fa;
+}
+
+.cashier-system {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.cashier-system:hover, .cashier-system.active {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: #3b82f6;
+}
+
+.cashier-system span {
+    color: #cbd5e1;
+}
+
+.form-group label {
+    color: #94a3b8;
+}
+
+.cashier-input {
+    background: #0f172a;
+    border-color: #334155;
+    color: #f1f5f9;
+}
+
+.cashier-input:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+}
+
+.quick-amounts button {
+    background: rgba(255, 255, 255, 0.05);
+    color: #cbd5e1;
+}
+
+.quick-amounts button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #f1f5f9;
+}
+
+.cashier-btn-action {
+    background: linear-gradient(360deg, #6366f1, #818cf8);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.withdraw-btn {
+    background: linear-gradient(360deg, #6366f1, #818cf8);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.deposit-warning {
+    background: rgba(245, 158, 11, 0.1);
+    border-color: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+}
+
+/* TON Promo Section - Dark */
+.ton-promo-box {
+    background: linear-gradient(135deg, rgba(0, 136, 204, 0.15), rgba(0, 168, 232, 0.05));
+    border-color: rgba(0, 136, 204, 0.3);
+}
+.ton-promo-title { color: #00a8e8; }
+.ton-promo-desc { color: #94a3b8; }
+
+.ton-feature {
+    background: rgba(0, 136, 204, 0.08);
+    border-color: rgba(0, 136, 204, 0.2);
+    color: #94a3b8;
+}
+.ton-feature i { color: #00a8e8; }
+
+.withdraw-calc {
+    background: rgba(255, 255, 255, 0.03);
+    color: #cbd5e1;
+}
+
+.cashier-error {
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.history-filter {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.history-filter button {
+    color: #94a3b8;
+}
+
+.history-filter button.active {
+    background: #3b82f6;
+    color: #fff;
+    box-shadow: none;
+}
+
+.history-item {
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+.h-icon {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.h-icon-deposit {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.h-icon-withdraw {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.h-expand-icon {
+    color: #64748b;
+}
+
+.h-title {
+    color: #f1f5f9;
+}
+
+.amount-number,.form-control,.set_bubbles {
+    color: #cbd5e1!important;
+}
+
+.cards,.modal-content {
+    box-shadow: 0 25px 35px #0f141975!important;
+}
+
+.search_ input {
+    color: #cbd5e1!important;
+    background-color: #0f1419!important;
+    border: 2px solid #334155!important;
+}
+
+.search_::before {
+    filter: invert(.8);
+}
+
+.live .username,.live .coef {
+    color: #ddd!important;
+}
+
+.live .slotname {
+    color: #fff!important;
+}
+
+.live_ {
+    background-image: linear-gradient(90deg,#1e2435,#1e2435)!important;
+    box-shadow: 0 0 5px 0 #1e2435!important;
+}
+
+.logo_img {
+    background-image: url(/image/new_logo.png)!important;
+}
+
+/* Логотип для всех PC экранов (не мобильные) - принудительно темный */
+@media (min-width: 993px) {
+    .logo_img,
+    .left-main .logoBox .logo_img,
+    .left-main.cards .logoBox .logo_img,
+    #left-main .logoBox .logo_img,
+    #left-main.cards .logoBox .logo_img {
+        background-image: url(/image/new_logo.png)!important;
+    }
+}
+
+.mob_logo {
+    background-image: url(/image/new_logo.png)!important;
+    transition: none !important;
+}
+
+.mob_logo:hover,
+.list:hover .mob_logo,
+.top_:hover .mob_logo,
+.list .mob_logo,
+.top_ .mob_logo,
+.header_in .mob_logo,
+.header_in:hover .mob_logo,
+.header:hover .mob_logo,
+.header .mob_logo,
+.header .list .mob_logo,
+.header .list:hover .mob_logo {
+    background-image: url(/image/new_logo.png) !important;
+    filter: none !important;
+    background-size: 92% !important;
+    background-position: center !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* Принудительно темный логотип для всех PC экранов (не мобильные, больше 992px) */
+@media (min-width: 993px) {
+    .mob_logo,
+    .mob_logo:hover,
+    .list:hover .mob_logo,
+    .top_:hover .mob_logo,
+    .list .mob_logo,
+    .top_ .mob_logo,
+    .header_in .mob_logo,
+    .header_in:hover .mob_logo,
+    .header:hover .mob_logo,
+    .header .mob_logo,
+    .header .list .mob_logo,
+    .header .list:hover .mob_logo,
+    .mobile-top-logo .mob_logo,
+    .mobile-top-logo:hover .mob_logo,
+    .mobile-top-logo:active .mob_logo,
+    .mobile-top-logo:focus .mob_logo,
+    .header .mobile-top-bar .mobile-top-logo .mob_logo,
+    .header .mobile-top-bar .mobile-top-logo:hover .mob_logo,
+    .header .mobile-top-bar .mobile-top-logo:active .mob_logo,
+    .header .mobile-top-bar .mobile-top-logo:focus .mob_logo,
+    .mobile-top-bar .mobile-top-logo .mob_logo,
+    .mobile-top-bar .mobile-top-logo:hover .mob_logo,
+    .mobile-top-bar .mobile-top-logo:active .mob_logo,
+    .mobile-top-bar .mobile-top-logo:focus .mob_logo {
+        background-image: url(/image/new_logo.png) !important;
+        filter: none !important;
+        background-size: 92% !important;
+        background-position: center !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+.circle-online {
+    background-image: linear-gradient(360deg,#9c8ade,#8169db)!important;
+}
+
+.blue,.cards,.casino-set:hover,.games-item:hover,.games-menu,.header {
+    box-shadow: none!important;
+}
+
+.amount-number:hover,.blue:hover,.casino-play__control:hover,.casino-set:hover,.games-item:hover,.ser:hover {
+    background-image: linear-gradient(180deg,#818cf8,#a5b4fc)!important;
+}
+.redinp {
+    background-color: #0f1419;
+    border: 0;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    color: #cbd5e1;
+    height: 100%;
+    outline: none;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+.games-item.isActive,.mob-menu-item.isActive {
+    background-image: linear-gradient(180deg,#818cf8,#a5b4fc)!important;
+}
+
+.cards {
+    background-image: linear-gradient(180deg,#1a1f2e,#252b3d)!important;
+}
+
+.blue,.casino-play__control,.casino-set,.page-item.active .page-link,.games-item,.ser {
+    background-image: linear-gradient(360deg,#6366f1,#818cf8)!important;
+}
+
+.amount-number {
+    background-image: linear-gradient(360deg,#475569,#64748b)!important;
+}
+
+.amount-number.active {
+    background-image: linear-gradient(180deg,#818cf8,#a5b4fc)!important;
+    color: #fff!important;
+}
+
+body {
+    background-color: #0f1419!important;
+    color: #f1f5f9!important;
+}
+
+.diceRouletteBox {
+    background-color: #1a1f2e!important;
+    border: 1px solid #1a1f2e!important;
+}
+
+.set_bubbles {
+    background: #1a1f2e!important;
+}
+
+.bubbles_btn {
+    border-right: 1px solid #5b6481a8;
+}
+
+.bubbles-pick-helper,.bubbles-pick-helper-mobile {
+    border: 1px solid #5b6481a8!important;
+}
+
+.form-control {
+    background-color: #0f1419!important;
+    border: 1px solid #334155!important;
+}
+
+.games-menu,.header {
+    background-color: #1e2435!important;
+}
+
+/* Стили для раскрывающегося меню в темной теме */
+.left-main.collapsed .menu-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.left-main.collapsed .toggle-menu-btn {
+    color: #cbd5e1;
+}
+
+.left-main.collapsed .toggle-menu-btn:hover {
+    background-color: rgba(99, 102, 241, 0.2);
+    color: #6366f1;
+}
+
+.search-input-wrapper {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.search-input-wrapper:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(99, 102, 241, 0.5) !important;
+}
+
+.search-input-wrapper input {
+    color: #cbd5e1 !important;
+}
+
+.search-input-wrapper input::placeholder {
+    color: #94a3b8 !important;
+}
+
+.search-input-wrapper svg {
+    color: #94a3b8 !important;
+}
+
+.contact-box-collapsed:hover {
+    background-color: rgba(99, 102, 241, 0.2) !important;
+}
+
+.social-links {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.social-link {
+    color: #cbd5e1 !important;
+}
+
+.social-link:hover {
+    background: rgba(99, 102, 241, 0.2) !important;
+    color: #818cf8 !important;
+}
+
+.social-text {
+    color: #cbd5e1 !important;
+}
+
+.amount-number {
+    border: 1px solid #334155!important;
+}
+
+.still svg {
+    fill: #cbd5e1!important;
+}
+
+.mob-menu {
+    background: 0 0;
+    background-image: linear-gradient(180deg,#1a1f2e,#252b3d)!important;
+}
+
+.mob-menu-title {
+    color: #cbd5e1;
+}
+
+.mob-img.bonus,.mob-img.bonus:hover {
+    background-color: transparent;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAFyGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNi4wLWMwMDIgNzkuMTY0NDg4LCAyMDIwLzA3LzEwLTIyOjA2OjUzICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjIuMCAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIzLTAzLTE4VDE1OjAzOjI2KzAzOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMy0wMy0xOFQxNjo1OTozNyswMzowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMy0wMy0xOFQxNjo1OTozNyswMzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDE5OTBjYWItOTFkMC1jYzRjLTkxZTktYzdjNzI3Njk4ZWRiIiB4bXBNTTpEb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6Mzk1MDI0NjgtZWZlZi1kYTQ0LThhYjktN2M5OTQ0ZTljMTRmIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6NjNkMmJkYzctNjhhZS0yNTQ3LWE4Y2EtZDhiMTQwYmRmYmU5Ij4gPHhtcE1NOkhpc3Rvcnk+IDxyZGY6U2VxPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iY3JlYXRlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDo2M2QyYmRjNy02OGFlLTI1NDctYThjYS1kOGIxNDBiZGZiZTkiIHN0RXZ0OndoZW49IjIwMjMtMDMtMThUMTU6MDM6MjYrMDM6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMi4wIChXaW5kb3dzKSIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6NDE5OTBjYWItOTFkMC1jYzRjLTkxZTktYzdjNzI3Njk4ZWRiIiBzdEV2dDp3aGVuPSIyMDIzLTAzLTE4VDE2OjU5OjM3KzAzOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjIuMCAoV2luZG93cykiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+eU57XQAAAo1JREFUWIXtlz1oFFEUhb+JiagkYgyr+AOKWikWIggSRSsVBEFUAgZBJIiaJpgipdjEwsY2jYKINoJWikVAEFRQgoWFiD9RNIXBfxOUmD0W70727cvM7mzImih7YLgzZ98798zb93MnksRsQd1MG/AxVTNHgEtAD7DAuDlAl/EdU1KVVOnVJmlEBZwxvsvjxiUdq1S7UiMHLNlTST2SrtvzC4u3jX9ozyeqZSayBM8C/pzxfQH/wPj6aphpNPHOgF9vfGvKKK7OmqOSCfwD+A7sD/hvFkcD/hAwBgxmTVCfwG0GGoFwAxJwBzgIXABuAuPARvt9F9AERMBuoA3oB1pxK81HZOYfFWcoDNNiSXf1d/FY0orYQ6TCDtwHHAdOAQMk70EC8sAa4BpwFrhlbwqwHThvOk9sRKJJKk5jHXAFuAq0hyPTb26zTLZma7sn4LcYvzajjiTdU8IEHrHYnPAmIZZZbAn4nMWlGTTi3KMhAW7yAXzOIPTS4vuAf2txMINGPshbtJruAztx//lzYG4JoXhkjgIb7F4UVlY38KpE/zFgud0PTLDe/9cg6fI0rpQsuCGpKfaQNKnyki5KyklaknDlJG0zsZNeu5ykw8bvLdO/19oV5Q43vTrcUvwEDJcY5gaLQ0G7dxbflOn/weIi4Iuf3Ee8U84rIRSLgNupfcSTcWGZ/n4NNIH/otKrCmpm0lAzk4aamTT8E2aq/QGeqJ9m5msZsdcWhwLeP5tK4aPFouMgPCh/4yr+Dlw9kicZKy22A6s8fpPFTlxNlIQIOG33xS+dUELskPRrGmuWNOwLc/tfBz66ga0kV/bxCA7jTu/5Hv8TV7a2kF4pClfd9U4ashQzM4JZtbT/AD5TgN9kp4M6AAAAAElFTkSuQmCC)!important;
+}
+
+.mob-img.main,.mob-img.main:hover {
+    background-color: transparent;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAACXBIWXMAABX+AAAV/gFgyXAMAAAG8GlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNi4wLWMwMDIgNzkuMTY0NDg4LCAyMDIwLzA3LzEwLTIyOjA2OjUzICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjIuMCAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIzLTAzLTE4VDE2OjQwOjE0KzAzOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMy0wMy0xOFQxNjo0NDozMyswMzowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMy0wMy0xOFQxNjo0NDozMyswMzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTViYjg0NTQtYzM1OC0zNjQzLWJmYzgtNzM2M2Q1ZDBiMDJlIiB4bXBNTTpEb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6MzYxNDg2ODYtMmQ1Ny1iYjQ0LThjNDQtODllYWUyNDYyZWQ1IiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6ODRiMTVmMmYtYTk5Yy01OTRiLWIyOGMtNjY3ZjQ1YTQwMDhkIj4gPHBob3Rvc2hvcDpEb2N1bWVudEFuY2VzdG9ycz4gPHJkZjpCYWc+IDxyZGY6bGk+YWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjZhZmJlMzgzLTBlOTktYjg0My05ZWMyLTYwOGMwOGNlN2U0ZTwvcmRmOmxpPiA8cmRmOmxpPmFkb2JlOmRvY2lkOnBob3Rvc2hvcDo4NjJiZDQ1Mi02OTQzLTM5NGMtYTI3Yy04MjA3NWIxMTY5NTg8L3JkZjpsaT4gPHJkZjpsaT54bXAuZGlkOjllOGZiOWMxLTYzMDAtOGQ0Mi05MGIyLWFiMmI0YmFiMGMyNDwvcmRmOmxpPiA8L3JkZjpCYWc+IDwvcGhvdG9zaG9wOkRvY3VtZW50QW5jZXN0b3JzPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjg0YjE1ZjJmLWE5OWMtNTk0Yi1iMjhjLTY2N2Y0NWE0MDA4ZCIgc3RFdnQ6d2hlbj0iMjAyMy0wMy0xOFQxNjo0MDoxNCswMzowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDIyLjAgKFdpbmRvd3MpIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDo1NWJiODQ1NC1jMzU4LTM2NDMtYmZjOC03MzYzZDVkMGIwMmUiIHN0RXZ0OndoZW49IjIwMjMtMDMtMThUMTY6NDQ6MzMrMDM6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMi4wIChXaW5kb3dzKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz56f1RQAAADTklEQVRYhe2XW4hWVRTHf984ZCml1HQZKKVSLDKtEclKpYt4gRLqQUQkKALDQER7C8TU7EkyCnqIHrpZlBWNPlhCKd3sYTSzK1MvOQ5YgRcSBKlfD2cdZs/hnO/7Tj44D7Ng8e211n/t/d9n7b3O+RoqI0U6LjSBVEbJVMmIItPZJDYWeBCYBYwB+oEjQB9wro25xwCzgRnATeE7BOwGTpRmqFW6Sj3kkPyp7lJXqzOa5KHeEvkfRV4uP6tPVeU1Sq52A9gHzA/7IHAGuB64toA9EHoU6AbuBO4uYI4DvwEXAz3h+wG4Czjd6sl8HbvYrl5aiI1V56ob1G8slz51s3pPSf449dnA9RfXLhLZGsDNLcqQ6nXqdHVSjZx1sc5rVWSuCsCPhcQ16pvqihqLpbq4IvfzWO/mMjJvFYPqG4USPF2TyJIkd2Mhdk34PyuSGReBtI6Lw7dTnaD+EvatNcg8mpB5pyS+P2JdKZnl4VwU9gfJJE+G76XEt6kFiTlmBx2zA/uy2qneqN6X4O5N1yjWD3VBjJ+PpzM+/F3q0oTozAoiSxPSyxL/pMS/NXyNsPtVOqKvzI27T4wBXgX2RI8B+AvoBXaEPbm0i2ZdN5cFybgnGS/MOwvwKTAFuASzA5s++inJDvrVheFfqX4f/sHkiRV1ovq+2hul6VanRWy7+rFZK8jxa2POeahPhLEoAcyOpLxcaSlfN7sJ7Rzgaeo/kbeyAnNHxJ9B3RHG5SXAvyP2bvz2tUmiuGvVTyowF0V8L+q3YZQBb1OPRvyAcQVr6ASzl+uXDpWqTM+qgw31LNkrvbviQAJMBE42iZ+vHAGmd5B9t/zeApwSuQJ4HNgJDJDdiFwHgQ+BVUBXDTLHAGhRz1Q71RcdLqejzPvVg+qJQvyFNsv5Xn5OVPe2AE9V/wjsF+pD6mUV2PHqAzGn6oCtb98wMt81Ad6f7PSRNnea68NJ7swmuH05mQH1XAVofTLZvJpE0huZy2MVmFPqGdTnArikMEH+Rv1Jnfw/ieR6pXo45utVb0hit4f/lbwX/BuOPQ61fNVt50miqFuSub8y6+a5XJ2DeszOTS5vW++7pY5OdfhH26/qfC3/d3DBZET9oxwlUyWjZKrkP1Druc81eXe7AAAAAElFTkSuQmCC)!important;
+}
+
+.mob-img.search,.mob-img.search:hover {
+    background-color: transparent;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAACXBIWXMAAHxqAAB8agGqO5LeAAAHM2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNi4wLWMwMDIgNzkuMTY0NDg4LCAyMDIwLzA3LzEwLTIyOjA2OjUzICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjIuMCAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIzLTA0LTA2VDIxOjI3OjMxKzAzOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMy0wNC0yNVQxMzozNDo1OSswMzowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMy0wNC0yNVQxMzozNDo1OSswMzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6M2ExOGE1OTEtMmNhNi1hODQzLWFlMTgtMDMzZjhjZmI3OWI5IiB4bXBNTTpEb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6ODBkNWQxZjctOTNlZS00MzQzLWIxZDYtMTJhOTY4ZWRiYWFiIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6MDg5NDM0YWYtYmI4ZS00MDQ2LWEwNzQtY2E4ZjU1MmVmOTk5Ij4gPHBob3Rvc2hvcDpEb2N1bWVudEFuY2VzdG9ycz4gPHJkZjpCYWc+IDxyZGY6bGk+YWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjEyZTljYzk1LWU0NDAtZDM0OS1hNDM1LTIxOTI4YzczZjIwYzwvcmRmOmxpPiA8L3JkZjpCYWc+IDwvcGhvdG9zaG9wOkRvY3VtZW50QW5jZXN0b3JzPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjA4OTQzNGFmLWJiOGUtNDA0Ni1hMDc0LWNhOGY1NTJlZjk5OSIgc3RFdnQ6d2hlbj0iMjAyMy0wNC0wNlQyMToyNzozMSswMzowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDIyLjAgKFdpbmRvd3MpIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDo3ZDUzNGU0Yy1mNDhkLWJlNDQtYTBkMi1lNzA0Yzg3ODgwMTMiIHN0RXZ0OndoZW49IjIwMjMtMDQtMjVUMTM6MDc6NDUrMDM6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMi4wIChXaW5kb3dzKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6M2ExOGE1OTEtMmNhNi1hODQzLWFlMTgtMDMzZjhjZmI3OWI5IiBzdEV2dDp3aGVuPSIyMDIzLTA0LTI1VDEzOjM0OjU5KzAzOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjIuMCAoV2luZG93cykiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+MqfeZAAAAulJREFUWIXFl09oFVcUh7/3IpLXReLGFtNFVVxIwIWFBKFIbUorpRKwuHEjYhFcWxAXWkoDgmChorRdpM0mpZTSP6tCVbDRVhG0GoiixkpwERJcGArVRqJfF5MHk/vuvDfznNYfHJh75t4z35w7994zFZUc6gLeBF4HNgI9QDewAMwCU8A54AJwKU/AqNRmVlOPqDfMrx/Vd1vEjVqzm4PqzQIQob5Su4vAVIxP037gk4xkTgMTwEOgCqwC+jL6TgDvAZPtTtPHkbd8rI6qr6k9Qf+a2qvuUa9Fxk6ra/NkJnTsjgS7qG4ukO6D6nwQYzzPlKUbayJBRtVqAZC6bVHnglhfF4H5Jhj8SxsQaXvLZHrT2pQH5tVg0Kz64jPC1KcsrZ/ywHwaDDpYAghqp3orFXdBXZ/VvwosA95ILbBZ4ItcS7G1/gFGUu0OYGtW5yrQD6xL+c4AcyXBAJxehKqrvxnMAPBCyne5RBCAGyQbZV1rm8GsC3wzJcM8Au6n2rXF50ZhOgLfk5JhAJ6mritZnao0ZmJFySBVknKjrscshVvS8ffgZm/JMGtI6p+6Mj+DKjAG3Ev53iZZ7mVpE0uzfbUZzAPgj5SvFxgsEWZ30D6V2XNx99sR7MDXStqBB4rErV8sU68GAz96RpCX1Kkg5q48MKjbbNS+NkG61LNBrHF1eV4Y1JMRoA8LgvSp14MYd9SXW40NHRX1fAToirpdXdkk2Hr1qPowMv63PC8SK8hXAt+R/COF+pPkIL1DssV3Aq8AG4B3aNzN0xojObHnW62m0DrUE5E3LKJJG8vYH5plplXqtqm/FoT426RY61R3Ru5/3y5MGupz9bb6KAj+RP1LHVM/sLGS2x8BGok9J+snLks1YPWirSA59GaAuyQVYvQABA4BQ4FvGNib55v5L+xwJEOftTNNZdmRCNCx5wWDejwCNGQb30xZ+hLYE/gORGvR/0HvA98Gvr7nMU1pGzb5J/9Z7fkXdMZCCsWROtMAAAAASUVORK5CYII=);
+}
+
+.mob-img.profile,.mob-img.profile:hover {
+    background-color: transparent;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAACXBIWXMAAAGxAAABsQFhmCgOAAAGZmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNi4wLWMwMDIgNzkuMTY0NDg4LCAyMDIwLzA3LzEwLTIyOjA2OjUzICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjIuMCAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIzLTA0LTI1VDEzOjEwOjA3KzAzOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMy0wNC0yNVQxMzozNzozOSswMzowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMy0wNC0yNVQxMzozNzozOSswMzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OTU1NTM3YjAtODU4NS0zMzQxLThjOGQtMTlkODM2ZGIwNDg0IiB4bXBNTTpEb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6ZmViM2U5OTAtZjMxYi0xNzRkLThlNTMtMDZhYmIxNTQ5MmY1IiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6MjAxMzYzZTItZTdmZS02NDRjLWJiNjAtZGJhM2JlZDhiZmY1Ij4gPHBob3Rvc2hvcDpEb2N1bWVudEFuY2VzdG9ycz4gPHJkZjpCYWc+IDxyZGY6bGk+YWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjEyZTljYzk1LWU0NDAtZDM0OS1hNDM1LTIxOTI4YzczZjIwYzwvcmRmOmxpPiA8L3JkZjpCYWc+IDwvcGhvdG9zaG9wOkRvY3VtZW50QW5jZXN0b3JzPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjIwMTM2M2UyLWU3ZmUtNjQ0Yy1iYjYwLWRiYTNiZWQ4YmZmNSIgc3RFdnQ6d2hlbj0iMjAyMy0wNC0yNVQxMzoxMDowNyswMzowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDIyLjAgKFdpbmRvd3MpIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDo5NTU1MzdiMC04NTg1LTMzNDEtOGM4ZC0xOWQ4MzZkYjA0ODQiIHN0RXZ0OndoZW49IjIwMjMtMDQtMjVUMTM6Mzc6MzkrMDM6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMi4wIChXaW5kb3dzKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5Q74gJAAADOElEQVRYhbWYXYhVVRTHf+MIqWM5amqJqTUqlaFGlkahhSImBD70MBD0EgS+BRH6FImCHw8iPhSBIPhQVFC9lNgHIUKkg4pY6KgIaShWmgXlZRr99bDXeI8zd477jPcu2Kx92Gut/d+LvT72aVMZAT0GvA4sA+YAY4FLwHHgU+AToL+yVbXq2OydqVddVNV2VSAfFTb8Ru1WF6gz1ZXqRvVarN9Ql7cKzKbYpF99o0RuuvpdyF5WZzcbzNMFj7yaqXM45D9sNpi9YfjjCp5cWjjA4zk6ozLu+DhgRcz3VIiNH4F9MV+do5ADpguYDtSAIxXAAPQEX9gsMGOCXwOuVgRzJfi9zQLzT/ApwAMVwTwY/M9mgTkNnAPagcUVwSwN3lMqNUCZkfFeRMX+CtH0UiGaZjUztLvUWhh+O0O+Uz0T8rtyD5ALBnVd4aQ7SuSWqGdD7me1I3ePNq1UtbcAG2LeS6rOPaSoWQC8CLxCuosXSfnpVLb1Cp4ZGK+pf1lOX6rTqtrO9cwYYHx4QGAC0B2emEu9nzlG6mcOhd4oYBLwN9B3t55Zq36t/h4n3m9mnVGfUr8PvUvqV+rqMp3hFtq9vXe5YWodVP9Td6ozhtF9WP1gkO7NwvfuqmB2h2JNXa9OViepewpG++Pk29U3TRF2cNDG76v3qVPVdwoH2pkLprtg7LkG68+q+yynL9TFDXRXFWReHrze6AIfIDXaG4BtJdftUeDJ4DOAX0jhfgQ4W6K3FVhPai/WlF3gJYH6qjqxkSubMB4y3TvVJ4prxUJ5P7Ay5p+RWWlHQBeAz2O+jHqLchuY+bEIuVV25PRD8BWkzD0ETFcMgJ9aDGagRDwCzBwOzKyY/9piMOeDzya9SIeAmQyMBv6l3i62igbKSmfsOwTMuOA14HqLwVyPfQA6GoG5UljsoLU0nlRc+4A/GoE5CpwE7qHeu7aKngl+jELkFsEcJmVfSBmyVdROvUE7QPqNAjCkHHQCJ0jp/RDwLikM+8h7SQxHN0kenw9sAhYBZ0g5pnZLqkG6fl797Q6F8G7pgulnQlanNwF4C3gBmAdMI4XiSH5ztcW4SCqg3wI7qD8Ob9H/52IVb5VZ4wIAAAAASUVORK5CYII=);
+}
+
+.tooltip-inner {
+    background: #6366f1!important;
+}
+
+.popup {
+    text-align: center;
+    z-index: 3;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 160px;
+    height: 160px;
+    box-shadow: 0 5px 15px 0 rgba(78,101,136,.8);
+    background-image: linear-gradient(360deg,#6366f1,#818cf8)!important;
+    border-radius: 20px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: .9;
+}
+
+.game-search-modal[data-v-c176d7f8]::before {
+    filter: invert(1);
+}
+
+.games-title,.logoBox div,.lvl,.still .games-title,.sumDep {
+    color: #94a3b8!important;
+}
+
+.lds-ellipsis div {
+    background: #496db0!important;
+}
+
+/* Game icons - removed excessive brightness filter */
+.games-img,.gm {
+    filter: none !important;
+    opacity: 1 !important;
+}
+
+.form-control:focus {
+    border-color: #6366f1!important;
+}
+
+::-webkit-scrollbar-button {
+    background-color: #1a1f2e;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #6366f1!important;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: #1a1f2e!important;
+}
+
+.likeLevlBox {
+    background-color: #0f1419!important;
+}
+
+.main-item {
+    box-shadow: 0 25px 35px #0f141975!important;
+}
+
+.search_ input:focus {
+    border: 2px solid #6366f1!important;
+}
+
+.mines .cell.win {
+    opacity: .9;
+}
+
+.winT {
+    background-color: #1a1f2e!important;
+    border: 2px solid #1a1f2ec4!important;
+    color: #f1f5f9!important;
+}
+
+.card-header {
+    background-color: #1a1f2e!important;
+}
+
+.stepsCoffs {
+    border: 1px solid #6169898f!important;
+}
+
+.stepsCoffs.win {
+    border: 1px solid #1cd045!important;
+    color: #1cd045!important;
+}
+
+.stepsCoffs.active {
+    border: 1px solid #94a3b8!important;
+    color: #94a3b8!important;
+}
+
+.header-menu .item:hover {
+    color: #60a5fa!important;
+}
+
+@media(max-width:992px) {
+    .header-menu {
+        background-color: #1a1f2e;
+    }
+
+    .header-menu .item {
+        border: 3px solid #334155!important;
+        color: #f1f5f9!important;
+    }
+}
+
+.ser {
+    color: #fff!important;
+}
+
+td,th {
+    border-bottom: 1px solid #5c5c5c2e!important;
+}
+
+.noty.success {
+    background-image: linear-gradient(45deg,#10b981,#34d399)!important;
+}
+
+.noty.error {
+    background-image: linear-gradient(45deg,#ef4444,#f87171)!important;
+}
+
+.close {
+    color: #cbd5e1!important;
+}
+
+.modal-header {
+    border-bottom: 1px solid #334155!important;
+}
+
+.modal-content,.page-link {
+    background-color: #0f1419!important;
+}
+
+.vue-notification.success {
+    border-left-color: #10b981!important;
+    background-image: linear-gradient(45deg,#10b981,#34d399)!important;
+}
+
+.vue-notification.error {
+    border-left-color: #ef4444!important;
+    background-image: linear-gradient(45deg,#ef4444,#f87171)!important;
+}
+
+.amount-number.amounts {
+    color: #cbd5e1!important;
+}
+
+.mines .cell {
+    border: none!important;
+    background-color: #aa93ff45!important;
+}
+
+.mines .cell:hover {
+    background-color: #6366f1;
+}
+
+.content:before,.header:before,button.blue.mt-2.col-12:before,button.blue.mt-3.col-12:before {
+    opacity: .45;
+}
+
+.legend-wheel-inner {
+    background-color: #1a1f2e!important;
+}
+
+.legend-wheel-coefficient-item>span {
+    color: #cbd5e1!important;
+}
+
+.legend-wheel-coefficient-item>svg {
+    width: 12px;
+    border: 2px solid #6366f1;
+    border-radius: 50%;
+    height: 12px;
+}
+
+.page-link,.page-link:hover {
+    color: #f1f5f9!important;
+    border: 1px solid #334155!important;
+}
+
+.legend-wheel-coefficient {
+    background-color: transparent!important;
+}
+
+.page-item.active .page-link {
+    border-color: #6366f1!important;
+}
+
+.page-link:hover {
+    background-color: #252b3d!important;
+}
+
+.header-menu .item.isActive {
+    color: #60a5faf7!important;
+}
+
+.nav-item {
+    color: #fff!important;
+}
+
+.nav-item svg {
+    stroke: #fff!important;
+}
+
+.nav-item:hover {
+    background-color: rgba(96, 165, 250, 0.1)!important;
+}
+
+.nav-item:hover svg {
+    stroke: #60a5fa!important;
+}
+
+.nav-item.isActive {
+    color: #60a5fa!important;
+    background-color: rgba(96, 165, 250, 0.15)!important;
+}
+
+.nav-item.isActive svg {
+    stroke: #60a5fa!important;
+}
+
+.header-buttons button.blue {
+    background: linear-gradient(180deg, #6366f1, #818cf8)!important;
+}
+
+.header-buttons button.blue:hover {
+    background: linear-gradient(180deg, #818cf8, #a5b4fc)!important;
+}
+
+.header-buttons button.ser {
+    background: linear-gradient(360deg, #475569, #64748b)!important;
+    color: #fff!important;
+}
+
+.header-buttons button.ser:hover {
+    background: linear-gradient(180deg, #64748b, #94a3b8)!important;
+}
+
+a {
+    color: #60a5faf7!important;
+}
+
+.vue-load-image .loading {
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    position: relative;
+    background-color: #1c2443!important;
+}
+
+.payout-value-wrap__pocket {
+    background: rgb(36 47 84)!important;
+}
+
+tr th {
+    background: #252b3d!important;
+}
+
+.table {
+    color: #f1f5f9!important;
+}
+
+.select-games-search-for-modal__dropdown {
+    background-color: #1e2435!important;
+}
+
+.select-games-search-for-modal__option-link:hover {
+    background-color: #0f1419!important;
+}
+
+.select-games-search-for-modal__option-title {
+    color: #f1f5f9!important;
+}
+
+.changeHistory {
+    color: #ffffff80!important;
+}
+
+.item.mobapp {
+    background-image: linear-gradient(360deg,rgb(81 52 188/40%),rgb(80 52 184/80%))!important;
+    color: #fff!important;
+}
+
+.mob-img-menu.faq {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAAAsTAAALEwEAmpwYAAAHf2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNi4wLWMwMDIgNzkuMTY0NDg4LCAyMDIwLzA3LzEwLTIyOjA2OjUzICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjIuMCAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIzLTA0LTMwVDAwOjUxOjIxKzAzOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMy0wNC0zMFQwNjozNzoyOCswMzowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMy0wNC0zMFQwNjozNzoyOCswMzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6YzNiNWQ0YjktMmI3OS05MjQ2LThhZTktYjczYzM5MGRlOTNkIiB4bXBNTTpEb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6ZTFlNWQ2OTUtZjdkNi0xOTRhLTk4YTQtY2EzNWQzYTE2MDU2IiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6Yjc3MTExNDUtZjdmZC0xMzRkLThhNTEtMWQ5MDZjZTNhOTY1Ij4gPHBob3Rvc2hvcDpEb2N1bWVudEFuY2VzdG9ycz4gPHJkZjpCYWc+IDxyZGY6bGk+YWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjEyZTljYzk1LWU0NDAtZDM0OS1hNDM1LTIxOTI4YzczZjIwYzwvcmRmOmxpPiA8cmRmOmxpPmFkb2JlOmRvY2lkOnBob3Rvc2hvcDozYzE4MDI0Yy1mYzI3LTI2NDUtYmJlOS0zZjViMjFmMDU3YzM8L3JkZjpsaT4gPC9yZGY6QmFnPiA8L3Bob3Rvc2hvcDpEb2N1bWVudEFuY2VzdG9ycz4gPHhtcE1NOkhpc3Rvcnk+IDxyZGY6U2VxPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iY3JlYXRlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDpiNzcxMTE0NS1mN2ZkLTEzNGQtOGE1MS0xZDkwNmNlM2E5NjUiIHN0RXZ0OndoZW49IjIwMjMtMDQtMzBUMDA6NTE6MjErMDM6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMi4wIChXaW5kb3dzKSIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6NTEwNmEzMDktNmY0ZS1mNTRhLTgwYmMtYzIxOTQ1NTg3MTY2IiBzdEV2dDp3aGVuPSIyMDIzLTA0LTMwVDAxOjAxOjQxKzAzOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjIuMCAoV2luZG93cykiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOmMzYjVkNGI5LTJiNzktOTI0Ni04YWU5LWI3M2MzOTBkZTkzZCIgc3RFdnQ6d2hlbj0iMjAyMy0wNC0zMFQwNjozNzoyOCswMzowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDIyLjAgKFdpbmRvd3MpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PnHfkkcAAAUQSURBVFiFtZhriFVVFMd/cx11NCcdrDGzh+aLkMwyLRRNKE0qU7MUqcy+GIwhhJBFD4miFHpRlJSQoFghmVl9UCvfDzSwPoxaU5bPyKYytdeMjv8+rHW4u3Hm3H3unf6wufvus9ba/732PnutdcokEYGOwFBgNHAt0AfoCVQAJ4AjQB2wGdgO7I8xGgVJaa1c0jRJaxSPE5IWSRpVwHZUK0vx4DDgRWBUMHYY2AJ8B9QD/wDnAxcBQ4AbgQ7J2oEF3k62tQdrJP0eeOVTSZMk9UpZbYWkgZLmSqoLdL+UNLhYD7Y0+Ghg/CdJD8i2OovhC3ybE3xfLMnmA7MCo7slDSh25d6mSvrD7dVJurAUgsMlNbqxXZKqIgx0i5C5TVKD290oqV0xBMslbXEjRyT1SFGqkvSypK8lHZK0U9LMAhPVBDvzcDEEpwUG7k9R6Cfb+pbwVoHJPgkcUJmFYIXM9ZK0voDCJpdrlLTQvbEhIDkrRXeopL9d7oksBK8PJhifIjw9kHskGC+X9LGPfyWpQ4qNRG6LIs9iDrjJr8RDwK6UK7MJ2AosBV4Kxs8Ar3v/cuC8FBvL/fca4MqYe7ocixhgcfS3FNkVwCrgdAvP+vpvI0a4NWwGGrBFDAJqCxHMYasGC/aF0BK5UcBT3v8c+DNFvx7Y6/3OEfORw+IowK8xCs1wK7AaqAZ+xoieTZFvAg4Guv1jCHb0fkMGYmXATOBDoMrJTcWSiDSI/BG4C9gJvIOlcK0SPOX9tMPdHBXAHKA98ANwJ7ApUjeZpwlb3HTsbM5zPucQPOL9HhkItge6en81sC1SrwJ7OQCeBWqAo056AbAS6NKcYPJyDCWfyxXCGSe1D/NgLPoDl3l/PbAIGAO852OTsKso70lJM/zyPC2pb+wNLyknqVMGeTyCSBbDm+eWC4JA8EIYSXorn23MyThhllYmqdbn+aAVmaUBydEJQSQt9sHDisvZOssS0u2yTCWG4H0+xxlJE1uRqZS03+VWS+qQPLha0jF/sDhisu6S6l1+ZYT8xb54yeJwmmyYWQ0v96NYBxzDLtyYOvQk8KQf+nUFZHPAa8Al2CU+r4D8WuAA0BuYmLAe666XpBGRWxb7Ir0aeCQ2zUrqmQ3JwOM+UNtMsGcJ5HrIXoYESzLoznaduhx29yW170dAP+Ah4F0sOqwBRkRse4gHgY3AZP+/DJiVQT8JHt2R1Ef5TPeQ/lsPJ/jLvXGPy1f49pXJEtZKScMkzZfVwQkaJT1dhPdvd/3j5cB1WAgCuNR/f8G+sXwLTAAGuDcmY0nFXl/laaDSnydpW4LPgOeADRk8l6Daf08gqzPOStrqh3OG7PIOr5THZPXKqRa8G2K/pPclTSnCa2F73u3tKJM0A8vRdmAZcRqGAFdgOeQkYCyWlcwHvgD2YMG/FHTB4vxg4I1SVtlTdl7PyqJEW11NNwc7MrZUYyvd0AGlF/uxrZvyZew2SZWlGhwky4IkO3ul2hsfeO9uSedmsBmxh3zBNAV7a0vBbqywAsu2C35hjW3Lg5UvUbavWF0ljQuOyDNuZ5WkXFsR7OQGE3wj6V5ZFtOaTpWkCZLWyV60o5JekfS226iX1CvtE3BWtAMWAnODsYNYdrIP+3LRhNU+A7FUv9VqznFLWxJMMAaYjZWVMdgBvAl0AsYBI8lHkhX/B8EEI33CG7BCqTv2qeU48CP2QqzFPsonpW8OC7dXAXcA1f8CcM2me76ughgAAAAASUVORK5CYII=);
+}
+
+.mob-img-menu.refs {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAHf2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNi4wLWMwMDIgNzkuMTY0NDg4LCAyMDIwLzA3LzEwLTIyOjA2OjUzICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjIuMCAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIzLTA0LTMwVDAwOjUxOjMzKzAzOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMy0wNC0zMFQwNjozNzoyNyswMzowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMy0wNC0zMFQwNjozNzoyNyswMzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTYwZjdhOGYtMjY4OC0wZTQ5LTk5ZTEtN2NjYWZmZjZiOTM3IiB4bXBNTTpEb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6ODQ5ZTYyYTMtYTE4MC1iZTRmLTg3MjMtMzFiOTI0YjVlZDAxIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6N2RkYTFhNDctN2VlMi01YTRjLWFiMmUtOWU4NTkzYTU1YjQyIj4gPHBob3Rvc2hvcDpEb2N1bWVudEFuY2VzdG9ycz4gPHJkZjpCYWc+IDxyZGY6bGk+YWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjEyZTljYzk1LWU0NDAtZDM0OS1hNDM1LTIxOTI4YzczZjIwYzwvcmRmOmxpPiA8cmRmOmxpPmFkb2JlOmRvY2lkOnBob3Rvc2hvcDozYzE4MDI0Yy1mYzI3LTI2NDUtYmJlOS0zZjViMjFmMDU3YzM8L3JkZjpsaT4gPC9yZGY6QmFnPiA8L3Bob3Rvc2hvcDpEb2N1bWVudEFuY2VzdG9ycz4gPHhtcE1NOkhpc3Rvcnk+IDxyZGY6U2VxPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iY3JlYXRlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDo3ZGRhMWE0Ny03ZWUyLTVhNGMtYWIyZS05ZTg1OTNhNTViNDIiIHN0RXZ0OndoZW49IjIwMjMtMDQtMzBUMDA6NTE6MzMrMDM6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMi4wIChXaW5kb3dzKSIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6MDg5MWEyNzEtMmU3OC0wNjQ0LWFjN2ItNzU5YmY2YzI5Mjk0IiBzdEV2dDp3aGVuPSIyMDIzLTA0LTMwVDAwOjUzOjU2KzAzOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjIuMCAoV2luZG93cykiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjU2MGY3YThmLTI2ODgtMGU0OS05OWUxLTdjY2FmZmY2YjkzNyIgc3RFdnQ6d2hlbj0iMjAyMy0wNC0zMFQwNjozNzoyNyswMzowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDIyLjAgKFdpbmRvd3MpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PvKzvCUAAAOeSURBVFiF7ZhdiFVlFIafsSmlyH5stImsINRwKIgKkgosKuuqKCEKqpsy+6FirKwuo5suSiGCtJu0CIoos6KIjEihxEAK+pEcSgo7KaOkqEfRebrYa3f2bPefzBlU8IV11t5rvd/3vfvb39/ZPSrHMiYcbQF1OCFwrDjuBQ4C2wDDhoHngTMznH5gGbAnw2sDK4CLMrzTgUVAK8PbGfWVQy2yieqvJlinPqM+rX4dsceC97AdrA7OIvX9THxxcOfH/bfqs8FdE7G/1ClFWsoE/hQFryjIXRB+MDjL1VMLeL3qkuC8ELELC3gDwdnaVOCjUeCSEvGoM4LzUgUntcXBvaqCc35wXmwicJ/6fU2jm9XdDcSltkXdUcNZHSJHxfOTZFLYyoph2w9cDDxVObhHYyFwFnBpBWdF+HOzwbJZPFJR0Q3hVzVRFlgT/sYKTtpmTzaYF9gGDgL3VFTUF35XU3XAgfBnVHDSNlvZYFEPPgfMAaaXVLQ5/HlN1QGTw/9Zkj8bmA8sJVkfOygZsJ+rLXVmQW5SDOZXjmCSPBll+gty09Uhk/Wx8Tr4th18ZrIgP6K+GvmVRTOuwlS/iOsl6uPqAnVVrp3eOoHXZAo8ZLIY78rE9qinBPcP9asG4j5QhzP32zP17TNZJ+9XD0RsXpnAm4OwQZ2Wa6QvLBtbHvzt6i0FwubGQ6h+lMudo07NxSZHL6vemRfYF4m1DXrk8kzDb6o/xPVBdb36ndqO2Cb1jbgeNnlDdfWnr31mVmC699YVvjt4W9WrM/Fb1fdMdpgh9UP19kx+QP0tyj7YoJ29JgcIUGfnu7XE7greOw0aKLPXo46FNbzrgnc98bQjNQVmRYG3xiAutdeiritreDvVjQT54xpyS93WBXGp/WIyg6s4y1TTneSbil3gAWAaye7SLcwlOZQMVnB+hM5Wt7uCuBTYBAx1QViKf4C1wMsVnP3QEXhSCWkWcBpHdrRqiifCX1uSn/D/D8kTFeG28J90SVQWG8PfVJJvAfTGzb3AFHJnMeA+YEvXpXXwO3AH8HcuLjAvuersBGV4t4uzN2/ZQ0kRfu5RKem9EeBLkl6+bJx6cAPJWXEOh59NBf5NX/FwSQV7ganjow1Ilpo2sKOMUPdl4WTgUDcV5XCIzjwoRJ3AicR6NE5oRxulqFRP8oQDwAIOH6NjhVF3fgaPQp3AT4HZJB+HxgP7qfn7ms7iYxbH/ffBo44TAseK/wAbt3RBlJ5UZAAAAABJRU5ErkJggg==);
+}
+
+.tournaments-card__poster:after {
+    background: rgb(36 47 85/90%);
+}
+
+.tournaments-card-rating__item {
+    background: rgba(255,255,255,.95)!important;
+}
+
+.tournaments-card-info__settings-item>span {
+    color: hsl(0deg 0% 100%/85%)!important;
+}
+
+.tournaments-card-info__button span {
+    color: #fff;
+}
+
+.slick-arrow {
+    background-image: linear-gradient(360deg,rgb(81,52,188),rgb(80,52,184))!important;
+}
+
+.step-coff {
+    color: #ddd4ff!important;
+}
+
+.table th,.table td {
+    border-top: 1px solid #334155!important;
+}
+
+.form-select select {
+    color: #cbd5e1!important;
+    background-color: #0f1419!important;
+    border: 1px solid #334155!important;
+}
+
+.system_wallet img {
+    background: #fff;
+    border-radius: 6px;
+}
+
+/* Search modal dark theme */
+.modal-content .search-input-wrapper {
+    background: #1a1f2e !important;
+}
+
+.modal-content .input-search input.input__native,
+.modal-content .input-search input#games-search,
+.modal-content .input-search input[name="games-search"],
+.modal-content .input-search input {
+    background: #1a1f2e !important;
+    border: 2px solid #334155 !important;
+    color: #f1f5f9 !important;
+}
+
+.modal-content .input-search input.input__native:focus,
+.modal-content .input-search input#games-search:focus,
+.modal-content .input-search input[name="games-search"]:focus,
+.modal-content .input-search input:focus {
+    border-color: #6366f1 !important;
+    background: #252b3d !important;
+    color: #f1f5f9 !important;
+}
+
+.modal-content .input-search input.input__native::placeholder,
+.modal-content .input-search input#games-search::placeholder,
+.modal-content .input-search input[name="games-search"]::placeholder,
+.modal-content .input-search input::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+    opacity: 1 !important;
+}
+.menu-toggle {
+    background: #1a1f2e !important;
+}
+
+.menu-toggle:hover {
+    background: #252b3d !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+
+.menu-toggle svg {
+    stroke: #cbd5e1 !important;
+}
+
+.games-item-text {
+    color: #f1f5f9 !important;
+}
+
+.online-text {
+    color: #f1f5f9 !important;
+}
+
+.social-link-text {
+    color: #f1f5f9 !important;
+}
+
+.social-links-container {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.social-link-item:hover {
+    background: rgba(99, 102, 241, 0.2) !important;
+}
+
+.social-link-item img {
+    filter: none;
+    opacity: 1;
+}
+
+.social-link-item:hover img {
+    opacity: 1;
+}
+
+.left-main.collapsed .online-text {
+    opacity: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+}
+
+/* Mobile menu "еще" dark theme */
+@media(max-width:992px) {
+    .header-menu.menu_mob {
+        background: #1e2435 !important;
+        border: 1px solid #334155 !important;
+        padding: 20px !important;
+        min-height: 200px !important;
+        max-height: calc(100vh - 120px) !important;
+        overflow-y: auto !important;
+    }
+
+    .header-menu.menu_mob .item {
+        color: #f1f5f9 !important;
+        border-color: #334155 !important;
+        background: #1a1f2e !important;
+        font-size: 15px !important;
+        padding: 16px !important;
+        min-height: 60px !important;
+    }
+
+    .header-menu.menu_mob .item:hover {
+        background: #252b3d !important;
+        color: #60a5fa !important;
+    }
+
+    .header-menu.menu_mob .item.isActive {
+        color: #60a5fa !important;
+        background: rgba(96, 165, 250, 0.15) !important;
+    }
+
+    .header-menu.menu_mob .item img {
+        filter: brightness(0) invert(1) !important;
+        opacity: 1 !important;
+        display: block !important;
+        visibility: visible !important;
+    }
+    
+    .header-menu.menu_mob .item:hover img {
+        filter: brightness(0) invert(1) !important;
+        opacity: 1 !important;
+    }
+    
+    .header-menu.menu_mob .item img[src*="vk.svg"],
+    .header-menu.menu_mob .item img[src*="tg.svg"] {
+        filter: brightness(0) invert(1) !important;
+        opacity: 1 !important;
+    }
+    
+    .header-menu.menu_mob .item svg {
+        filter: brightness(0) invert(1) !important;
+        opacity: 1 !important;
+    }
+
+    .mob-img.main {
+        background-image: url(/assets/image/play.svg) !important;
+        filter: brightness(0) invert(1) !important;
+        opacity: 0.9 !important;
+    }
+
+    .mob-img.main:hover,
+    .mob-menu-item:hover .mob-img.main {
+        filter: brightness(0) invert(1) !important;
+        opacity: 0.9 !important;
+    }
+
+    .mob-menu-item.isActive .mob-img.main,
+    .mob-menu-item.isActive .mob-img.main:hover {
+        filter: brightness(0) invert(1) !important;
+        opacity: 1 !important;
+    }
+
+}
+
+
+/* === Mobile Navigation v9 Dark Mode (Icons & Logo Fix) === */
+@media(max-width:992px) {
+    /* Top Bar */
+    .mobile-top-bar {
+        background: #1e293b !important;
+        border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+    }
+    
+    /* Logo Filter for Dark Mode */
+    .mobile-top-logo .mob_logo {
+        height: 45px !important;
+        width: 180px !important;
+        background-size: contain !important;
+        background-position: left center !important;
+        background-repeat: no-repeat !important;
+        margin-left: 0 !important;
+        filter: brightness(0) invert(1) !important;
+    }
+    
+    /* Force Static Dark Logo on Hover/Active - HIGH SPECIFICITY TO OVERRIDE GLOBAL HEADER HOVER */
+    .header .mobile-top-bar .mobile-top-logo .mob_logo,
+    .header .mobile-top-bar .mobile-top-logo:hover .mob_logo,
+    .header .mobile-top-bar .mobile-top-logo:active .mob_logo,
+    .header .mobile-top-bar .mobile-top-logo:focus .mob_logo,
+    .mobile-top-bar .mobile-top-logo .mob_logo,
+    .mobile-top-bar .mobile-top-logo:hover .mob_logo,
+    .mobile-top-bar .mobile-top-logo:active .mob_logo,
+    .mobile-top-bar .mobile-top-logo:focus .mob_logo,
+    .mob_logo:hover,
+    .mob_logo:active,
+    .mob_logo:focus {
+        background-image: url(/image/new_logo.png) !important;
+        background-size: contain !important;
+        background-position: left center !important;
+        background-repeat: no-repeat !important;
+        filter: brightness(0) invert(1) !important;
+        transform: none !important;
+        opacity: 1 !important;
+        width: auto !important;
+        height: 45px !important;
+        margin-left: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Prevent parent container from transforming */
+    .header .mobile-top-bar .mobile-top-logo,
+    .header .mobile-top-bar .mobile-top-logo:hover,
+    .header .mobile-top-bar .mobile-top-logo:active,
+    .mobile-top-bar .mobile-top-logo,
+    .mobile-top-bar .mobile-top-logo:hover,
+    .mobile-top-bar .mobile-top-logo:active {
+        transform: none !important;
+        transition: none !important;
+    }
+
+    /* Auth Button */
+    .mobile-top-auth {
+        background: #3b82f6 !important;
+        color: #fff !important;
+    }
+
+    /* Bottom Nav */
+    .mob-nav-bottom {
+        background: #1e293b !important;
+        border-top: 1px solid rgba(255,255,255,0.05) !important;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.2) !important;
+    }
+    
+    .mob-nav-item {
+        color: #94a3b8 !important;
+    }
+    
+    .mob-nav-item.isActive {
+        color: #60a5fa !important;
+    }
+    .mob-nav-item.isActive svg {
+        stroke: #60a5fa !important;
+    }
+    
+    .mob-nav-cashier {
+        border-color: #1e293b !important;
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4) !important;
+    }
+
+    /* Bottom Sheet */
+    .bottom-sheet {
+        background: #1e293b !important;
+        color: #f1f5f9 !important;
+    }
+    
+    .bottom-sheet-handle {
+        background: #475569 !important;
+    }
+    
+    .cashier-title { color: #fff !important; }
+    .cashier-balance { color: #60a5fa !important; }
+    .cashier-btn {
+        background: #334155 !important;
+        border-color: #475569 !important;
+        color: #fff !important;
+    }
+    
+    /* Menu Items Fixed Dark */
+    .bottom-sheet-item {
+        background: #334155 !important;
+        border-color: rgba(255,255,255,0.05) !important;
+        color: #f1f5f9 !important;
+    }
+    
+    /* ICONS FIX: Force White for SVGs & Sprites only */
+    .bottom-sheet-item svg,
+    .bottom-sheet-item .mob-img-menu {
+        filter: brightness(0) invert(1) !important; /* Pure White */
+        opacity: 1 !important;
+        color: #fff !important;
+    }
+    
+    /* FIX: Do NOT filter images (VK/TG logos are colored) */
+    .bottom-sheet-item img {
+        filter: none !important;
+        opacity: 1 !important;
+    }
+    
+    .bottom-sheet-item.isActive {
+        background: #3b82f6 !important;
+        color: #fff !important;
+        border: none !important;
+    }
+}
+/* Left Menu Dark Theme - Compact Design */
+@media screen and (min-width: 993px) {
+    .left-main {
+        background: #1e293b !important;
+        border-right: 1px solid #334155 !important;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2) !important;
+    }
+    
+    .left-main .logoBox {
+        border-bottom: 1px solid #334155 !important;
+    }
+    
+    .left-main .games-item {
+        background: linear-gradient(135deg, #4338ca 0%, #6366f1 100%) !important;
+        box-shadow: 0 2px 8px rgba(67, 56, 202, 0.2) !important;
+    }
+    
+    .left-main .games-item:hover {
+        box-shadow: 0 4px 12px rgba(67, 56, 202, 0.3) !important;
+    }
+    
+    .left-main .games-item.isActive {
+        background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%) !important;
+        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3) !important;
+    }
+    
+    .left-main .online-box {
+        background: rgba(51, 65, 85, 0.6) !important;
+        border: 1px solid #475569 !important;
+        color: #cbd5e1 !important;
+    }
+    
+    .left-main .online-spawn {
+        color: #cbd5e1 !important;
+    }
+    
+    .left-main .social-links-container {
+        background: rgba(51, 65, 85, 0.4) !important;
+        border: 1px solid #475569 !important;
+    }
+    
+    .left-main .social-link-item {
+        color: #cbd5e1 !important;
+    }
+    
+    .left-main .social-link-item:hover {
+        background: rgba(71, 85, 105, 0.6) !important;
+        color: #f1f5f9 !important;
+    }
+    
+    .left-main .social-link-text {
+        color: #cbd5e1 !important;
+    }
+    
+    .left-main.collapsed .contact-box {
+        background: rgba(51, 65, 85, 0.6) !important;
+        border: 1px solid #475569 !important;
+    }
+    
+    .left-main.collapsed .contact-box:hover {
+        background: rgba(71, 85, 105, 0.8) !important;
+    }
+    
+    .left-main .menu-toggle {
+        background: #374151 !important;
+        border: 1px solid #4b5563 !important;
+    }
+    
+    .left-main .menu-toggle:hover {
+        background: #4b5563 !important;
+    }
+    
+    .left-main .menu-toggle svg {
+        stroke: #9ca3af !important;
+    }
+    
+    /* Fix game icons in dark theme */
+    .left-main .games-img {
+        filter: none !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Dark theme styles for left menu */
+@media (min-width: 993px) {
+    /* Left menu dark theme */
+    .left-main {
+        background: #1a1f2e !important;
+        border-right: 1px solid #334155 !important;
+    }
+    
+    /* Logo in dark theme */
+    .left-main .logoBox {
+        border-bottom: 1px solid #334155 !important;
+    }
+    
+    /* Game items in dark theme */
+    .left-main .games-item {
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+        box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15) !important;
+    }
+    
+    .left-main .games-item:hover {
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25) !important;
+    }
+    
+    .left-main .games-item.isActive {
+        background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%) !important;
+        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25) !important;
+    }
+    
+    /* Game icons - ensure visibility in dark theme */
+    .left-main .games-img {
+        filter: none !important;
+        opacity: 1 !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+    }
+    
+    /* Online indicator in dark theme */
+    .left-main .online-box {
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid #334155 !important;
+    }
+    
+    .left-main .online-spawn {
+        color: #cbd5e1 !important;
+    }
+    
+    /* Social links in dark theme */
+    .left-main .social-links-container {
+        background: rgba(255, 255, 255, 0.03) !important;
+        border: 1px solid #334155 !important;
+    }
+    
+    .left-main .social-link-item {
+        color: #cbd5e1 !important;
+    }
+    
+    .left-main .social-link-item:hover {
+        background: rgba(99, 102, 241, 0.2) !important;
+        color: #818cf8 !important;
+    }
+    
+    .left-main .social-link-text {
+        color: #cbd5e1 !important;
+    }
+    
+    /* Collapsed social icons in dark theme */
+    .left-main.collapsed .contact-box {
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid #334155 !important;
+    }
+    
+    .left-main.collapsed .contact-box:hover {
+        background: rgba(99, 102, 241, 0.2) !important;
+    }
+    
+    /* Menu toggle button in dark theme */
+    .left-main .menu-toggle {
+        background: #334155 !important;
+        border: 1px solid #475569 !important;
+        bottom: 25px !important;
+    }
+    
+    .left-main .menu-toggle:hover {
+        background: #475569 !important;
+    }
+    
+    .left-main .menu-toggle svg {
+        stroke: #cbd5e1 !important;
+    }
+}
+
+
+/* Desktop Navigation Dark */
+
+/* Desktop Header Dark Theme */
+.desktop-header {
+    background: #1e293b !important;
+    border: 1px solid #334155 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.desktop-header .nav-item {
+    color: #cbd5e1 !important;
+}
+
+.desktop-header .nav-item svg {
+    stroke: #cbd5e1 !important;
+}
+
+.desktop-header .nav-item:hover {
+    background-color: rgba(99, 102, 241, 0.15) !important;
+    color: #818cf8 !important;
+}
+
+.desktop-header .nav-item:hover svg {
+    stroke: #818cf8 !important;
+}
+
+.desktop-header .nav-item.isActive {
+    color: #818cf8 !important;
+    background-color: rgba(99, 102, 241, 0.2) !important;
+}
+
+.desktop-header .nav-item.isActive svg {
+    stroke: #818cf8 !important;
+}
+
+.desktop-header .btn-deposit {
+    background: linear-gradient(360deg, #6366f1, #818cf8) !important;
+    box-shadow: 0 0 16px 0 rgba(99, 102, 241, 0.4) !important;
+}
+
+.desktop-header .btn-deposit:hover {
+    background: linear-gradient(180deg, #818cf8, #a5b4fc) !important;
+    box-shadow: 0 0 20px 0 rgba(99, 102, 241, 0.6) !important;
+}
+
+.desktop-header .btn-auth {
+    background: linear-gradient(360deg, #6366f1, #818cf8) !important;
+    box-shadow: 0 0 16px 0 rgba(99, 102, 241, 0.4) !important;
+}
+
+.desktop-header .btn-auth:hover {
+    background: linear-gradient(180deg, #818cf8, #a5b4fc) !important;
+    box-shadow: 0 0 20px 0 rgba(99, 102, 241, 0.6) !important;
+}
+
+.desktop-header .btn-withdraw {
+    background: #334155 !important;
+    border-color: #475569 !important;
+    color: #cbd5e1 !important;
+}
+
+.desktop-header .btn-withdraw:hover {
+    background: #475569 !important;
+    color: #f1f5f9 !important;
+}
+
+/* Floating Games Menu Dark Theme */
+.floating-games-menu {
+    background: #1e293b !important;
+    border: 1px solid #334155 !important;
+}
+
+.game-item {
+    background: linear-gradient(360deg, #6366f1, #818cf8) !important;
+}
+
+.game-item:hover {
+    background: linear-gradient(180deg, #818cf8, #a5b4fc) !important;
+}
+
+.game-item.isActive {
+    background: linear-gradient(180deg, #818cf8, #a5b4fc) !important;
+}
+
+/* Online Counter Dark */
+.floating-online {
+    background: rgba(51, 65, 85, 0.6) !important;
+    border: 1px solid #475569 !important;
+}
+
+.floating-online .online-count {
+    color: #cbd5e1 !important;
+}
+
+/* Social Links Dark */
+.floating-social .social-btn,
+.floating-social-collapsed .social-btn-small {
+    background: rgba(51, 65, 85, 0.6) !important;
+    border: 1px solid #475569 !important;
+}
+
+.floating-social .social-btn:hover,
+.floating-social-collapsed .social-btn-small:hover {
+    background: rgba(71, 85, 105, 0.8) !important;
+}
+
+.menu-toggle-btn {
+    background: #334155 !important;
+    border-color: #475569 !important;
+}
+
+.menu-toggle-btn:hover {
+    background: #475569 !important;
+}
+
+.menu-toggle-btn svg {
+    stroke: #cbd5e1 !important;
+}
+
+
+/* Desktop Logo Dark Theme - use new logo with white filter */
+.desktop-logo .logo_img {
+    background-image: url(/image/new_logo.png) !important;
+    filter: brightness(0) invert(1) !important;
+}
+
+/* Game icons white in floating menu */
+.game-item .games-img {
+    filter: brightness(0) invert(1) !important;
+}
+
+
+/* Hide old left-main on desktop - dark theme */
+@media screen and (min-width: 993px) {
+    .left-main > *:not(.floating-games-menu) {
+        display: none !important;
+    }
+    
+    .left-main {
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+}
+
+
+/* Profile Stats Dark */
+.user-stat-card {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+.user-stat-label {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.user-stat-value {
+    color: #fff;
+}
+
+.user-stat-value.deposits { color: #60a5fa; }
+.user-stat-value.withdraws { color: #a78bfa; }
+.user-stat-value.games { color: #fbbf24; }
+.user-stat-value.profit-plus { color: #34d399; }
+.user-stat-value.profit-minus { color: #f87171; }
+.user-stat-value.wager-active { color: #f472b6; }
+.user-stat-value.wager-done { color: #34d399; }
+
+
+/* Cashier History Dark */
+
+.history-item:hover {
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+
+.history-item.expanded {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.history-item .h-details {
+    border-top-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.h-detail-label {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.h-detail-value {
+    color: #fff !important;
+}
+
+
+/* Cashier History Fix Dark */
+
+.history-item.expanded .h-details {
+    border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.h-detail-row {
+    border-bottom-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+
+/* Confirm Cancel Modal Dark */
+
+.confirm-modal {
+    background: #1e293b !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.confirm-icon {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1)) !important;
+}
+
+.confirm-title {
+    color: #fff !important;
+}
+
+.confirm-text {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.confirm-btn-cancel {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.confirm-btn-cancel:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* CONFIRM MODAL DARK */
+.confirm-modal { background: #1e293b !important; border: 1px solid rgba(255, 255, 255, 0.1); }
+.confirm-title { color: #fff !important; }
+.confirm-text { color: rgba(255, 255, 255, 0.7) !important; }
+.confirm-btn-cancel { background: rgba(255, 255, 255, 0.1) !important; color: rgba(255, 255, 255, 0.8) !important; }
+.confirm-btn-cancel:hover { background: rgba(255, 255, 255, 0.15) !important; }
+
+
+/* QR Download Button - Dark Theme */
+.qr-download-btn {
+    background: linear-gradient(360deg, #6366f1, #818cf8) !important;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+.qr-download-btn:hover {
+    background: linear-gradient(360deg, #818cf8, #a5b4fc) !important;
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+}
+.qr-code-block {
+    background: rgba(99, 102, 241, 0.1) !important;
+    border-color: rgba(99, 102, 241, 0.3) !important;
+}
+
+/* Telegram Box Dark */
+.tg-title {
+    color: #fff !important;
+}
+
+.tg-benefits li {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.tg-code {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #38bdf8 !important;
+}
+
+.telegram-box.tg-linked {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(16, 185, 129, 0.04)) !important;
+}
+
+.tg-header.tg-success .tg-title {
+    color: #10b981 !important;
+}
+
+
+/* Telegram title and benefits - Dark Theme */
+.tg-title {
+    color: #fff !important;
+}
+
+.tg-benefits li {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+
+/* Telegram button - Dark Theme (like other buttons) */
+.tg-get-btn {
+    background: linear-gradient(135deg, #6366f1, #818cf8) !important;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.tg-get-btn:hover {
+    background: linear-gradient(135deg, #818cf8, #a5b4fc) !important;
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+}
+
+.tg-link-btn {
+    background: linear-gradient(135deg, #6366f1, #818cf8) !important;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.tg-link-btn:hover {
+    background: linear-gradient(135deg, #818cf8, #a5b4fc) !important;
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+}
+
+
+/* Win Feed Dark */
+.win-feed-container {
+    background: linear-gradient(135deg, #1a1f2e 0%, #252b3d 100%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.win-feed-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.win-feed-icon {
+    color: #a78bfa;
+}
+
+.win-feed-title {
+    color: #fff;
+}
+
+.win-feed-item {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.win-feed-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.win-feed-user {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.win-feed-game-name {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.win-feed-game-icon {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Telegram Box Mobile Dark */
+@media (max-width: 768px) {
+    .telegram-section {
+        width: 100% !important;
+        margin-top: 15px !important;
+        margin-left: 0 !important;
+    }
+    
+    .telegram-box {
+        width: 100% !important;
+        min-width: unset !important;
+        max-width: 100% !important;
+    }
+}
+
+
+/* Profile Page Mobile Dark */
+@media (max-width: 992px) {
+    .bonuses.rows {
+        flex-direction: column !important;
+    }
+    
+    .profile-left-column {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
+        margin-right: 0 !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .bonuses.rows > .content.cards.col-8 {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
+    }
+}
+
+
+/* TG Connect Modal Dark */
+.tg-connect-modal {
+    background: #1a1d29 !important;
+    border: 1px solid rgba(0,136,204,0.2) !important;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5) !important;
+}
+
+.tg-connect-hero {
+    background: linear-gradient(135deg, rgba(0,136,204,0.15) 0%, rgba(0,136,204,0.05) 100%) !important;
+    border-color: rgba(0,136,204,0.2) !important;
+}
+
+.tg-hero-title {
+    color: #fff !important;
+}
+
+.tg-hero-desc {
+    color: rgba(255,255,255,0.6) !important;
+}
+
+.tg-step {
+    background: rgba(255,255,255,0.03) !important;
+    border-color: rgba(255,255,255,0.06) !important;
+}
+
+.tg-step:hover {
+    background: rgba(255,255,255,0.05) !important;
+}
+
+.tg-step-title {
+    color: #fff !important;
+}
+
+.tg-step-desc {
+    color: rgba(255,255,255,0.5) !important;
+}
+
+.tg-loading {
+    color: rgba(255,255,255,0.6) !important;
+}
+
+.tg-code-label {
+    color: rgba(255,255,255,0.6) !important;
+}
+
+.tg-code-value {
+    background: rgba(0,136,204,0.1) !important;
+    border-color: rgba(0,136,204,0.4) !important;
+}
+
+.tg-code-value:hover {
+    background: rgba(0,136,204,0.15) !important;
+    border-color: rgba(0,136,204,0.6) !important;
+}
+
+.tg-code-value svg {
+    color: rgba(255,255,255,0.5) !important;
+}
+
+.tg-code-timer {
+    color: rgba(255,255,255,0.4) !important;
+}
+
+.tg-connect-benefits {
+    border-top-color: rgba(255,255,255,0.06) !important;
+}
+
+.tg-benefit {
+    color: rgba(255,255,255,0.5) !important;
+}
+
+/* Dark theme button - purple gradient like other buttons */
+.tg-btn-get-code,
+.tg-btn-connect {
+    background: linear-gradient(360deg, #6366f1, #818cf8) !important;
+    box-shadow: 0 0 16px 0 rgba(99, 102, 241, 0.4) !important;
+    color: #fff !important;
+}
+
+.tg-btn-get-code:hover,
+.tg-btn-connect:hover {
+    background: linear-gradient(180deg, #818cf8, #a5b4fc) !important;
+    box-shadow: 0 0 20px 0 rgba(99, 102, 241, 0.6) !important;
+    color: #fff !important;
+}
