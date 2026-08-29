@@ -1,0 +1,122 @@
+services:
+  # PostgreSQL Database
+  - type: pgsql
+    name: mzizination-db
+    plan: starter
+    ipAllowList: []
+
+  # Main Casino Web Application
+  - type: web
+    name: mzizination-casino
+    env: php
+    phpVersion: 8.2
+    startCommand: "sh scripts/start.sh"
+    buildCommand: "sh scripts/build.sh"
+    
+    envVars:
+      # Application
+      - key: APP_NAME
+        value: Mzizination
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        scope: build
+      - key: APP_TIMEZONE
+        value: Africa/Nairobi
+      - key: APP_LOCALE
+        value: en
+      
+      # Database
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: mzizination-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: mzizination-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: mzizination-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: mzizination-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: mzizination-db
+          property: password
+      
+      # Cache & Session
+      - key: CACHE_DRIVER
+        value: array
+      - key: SESSION_DRIVER
+        value: cookie
+      - key: QUEUE_DRIVER
+        value: sync
+      - key: BROADCAST_DRIVER
+        value: log
+      
+      # M-Pesa Daraja (Primary)
+      - key: MPESA_SANDBOX
+        value: true
+      - key: MPESA_CONSUMER_KEY
+        scope: build
+      - key: MPESA_CONSUMER_SECRET
+        scope: build
+      - key: MPESA_SHORTCODE
+        value: "174379"
+      - key: MPESA_PASSKEY
+        scope: build
+      - key: MPESA_INITIATOR_NAME
+        value: testapi
+      - key: MPESA_INITIATOR_PASSWORD
+        scope: build
+      
+      # Paystack (Backup)
+      - key: PAYSTACK_PUBLIC_KEY
+        scope: build
+      - key: PAYSTACK_SECRET_KEY
+        scope: build
+      
+      # Payments
+      - key: WITHDRAWAL_MIN_AMOUNT
+        value: "100"
+      - key: WITHDRAWAL_MAX_AMOUNT
+        value: "500000"
+      - key: WITHDRAWAL_AUTO_APPROVE_LIMIT
+        value: "10000"
+      - key: DEPOSIT_MIN_AMOUNT
+        value: "10"
+      - key: DEPOSIT_MAX_AMOUNT
+        value: "70000"
+      
+      # Logging
+      - key: LOG_CHANNEL
+        value: stack
+      - key: LOG_LEVEL
+        value: debug
+    
+    plan: starter
+    numInstances: 1
+    maxNumInstances: 3
+    minNumInstances: 1
+    
+    healthCheckPath: /health
+    
+    preDeployCommand: "sh scripts/pre-deploy.sh"
+
+hooks:
+  postDeploy: |
+    set -e
+    echo "Running post-deployment scripts..."
+    php artisan migrate --force
+    php artisan cache:clear
+    php artisan config:cache
+    php artisan route:cache
+    echo "✓ Deployment complete"

@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: mzizination_postgres
+    environment:
+      POSTGRES_DB: mzizination
+      POSTGRES_USER: mzizi_user
+      POSTGRES_PASSWORD: mzizi_password_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mzizi_user -d mzizination"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Laravel Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mzizination_app
+    environment:
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: mzizination
+      DB_USERNAME: mzizi_user
+      DB_PASSWORD: mzizi_password_dev
+      APP_ENV: local
+      APP_DEBUG: "true"
+      CACHE_DRIVER: array
+      QUEUE_DRIVER: sync
+      MPESA_SANDBOX: "true"
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - .:/app
+      - app_storage:/app/storage
+    command: >
+      sh -c "
+        composer install &&
+        php artisan migrate:fresh --seed &&
+        php artisan serve --host=0.0.0.0 --port=8000
+      "
+
+  # Redis (Optional - for caching)
+  redis:
+    image: redis:7-alpine
+    container_name: mzizination_redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+  app_storage:
+
+networks:
+  default:
+    name: mzizination_network
