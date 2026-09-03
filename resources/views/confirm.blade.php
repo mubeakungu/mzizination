@@ -7,12 +7,12 @@
         <meta name="verification" content="58c54802a9fb9526cd0923353a34a7ae" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link rel="shortcut icon" href="/image/icon.png?v={{time()}}">
-        <title>{{ $settings->title }}</title>
-        <meta name="description" content="{{ $settings->description }}">
-        <meta name="keywords" content="{{ $settings->keywords }}">
+        <title>{{ $settings?->title ?? 'Mzizibet' }}</title>
+        <meta name="description" content="{{ $settings?->description ?? '' }}">
+        <meta name="keywords" content="{{ $settings?->keywords ?? '' }}">
         <link rel="preconnect" href="https://fonts.gstatic.com">
 	    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('assets/app.css') }}?v={{ $settings->file_version }}">
+        <link rel="stylesheet" href="{{ asset('assets/app.css') }}?v={{ $settings?->file_version ?? '1' }}">
         <script
 			src="https://code.jquery.com/jquery-3.7.0.min.js"
 			integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
