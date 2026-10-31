@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'secretKey' => \App\Http\Middleware\secretKey::class,
         'access' => \App\Http\Middleware\Access::class,
+        'rg' => \App\Http\Middleware\ResponsibleGamblingGate::class,
     ];
 }

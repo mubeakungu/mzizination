@@ -21,6 +21,27 @@
                 </h3>
             </div>
         </div>
+        @php($pendingKyc = \App\User::where('kyc_status', 'pending')->orderBy('kyc_submitted_at')->limit(50)->get())
+        @if($pendingKyc->count())
+        <div class="kt-portlet__body">
+            <h5>KYC waiting for review ({{ $pendingKyc->count() }})</h5>
+            <table class="table table-sm table-bordered">
+                <thead><tr><th>ID</th><th>User</th><th>Date of birth</th><th>ID number</th><th>Submitted</th><th></th></tr></thead>
+                <tbody>
+                @foreach($pendingKyc as $p)
+                    <tr>
+                        <td>{{ $p->id }}</td>
+                        <td>{{ $p->username }}</td>
+                        <td>{{ $p->date_of_birth }}</td>
+                        <td>{{ $p->id_number }}</td>
+                        <td>{{ $p->kyc_submitted_at }}</td>
+                        <td><a href="/admin/users/edit/{{ $p->id }}">Review</a></td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+        @endif
         <div class="kt-portlet__body">
 
             <!--begin: Datatable -->

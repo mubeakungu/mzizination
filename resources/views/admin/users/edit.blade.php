@@ -53,6 +53,28 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <div class="col-lg-3">
+                                    <label>KYC status</label>
+                                    <select class="form-control" name="kyc_status">
+                                        @foreach(['none' => 'Not submitted', 'pending' => 'Pending review', 'verified' => 'Verified', 'rejected' => 'Rejected'] as $k => $label)
+                                            <option value="{{ $k }}" @if(($user->kyc_status ?? 'none') == $k) selected @endif>{{ $label }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label>Date of birth</label>
+                                    <input type="text" class="form-control" value="{{ $user->date_of_birth ? \Carbon\Carbon::parse($user->date_of_birth)->toDateString() . ' (age ' . \Carbon\Carbon::parse($user->date_of_birth)->age . ')' : '-' }}" disabled />
+                                </div>
+                                <div class="col-lg-3">
+                                    <label>ID / passport number</label>
+                                    <input type="text" class="form-control" value="{{ $user->id_number ?? '-' }}" disabled />
+                                </div>
+                                <div class="col-lg-3">
+                                    <label>Self-excluded until</label>
+                                    <input type="text" class="form-control" value="{{ $user->self_excluded_until && \Carbon\Carbon::parse($user->self_excluded_until)->isFuture() ? $user->self_excluded_until : 'No' }}" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <div class="col-lg-4">
                                     <label>Необходимо отыграть (₽):</label>
                                     <input type="text" autocomplete="off" class="form-control" placeholder="" value="{{ $user->wager }}" name="wager" required />

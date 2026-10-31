@@ -40,7 +40,17 @@ class UsersController extends Controller
             ]);
         }
 
-        User::query()->find($id)->update($r->all());
+        // Player-protection fields can't be changed from the admin form (self-exclusion must not be lifted early).
+        $data = $r->except([
+            'self_excluded_until', 'daily_deposit_limit', 'daily_stake_limit', 'pending_deposit_limit',
+            'pending_stake_limit', 'pending_deposit_unlimited', 'pending_stake_unlimited', 'pending_limits_at',
+            'stake_day', 'stake_today', 'date_of_birth', 'id_number',
+        ]);
+        if (isset($data['kyc_status']) && !in_array($data['kyc_status'], ['none', 'pending', 'verified', 'rejected'])) {
+            unset($data['kyc_status']);
+        }
+
+        User::query()->find($id)->update($data);
 
         return redirect('/admin/users/edit/' . $id)->with('success', 'Данные пользователя обновлены!');
     }
