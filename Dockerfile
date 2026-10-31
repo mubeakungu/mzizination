@@ -50,7 +50,7 @@ COPY . /app
 WORKDIR /app
 
 # Create necessary directories
-RUN mkdir -p storage/logs storage/cache bootstrap/cache \
+RUN mkdir -p storage/logs storage/app/public storage/framework/cache/data storage/framework/sessions storage/framework/views bootstrap/cache \
     && chown -R www-data:www-data /app/storage /app/bootstrap
 
 # Health check

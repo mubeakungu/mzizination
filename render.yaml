@@ -62,6 +62,9 @@ services:
       - key: BROADCAST_DRIVER
         value: log
       
+      - key: APP_KEY
+        generateValue: true
+
       # Sportsbook odds (The Odds API, free tier: https://the-odds-api.com)
       - key: ODDS_API_KEY
         sync: false

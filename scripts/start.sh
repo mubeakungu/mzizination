@@ -3,6 +3,9 @@ set -e
 
 echo "🚀 Starting Mzizination..."
 
+# Laravel's writable directories (not committed to git)
+mkdir -p storage/logs storage/app/public storage/framework/cache/data storage/framework/sessions storage/framework/views bootstrap/cache
+
 # Run migrations
 echo "🔄 Running database migrations..."
 php artisan migrate --force

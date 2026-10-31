@@ -27,7 +27,7 @@ class ChatController extends Controller
 
         // Simple spam check (optional, can be improved)
         $lastMsg = Chat::where('user_id', Auth::id())->orderBy('id', 'desc')->first();
-        if($lastMsg && Carbon::now()->diffInSeconds($lastMsg->created_at) < 1) {
+        if($lastMsg && abs(Carbon::now()->diffInSeconds($lastMsg->created_at)) < 1) { // Carbon 3 returns signed values
              return ['error' => true, 'message' => 'Не так часто'];
         }
 
