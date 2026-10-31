@@ -2613,6 +2613,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['page'],
@@ -5187,6 +5220,574 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.updateResult();
     this.countUp = this.$refs.countup;
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/Crash.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/dist/js/pages/Crash.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var THEMES = {
+  flight: {
+    title: 'Safari Flight',
+    idle: 'Ready for take-off',
+    crashText: 'Flew off!',
+    sky: ['#ff9a3c', '#3b1d5c'],
+    line: '#ffd166'
+  },
+  rocket: {
+    title: 'Mzizi Rocket',
+    idle: 'Ready for launch',
+    crashText: 'Boom!',
+    sky: ['#1a1440', '#05030f'],
+    line: '#a78bfa'
+  },
+  jet: {
+    title: 'Savanna Jet',
+    idle: 'Engines ready',
+    crashText: 'Gone!',
+    sky: ['#5ad1c8', '#0b3954'],
+    line: '#e0fbfc'
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      themes: THEMES,
+      amount: 100,
+      auto: '',
+      phase: 'idle',
+      game: null,
+      multiplier: 1,
+      history: [],
+      offset: 0,
+      growth: 0.00006,
+      houseEdge: 0.03,
+      maxMult: 1000,
+      minBet: 10,
+      busy: false,
+      error: null,
+      fair: null,
+      verified: null,
+      raf: null,
+      poll: null,
+      stars: []
+    };
+  },
+  computed: {
+    theme: function theme() {
+      return THEMES[this.$route.params.theme] ? this.$route.params.theme : 'rocket';
+    },
+    meta: function meta() {
+      return THEMES[this.theme];
+    }
+  },
+  watch: {
+    '$root.user': function $rootUser(u, old) {
+      if (u && !old) this.init();
+    },
+    theme: function theme() {
+      this.draw();
+    }
+  },
+  mounted: function mounted() {
+    this.stars = Array.from({
+      length: 60
+    }, function () {
+      return [Math.random(), Math.random(), Math.random() * 1.5 + 0.3];
+    });
+    window.addEventListener('resize', this.draw);
+    this.init();
+    this.draw();
+  },
+  beforeDestroy: function beforeDestroy() {
+    window.removeEventListener('resize', this.draw);
+    cancelAnimationFrame(this.raf);
+    clearInterval(this.poll);
+  },
+  methods: {
+    fmt: function fmt(n) {
+      return Number(n || 0).toFixed(2);
+    },
+    chipClass: function chipClass(x) {
+      return x >= 10 ? 'hi' : x >= 2 ? 'mid' : 'lo';
+    },
+    api: function api(url, body) {
+      return this.$root.axios.post(url, body).then(function (r) {
+        return r.data;
+      });
+    },
+    init: function init() {
+      var _this = this;
+
+      if (!this.$root.user) return;
+      this.api('/crash/init').then(function (d) {
+        if (d.error) return;
+        _this.growth = d.growth;
+        _this.houseEdge = d.house_edge;
+        _this.maxMult = d.max_multiplier || 1000;
+        _this.minBet = d.min_bet;
+        _this.history = d.history;
+        _this.offset = d.server_time_ms - Date.now();
+        if (d.active) _this.run(d.active);
+      });
+    },
+    start: function start() {
+      var _this2 = this;
+
+      if (!this.$root.user) {
+        this.error = 'Please log in to play';
+        return;
+      }
+
+      this.error = null;
+      this.busy = true;
+      this.verified = null;
+      this.api('/crash/start', {
+        amount: this.amount,
+        auto_cashout: this.auto || null,
+        theme: this.theme
+      }).then(function (d) {
+        _this2.busy = false;
+
+        if (d.error) {
+          _this2.error = d.message;
+          return;
+        }
+
+        _this2.$root.user.balance = d.balance;
+        _this2.offset = d.server_time_ms - Date.now();
+
+        _this2.run(d.game);
+      })["catch"](function () {
+        _this2.busy = false;
+      });
+    },
+    run: function run(game) {
+      var _this3 = this;
+
+      this.game = game;
+      this.phase = 'running';
+      this.fair = null;
+
+      var tick = function tick() {
+        if (_this3.phase !== 'running') return;
+        var t = Date.now() + _this3.offset - game.started_at_ms;
+        _this3.multiplier = Math.max(1, Math.floor(Math.exp(_this3.growth * t) * 100) / 100);
+
+        _this3.draw();
+
+        _this3.raf = requestAnimationFrame(tick);
+      };
+
+      tick();
+      clearInterval(this.poll);
+      this.poll = setInterval(function () {
+        return _this3.check();
+      }, 400);
+    },
+    check: function check() {
+      var _this4 = this;
+
+      if (!this.game) return;
+      this.api('/crash/status', {
+        id: this.game.id
+      }).then(function (d) {
+        if (!d.error) _this4.finish(d);
+      });
+    },
+    cashout: function cashout() {
+      var _this5 = this;
+
+      this.busy = true;
+      this.api('/crash/cashout', {
+        id: this.game.id
+      }).then(function (d) {
+        _this5.busy = false;
+        if (!d.error) _this5.finish(d);
+      })["catch"](function () {
+        _this5.busy = false;
+      });
+    },
+    finish: function finish(d) {
+      if (d.game.status === 'active') return;
+      clearInterval(this.poll);
+      cancelAnimationFrame(this.raf);
+      this.game = d.game;
+      this.phase = d.game.status;
+      this.multiplier = d.game.status === 'cashed' ? d.game.cashout_multiplier : d.game.crash_point;
+
+      if (d.game.status === 'cashed') {
+        // keep the curve going visually to show where it crashed
+        this.multiplier = d.game.crash_point;
+      }
+
+      if (d.balance !== undefined) this.$root.user.balance = d.balance;
+      this.history = [d.game].concat(_toConsumableArray(this.history.filter(function (h) {
+        return h.id !== d.game.id;
+      }))).slice(0, 20);
+      this.fair = d.game;
+      this.draw();
+    },
+    verify: function verify(g) {
+      var _this6 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var enc, key, sig, hex, h, e, point, seedHash;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                enc = new TextEncoder();
+                _context.next = 3;
+                return crypto.subtle.importKey('raw', enc.encode(g.server_seed), {
+                  name: 'HMAC',
+                  hash: 'SHA-256'
+                }, false, ['sign']);
+
+              case 3:
+                key = _context.sent;
+                _context.t0 = Uint8Array;
+                _context.next = 7;
+                return crypto.subtle.sign('HMAC', key, enc.encode(g.client_seed + ':' + g.nonce));
+
+              case 7:
+                _context.t1 = _context.sent;
+                sig = new _context.t0(_context.t1);
+                hex = Array.from(sig).map(function (b) {
+                  return b.toString(16).padStart(2, '0');
+                }).join('');
+                h = parseInt(hex.slice(0, 13), 16), e = Math.pow(2, 52);
+                point = Math.floor((1 - _this6.houseEdge) * e / (e - h) * 100) / 100;
+                point = Math.max(1, Math.min(point, _this6.maxMult));
+                _context.t2 = Array;
+                _context.t3 = Uint8Array;
+                _context.next = 17;
+                return crypto.subtle.digest('SHA-256', enc.encode(g.server_seed));
+
+              case 17:
+                _context.t4 = _context.sent;
+                _context.t5 = new _context.t3(_context.t4);
+                seedHash = _context.t2.from.call(_context.t2, _context.t5).map(function (b) {
+                  return b.toString(16).padStart(2, '0');
+                }).join('');
+                _this6.verified = Math.abs(point - g.crash_point) < 0.001 && seedHash === g.server_seed_hash;
+
+              case 21:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    draw: function draw() {
+      var c = this.$refs.canvas,
+          stage = this.$refs.stage;
+      if (!c || !stage) return;
+      var W = stage.clientWidth,
+          H = stage.clientHeight,
+          dpr = window.devicePixelRatio || 1;
+      c.width = W * dpr;
+      c.height = H * dpr;
+      c.style.width = W + 'px';
+      c.style.height = H + 'px';
+      var ctx = c.getContext('2d');
+      ctx.scale(dpr, dpr);
+      var m = this.meta;
+      var g = ctx.createLinearGradient(0, H, 0, 0);
+      g.addColorStop(0, m.sky[0]);
+      g.addColorStop(1, m.sky[1]);
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, W, H);
+      this.drawScenery(ctx, W, H);
+      if (this.phase === 'idle') return; // curve: x = time, y = multiplier, axes stretch as the round goes on
+
+      var pad = 40,
+          mult = Math.max(1.0001, this.multiplier);
+      var tMax = Math.log(mult) / this.growth,
+          xMax = Math.max(tMax, 8000),
+          yMax = Math.max(mult, 2);
+
+      var X = function X(t) {
+        return pad + (W - 2 * pad) * (t / xMax);
+      };
+
+      var Y = function Y(v) {
+        return H - pad - (H - 2 * pad) * ((v - 1) / (yMax - 1));
+      };
+
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = m.line;
+      ctx.beginPath();
+
+      for (var i = 0; i <= 60; i++) {
+        var t = tMax * i / 60,
+            v = Math.exp(this.growth * t);
+        i ? ctx.lineTo(X(t), Y(v)) : ctx.moveTo(X(t), Y(v));
+      }
+
+      ctx.stroke();
+      ctx.lineTo(X(tMax), H - pad);
+      ctx.lineTo(X(0), H - pad);
+      ctx.closePath();
+      ctx.fillStyle = m.line + '33';
+      ctx.fill();
+      var x = X(tMax),
+          y = Y(mult);
+      var t2 = tMax * 0.97,
+          angle = Math.atan2(Y(Math.exp(this.growth * t2)) - y, X(t2) - x) + Math.PI;
+      if (this.phase === 'crashed') this.drawBurst(ctx, x, y);else this.drawCraft(ctx, x, y, angle);
+    },
+    drawScenery: function drawScenery(ctx, W, H) {
+      if (this.theme === 'rocket') {
+        ctx.fillStyle = '#ffffff';
+        this.stars.forEach(function (_ref) {
+          var _ref2 = _slicedToArray(_ref, 3),
+              sx = _ref2[0],
+              sy = _ref2[1],
+              r = _ref2[2];
+
+          ctx.globalAlpha = 0.4 + r / 3;
+          ctx.beginPath();
+          ctx.arc(sx * W, sy * H, r, 0, 7);
+          ctx.fill();
+        });
+        ctx.globalAlpha = 1;
+      } else if (this.theme === 'flight') {
+        ctx.fillStyle = 'rgba(255,230,150,.85)';
+        ctx.beginPath();
+        ctx.arc(W * 0.8, H * 0.75, 42, 0, 7);
+        ctx.fill();
+        ctx.fillStyle = '#2b1a12';
+        ctx.beginPath();
+        ctx.moveTo(0, H);
+
+        for (var i = 0; i <= 10; i++) {
+          ctx.lineTo(W * i / 10, H - 18 - 10 * Math.sin(i * 1.7));
+        }
+
+        ctx.lineTo(W, H);
+        ctx.fill(); // acacia tree silhouette
+
+        var tx = W * 0.62,
+            ty = H - 22;
+        ctx.fillRect(tx - 2, ty - 34, 4, 34);
+        ctx.beginPath();
+        ctx.ellipse(tx, ty - 38, 34, 9, 0, 0, 7);
+        ctx.fill();
+      } else {
+        ctx.fillStyle = 'rgba(255,255,255,.35)';
+        [[0.2, 0.25, 40], [0.55, 0.15, 55], [0.8, 0.35, 35], [0.35, 0.55, 30]].forEach(function (_ref3) {
+          var _ref4 = _slicedToArray(_ref3, 3),
+              cx = _ref4[0],
+              cy = _ref4[1],
+              r = _ref4[2];
+
+          ctx.beginPath();
+          ctx.arc(cx * W, cy * H, r, 0, 7);
+          ctx.arc(cx * W + r, cy * H + 6, r * 0.8, 0, 7);
+          ctx.arc(cx * W - r, cy * H + 8, r * 0.7, 0, 7);
+          ctx.fill();
+        });
+      }
+    },
+    drawCraft: function drawCraft(ctx, x, y, angle) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(angle);
+
+      if (this.theme === 'rocket') {
+        ctx.fillStyle = '#f8f9fa';
+        ctx.beginPath();
+        ctx.moveTo(26, 0);
+        ctx.quadraticCurveTo(10, -11, -14, -8);
+        ctx.lineTo(-14, 8);
+        ctx.quadraticCurveTo(10, 11, 26, 0);
+        ctx.fill();
+        ctx.fillStyle = '#ef476f';
+        ctx.beginPath();
+        ctx.moveTo(-8, -8);
+        ctx.lineTo(-18, -16);
+        ctx.lineTo(-14, -6);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(-8, 8);
+        ctx.lineTo(-18, 16);
+        ctx.lineTo(-14, 6);
+        ctx.fill();
+        ctx.fillStyle = '#4cc9f0';
+        ctx.beginPath();
+        ctx.arc(8, 0, 4, 0, 7);
+        ctx.fill();
+        ctx.fillStyle = '#ffb703';
+        ctx.beginPath();
+        ctx.moveTo(-14, -5);
+        ctx.lineTo(-28 - Math.random() * 8, 0);
+        ctx.lineTo(-14, 5);
+        ctx.fill();
+      } else if (this.theme === 'flight') {
+        // side-view propeller plane
+        ctx.fillStyle = '#d62828';
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 22, 6, 0, 0, 7);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(-14, -2);
+        ctx.lineTo(-24, -14);
+        ctx.lineTo(-18, -14);
+        ctx.lineTo(-8, -3);
+        ctx.fill();
+        ctx.fillStyle = '#f77f00';
+        ctx.beginPath();
+        ctx.ellipse(2, 3, 11, 3.5, 0.15, 0, 7);
+        ctx.fill();
+        ctx.fillStyle = '#bde0fe';
+        ctx.beginPath();
+        ctx.ellipse(9, -3, 5, 3, 0, 0, 7);
+        ctx.fill();
+        ctx.strokeStyle = '#333';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(23, -7 + Math.random() * 3);
+        ctx.lineTo(23, 7 - Math.random() * 3);
+        ctx.stroke();
+      } else {
+        ctx.fillStyle = '#e9ecef';
+        ctx.beginPath();
+        ctx.moveTo(28, 0);
+        ctx.lineTo(-16, -5);
+        ctx.lineTo(-16, 5);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = '#0b3954';
+        ctx.beginPath();
+        ctx.moveTo(6, 0);
+        ctx.lineTo(-10, -20);
+        ctx.lineTo(-14, -20);
+        ctx.lineTo(-6, 0);
+        ctx.lineTo(-14, 20);
+        ctx.lineTo(-10, 20);
+        ctx.fill();
+        ctx.fillStyle = '#ff6b35';
+        ctx.beginPath();
+        ctx.moveTo(-16, -3);
+        ctx.lineTo(-30 - Math.random() * 10, 0);
+        ctx.lineTo(-16, 3);
+        ctx.fill();
+      }
+
+      ctx.restore();
+    },
+    drawBurst: function drawBurst(ctx, x, y) {
+      ctx.save();
+      ctx.translate(x, y);
+
+      for (var i = 0; i < 12; i++) {
+        var a = i * Math.PI / 6,
+            r = 18 + i % 2 * 10;
+        ctx.strokeStyle = i % 2 ? '#ffd166' : '#ef476f';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(Math.cos(a) * 6, Math.sin(a) * 6);
+        ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r);
+        ctx.stroke();
+      }
+
+      ctx.restore();
+    }
   }
 });
 
@@ -57639,7 +58240,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Hide desktop menu on mobile */\n@media screen and (max-width: 992px) {\n.floating-games-menu[data-v-5d46b43a] {\n        display: none !important;\n}\n}\n\n/* Hide mobile nav on desktop */\n@media screen and (min-width: 993px) {\n.mob-nav-bottom[data-v-5d46b43a] {\n        display: none !important;\n}\n}\n.rg-link[data-v-5d46b43a] { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 8px 0; font-size: 12px; opacity: .75; color: inherit; text-decoration: none;\n}\n.rg-link[data-v-5d46b43a]:hover { opacity: 1;\n}\n.rg-18[data-v-5d46b43a] { border: 1.5px solid #eb5757; color: #eb5757; border-radius: 50%; font-size: 10px; font-weight: 700; width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Hide desktop menu on mobile */\n@media screen and (max-width: 992px) {\n.floating-games-menu[data-v-5d46b43a] {\n        display: none !important;\n}\n}\n\n/* Hide mobile nav on desktop */\n@media screen and (min-width: 993px) {\n.mob-nav-bottom[data-v-5d46b43a] {\n        display: none !important;\n}\n}\n.rg-link[data-v-5d46b43a] { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 8px 0; font-size: 12px; opacity: .75; color: inherit; text-decoration: none;\n}\n.rg-link[data-v-5d46b43a]:hover { opacity: 1;\n}\n.rg-18[data-v-5d46b43a] { border: 1.5px solid #eb5757; color: #eb5757; border-radius: 50%; font-size: 10px; font-weight: 700; width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center;\n}\n", ""]);
 
 // exports
 
@@ -57792,6 +58393,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 // module
 exports.push([module.i, "\n.bubbles .buttons .amount-number {\n    padding: 5px;\n}\n.bubbles .content-body {\n    padding: 65px 0;\n    overflow-x: hidden;\n}\n.game-area_bubbles {\n    flex-direction: column;\n    height: 100%;\n    position: relative;\n    overflow-x: hidden;\n    overflow-y: visible;\n    min-height: 0;\n}\n.game-area,.game-area_bubbles {\n    overflow-x: hidden;\n    overflow-y: visible;\n    align-items: stretch;\n    display: flex;\n}\n.game-area {\n    min-width: 0;\n}\n.game-area_bubbles-options {\n    border: 1px solid var(--color-main-border);\n    border-radius: 7px;\n    display: flex;\n    padding: 0 10px;\n    width: 100%;\n}\n.game-area_bubbles-option {\n    flex: 1;\n    margin: 0 5px;\n}\n.game-sidebar_input-wrapper_no-margin {\n    margin-top: 0;\n}\n.game-sidebar_input-wrapper {\n    position: relative;\n}\n.game-sidebar_input-label {\n    display: block;\n    margin-bottom: .5rem;\n}\n.msg-wrapper {\n    position: relative;\n}\n.msg_error {\n    background: #1f51f8;\n    border-radius: 5px;\n    color: #fff;\n    font-size: 12px;\n    padding: 5px 13px;\n    position: absolute;\n    white-space: nowrap;\n    z-index: 5;\n}\n.msg_error_bottom {\n    bottom: -29px;\n    top: auto;\n}\n.bubbles-pick-helper {\n    border: 1px solid #ced4da;\n    border-radius: 8px;\n    display: flex;\n    position: absolute;\n    top: -7px;\n    transition: .1s;\n    z-index: 100;\n}\n.set_bubbles {\n    -webkit-appearance: none;\n    background: #fff;\n    border: none;\n    border-right: 1px solid #ced4da;\n    color: #495057;\n    flex: auto;\n    font-size: 12px;\n    line-height: 30px;\n    margin: 0;\n    outline: none;\n    padding: 0;\n    text-align: center;\n}\n.set_bubbles:first-of-type {\n    border-bottom-left-radius: 8px;\n    border-top-left-radius: 8px;\n}\n.bubbles_btn {\n    border-right: 1px solid #ced4da;\n    min-width: 40px;\n}\n.set_bubbles:last-of-type {\n    border-bottom-right-radius: 8px;\n    border-right: none;\n    border-top-right-radius: 8px;\n}\n.game-bubbles-coeff {\n    align-items: center;\n    display: flex;\n    flex: auto;\n    justify-content: center;\n    padding: 30px 0;\n    position: relative;\n    overflow-x: hidden;\n    overflow-y: visible;\n    min-height: 0;\n}\n.game-bubbles-coeff-val {\n    color: #496db0;\n    font-family: open sans,sans-serif;\n    font-size: 62px;\n    font-weight: 800;\n    max-width: 100%;\n    overflow-x: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n}\n.bubbles_list {\n    width: 100%;\n    overflow-x: hidden;\n    overflow-y: visible;\n    padding: 0 15px;\n    white-space: nowrap;\n}\n.simplebar-wrapper {\n    height: inherit;\n    max-height: inherit;\n    max-width: inherit;\n    overflow-x: hidden;\n    overflow-y: visible;\n    min-height: 0;\n    width: inherit;\n}\n.simplebar-height-auto-observer-wrapper {\n    box-sizing: inherit!important;\n    flex-basis: 0;\n    flex-grow: inherit;\n    flex-shrink: 0;\n    float: left;\n    height: 100%;\n    margin: 0;\n    max-height: 1px;\n    max-width: 1px;\n    overflow-x: hidden;\n    overflow-y: visible;\n    min-height: 0;\n    padding: 0;\n    pointer-events: none;\n    position: relative;\n    width: 100%;\n    z-index: -1;\n}\n.simplebar-mask {\n    direction: inherit;\n    height: auto!important;\n    overflow-x: hidden;\n    overflow-y: visible;\n    min-height: 0;\n    width: auto!important;\n    z-index: 0;\n}\n.simplebar-mask,.simplebar-offset {\n    bottom: 0;\n    left: 0;\n    margin: 0;\n    padding: 0;\n    position: absolute;\n    right: 0;\n    top: 0;\n}\n.simplebar-offset {\n    -webkit-overflow-scrolling: touch;\n    box-sizing: inherit!important;\n    direction: inherit!important;\n    resize: none!important;\n}\n[data-simplebar] {\n    align-content: flex-start;\n    align-items: flex-start;\n    flex-direction: column;\n    flex-wrap: wrap;\n    justify-content: flex-start;\n    position: relative;\n}\n.simplebar-content-wrapper {\n    -ms-overflow-style: none;\n    box-sizing: border-box!important;\n    direction: inherit;\n    display: block;\n    height: 100%;\n    max-height: 100%;\n    max-width: 100%;\n    position: relative;\n    scrollbar-width: none;\n    width: auto;\n}\n.bubbles-history-line {\n    min-height: 33px;\n    position: relative;\n    transition: all .2s ease;\n}\n.bubbles-history-line .bubbles-history-line-item .bubbles-item {\n    -webkit-animation-duration: .2s;\n    animation-duration: .2s;\n    -webkit-animation-fill-mode: forwards;\n    animation-fill-mode: forwards;\n    -webkit-animation-name: bubblesright;\n    animation-name: bubblesright;\n    -webkit-animation-timing-function: ease-out;\n    animation-timing-function: ease-out;\n    -webkit-backface-visibility: hidden;\n    backface-visibility: hidden;\n    overflow: visible!important;\n    perspective: 1000px;\n    transform: translateZ(0);\n    will-change: transform;\n}\n.bubbles-item {\n    border: 2px solid;\n    border-radius: 6px;\n    color: #fff;\n    display: inline-block;\n    font-size: 12px;\n    font-weight: 500;\n    margin: 3px;\n    padding: 5px 10px;\n}\n.bubbles-pick-helper-mobile {\n    border: 1px solid #ced4da;\n    border-radius: 5px;\n    display: flex;\n    position: absolute;\n    top: 12px;\n    z-index: 100;\n}\n.flex-position {\n    -webkit-box-align: center;\n    -ms-flex-position: center;\n    -webkit-align-items: center;\n    align-items: center;\n    display: flex;\n}\n@-webkit-keyframes bubblesright {\n0% {\n        transform: translate(-100%);\n}\n}\n@keyframes bubblesright {\n0% {\n        transform: translate(-100%);\n}\n}\n@-webkit-keyframes bubblesright-stb {\n0% {\n        transform: translate(-100%);\n}\n}\n@keyframes bubblesright-stb {\n0% {\n        transform: translate(-100%);\n}\n}\n.btn-play.blue:disabled {\n    background-image: linear-gradient(45deg,#5669a1,#5669a1);\n    cursor: not-allowed;\n}\n.game-sidebar-hide-desktop {\n    display: none;\n}\n@media (max-width:992px) {\n.flex-position {\n        margin-right: 5px;\n}\n.bubbless .col-8 {\n        min-width: 100%;\n}\n.bubbless .one {\n        order: 1;\n        padding: 0;\n}\n.bubbless .two {\n        order: 2;\n        padding: 1em 0;\n}\n.bubbless .content-body .rows.col-12 {\n        display: flex!important;\n        flex-direction: column;\n}\n.game-area_bubbles-wrapper {\n        display: none;\n}\n.bubbless .bodybubbles,.bubbless .play {\n        display: inline-block;\n        padding: 0;\n}\n.game-sidebar-hide-desktop {\n        display: flex;\n}\n.game-bubbles-coeff {\n        padding: 0;\n}\n.game-sidebar_input-wrapper {\n        padding-top: 1em;\n}\n.bubbles_list {\n        padding: 0;\n}\n}\n.bubbles_list .simplebar-wrapper {\n    overflow-x: hidden !important;\n    overflow-y: visible !important;\n    height: auto !important;\n    max-height: none !important;\n    overflow-y: visible !important;\n}\n.bubbles_list .simplebar-mask {\n    overflow-x: hidden !important;\n    overflow-y: visible !important;\n    height: auto !important;\n    max-height: none !important;\n    overflow-y: visible !important;\n}\n.bubbles_list .simplebar-content-wrapper {\n    overflow-x: hidden !important;\n    overflow-y: visible !important;\n    height: auto !important;\n    max-height: none !important;\n    overflow-y: visible !important;\n}\n.bubbles_list .simplebar-offset {\n    overflow-x: hidden !important;\n    overflow-y: visible !important;\n    height: auto !important;\n    max-height: none !important;\n    overflow-y: visible !important;\n}\n.bubbles_list .simplebar-content {\n    overflow-x: visible !important;\n    overflow-y: visible !important;\n}\n.bubbles_list .simplebar-track,\n.bubbles_list .simplebar-scrollbar {\n    display: none !important;\n    visibility: hidden !important;\n    opacity: 0 !important;\n}\n.bubbles_list .simplebar-placeholder {\n    display: none !important;\n}\n.bubbles_list .simplebar-wrapper {\n    overflow: visible !important;\n    height: auto !important;\n    max-height: none !important;\n}\n.bubbles_list .simplebar-mask {\n    overflow: visible !important;\n    position: static !important;\n    height: auto !important;\n    width: auto !important;\n}\n.bubbles_list .simplebar-offset {\n    overflow: visible !important;\n    position: static !important;\n    height: auto !important;\n    width: auto !important;\n}\n.bubbles_list .simplebar-content-wrapper {\n    overflow: visible !important;\n    height: auto !important;\n    max-height: none !important;\n}\n.bubbles_list .simplebar-content {\n    overflow: visible !important;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/Crash.vue?vue&type=style&index=0&id=04e61d37&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/dist/js/pages/Crash.vue?vue&type=style&index=0&id=04e61d37&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.crash[data-v-04e61d37] { padding: 20px;\n}\n.cr-head[data-v-04e61d37] { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;\n}\n.cr-head h2[data-v-04e61d37] { margin: 0; font-weight: 700;\n}\n.cr-themes[data-v-04e61d37] { display: flex; gap: 6px;\n}\n.cr-theme[data-v-04e61d37] { padding: 6px 12px; border-radius: 16px; border: 1px solid rgba(127,127,127,.3); color: inherit; font-size: 13px; text-decoration: none;\n}\n.cr-theme.active[data-v-04e61d37] { background: #2f80ed; border-color: #2f80ed; color: #fff !important;\n}\n.cr-history[data-v-04e61d37] { display: flex; gap: 6px; margin: 12px 0; overflow-x: auto; min-height: 26px;\n}\n.cr-chip[data-v-04e61d37] { padding: 3px 9px; border-radius: 12px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap;\n}\n.cr-chip.lo[data-v-04e61d37] { background: rgba(127,127,127,.2);\n}\n.cr-chip.mid[data-v-04e61d37] { background: rgba(47,128,237,.25); color: #56a0ff;\n}\n.cr-chip.hi[data-v-04e61d37] { background: rgba(155,81,224,.3); color: #c38bff;\n}\n.cr-stage[data-v-04e61d37] { position: relative; height: 340px; border-radius: 12px; overflow: hidden;\n}\n.cr-stage canvas[data-v-04e61d37] { display: block;\n}\n.cr-mult[data-v-04e61d37] { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 56px; font-weight: 800; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.5); pointer-events: none;\n}\n.cr-mult.crashed[data-v-04e61d37] { color: #ff5d73;\n}\n.cr-mult.cashed[data-v-04e61d37] { color: #6ee7a8;\n}\n.cr-sub[data-v-04e61d37] { font-size: 18px; font-weight: 600;\n}\n.cr-controls[data-v-04e61d37] { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; margin-top: 14px;\n}\n.cr-controls label[data-v-04e61d37] { display: flex; flex-direction: column; font-size: 13px; flex: 1; min-width: 170px; position: relative;\n}\n.cr-input[data-v-04e61d37] { padding: 10px; border-radius: 8px; border: 1px solid rgba(127,127,127,.3); background: transparent; color: inherit; margin-top: 4px;\n}\n.cr-quick[data-v-04e61d37] { position: absolute; right: 6px; bottom: 6px; display: flex; gap: 4px;\n}\n.cr-quick button[data-v-04e61d37] { border: 0; border-radius: 6px; padding: 3px 8px; background: rgba(127,127,127,.25); color: inherit; cursor: pointer;\n}\n.cr-btn[data-v-04e61d37] { flex: 1; min-width: 200px; padding: 14px; border: 0; border-radius: 10px; font-size: 17px; font-weight: 800; color: #fff; cursor: pointer;\n}\n.cr-bet[data-v-04e61d37] { background: #27ae60;\n}\n.cr-cash[data-v-04e61d37] { background: #f2994a;\n}\n.cr-btn[data-v-04e61d37]:disabled { opacity: .6;\n}\n.cr-error[data-v-04e61d37] { margin-top: 10px; padding: 8px 10px; border-radius: 8px; background: rgba(235,87,87,.15); color: #eb5757;\n}\n.cr-fair[data-v-04e61d37] { margin-top: 14px; font-size: 12px; border: 1px solid rgba(127,127,127,.2); border-radius: 10px; padding: 12px; word-break: break-all;\n}\n.cr-fair div[data-v-04e61d37] { margin: 3px 0;\n}\n.cr-fair code[data-v-04e61d37] { font-size: 11px;\n}\n.cr-verify[data-v-04e61d37] { margin-left: 8px; border: 0; border-radius: 6px; padding: 3px 8px; background: #2f80ed; color: #fff; cursor: pointer;\n}\n.ok[data-v-04e61d37] { color: #27ae60; margin-left: 6px;\n}\n.bad[data-v-04e61d37] { color: #eb5757; margin-left: 6px;\n}\n.cr-rtp[data-v-04e61d37] { margin-top: 10px; font-size: 12px; opacity: .6;\n}\n", ""]);
 
 // exports
 
@@ -99106,6 +99726,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/Crash.vue?vue&type=style&index=0&id=04e61d37&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/dist/js/pages/Crash.vue?vue&type=style&index=0&id=04e61d37&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--5-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--5-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Crash.vue?vue&type=style&index=0&id=04e61d37&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/Crash.vue?vue&type=style&index=0&id=04e61d37&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/Home/Home.vue?vue&type=style&index=0&id=10e99c82&scoped=true&lang=css&":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/dist/js/pages/Home/Home.vue?vue&type=style&index=0&id=10e99c82&scoped=true&lang=css& ***!
@@ -101411,6 +102061,135 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("span", { staticClass: "game-text" }, [_vm._v("Sports")])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  directives: [
+                    {
+                      name: "b-tooltip",
+                      rawName: "v-b-tooltip:left-main.hover.right",
+                      value: _vm.isCollapsed ? "Safari Flight" : false,
+                      expression: "isCollapsed ? 'Safari Flight' : false",
+                      arg: "left-main",
+                      modifiers: { hover: true, right: true }
+                    }
+                  ],
+                  staticClass: "game-item",
+                  class: [_vm.$route.path == "/crash/flight" ? "isActive" : ""],
+                  attrs: {
+                    tag: "div",
+                    title: _vm.isCollapsed ? "Safari Flight" : "",
+                    to: "/crash/flight"
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "games-img",
+                      staticStyle: {
+                        background: "none",
+                        display: "flex",
+                        "align-items": "center",
+                        "justify-content": "center",
+                        "font-size": "18px"
+                      }
+                    },
+                    [_vm._v("✈")]
+                  ),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "game-text" }, [
+                    _vm._v("Safari Flight")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  directives: [
+                    {
+                      name: "b-tooltip",
+                      rawName: "v-b-tooltip:left-main.hover.right",
+                      value: _vm.isCollapsed ? "Mzizi Rocket" : false,
+                      expression: "isCollapsed ? 'Mzizi Rocket' : false",
+                      arg: "left-main",
+                      modifiers: { hover: true, right: true }
+                    }
+                  ],
+                  staticClass: "game-item",
+                  class: [_vm.$route.path == "/crash/rocket" ? "isActive" : ""],
+                  attrs: {
+                    tag: "div",
+                    title: _vm.isCollapsed ? "Mzizi Rocket" : "",
+                    to: "/crash/rocket"
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "games-img",
+                      staticStyle: {
+                        background: "none",
+                        display: "flex",
+                        "align-items": "center",
+                        "justify-content": "center",
+                        "font-size": "18px"
+                      }
+                    },
+                    [_vm._v("🚀")]
+                  ),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "game-text" }, [
+                    _vm._v("Mzizi Rocket")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  directives: [
+                    {
+                      name: "b-tooltip",
+                      rawName: "v-b-tooltip:left-main.hover.right",
+                      value: _vm.isCollapsed ? "Savanna Jet" : false,
+                      expression: "isCollapsed ? 'Savanna Jet' : false",
+                      arg: "left-main",
+                      modifiers: { hover: true, right: true }
+                    }
+                  ],
+                  staticClass: "game-item",
+                  class: [_vm.$route.path == "/crash/jet" ? "isActive" : ""],
+                  attrs: {
+                    tag: "div",
+                    title: _vm.isCollapsed ? "Savanna Jet" : "",
+                    to: "/crash/jet"
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "games-img",
+                      staticStyle: {
+                        background: "none",
+                        display: "flex",
+                        "align-items": "center",
+                        "justify-content": "center",
+                        "font-size": "18px"
+                      }
+                    },
+                    [_vm._v("➤")]
+                  ),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "game-text" }, [
+                    _vm._v("Savanna Jet")
+                  ])
                 ]
               ),
               _vm._v(" "),
@@ -105600,6 +106379,309 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/Crash.vue?vue&type=template&id=04e61d37&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/dist/js/pages/Crash.vue?vue&type=template&id=04e61d37&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "content cards col-12 ml-auto mr-auto p-0" },
+    [
+      _c("div", { staticClass: "crash", class: "th-" + _vm.theme }, [
+        _c("div", { staticClass: "cr-head" }, [
+          _c("h2", [_vm._v(_vm._s(_vm.meta.title))]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "cr-themes" },
+            _vm._l(_vm.themes, function(m, key) {
+              return _c(
+                "router-link",
+                {
+                  key: key,
+                  staticClass: "cr-theme",
+                  class: { active: key === _vm.theme },
+                  attrs: { to: "/crash/" + key }
+                },
+                [_vm._v(_vm._s(m.title))]
+              )
+            }),
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "cr-history" },
+          _vm._l(_vm.history, function(h) {
+            return _c(
+              "span",
+              {
+                key: h.id,
+                staticClass: "cr-chip",
+                class: _vm.chipClass(h.crash_point),
+                on: {
+                  click: function($event) {
+                    _vm.fair = h
+                  }
+                }
+              },
+              [_vm._v(_vm._s(_vm.fmt(h.crash_point)) + "x")]
+            )
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _c("div", { ref: "stage", staticClass: "cr-stage" }, [
+          _c("canvas", { ref: "canvas" }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "cr-mult",
+              class: {
+                crashed: _vm.phase === "crashed",
+                cashed: _vm.phase === "cashed"
+              }
+            },
+            [
+              _vm.phase === "idle"
+                ? [_vm._v(_vm._s(_vm.meta.idle))]
+                : [_vm._v(_vm._s(_vm.fmt(_vm.multiplier)) + "x")],
+              _vm._v(" "),
+              _vm.phase === "crashed"
+                ? _c("div", { staticClass: "cr-sub" }, [
+                    _vm._v(_vm._s(_vm.meta.crashText))
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.phase === "cashed"
+                ? _c("div", { staticClass: "cr-sub" }, [
+                    _vm._v(
+                      "Cashed out at " +
+                        _vm._s(_vm.fmt(_vm.game.cashout_multiplier)) +
+                        "x: +" +
+                        _vm._s(_vm.fmt(_vm.game.win))
+                    )
+                  ])
+                : _vm._e()
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "cr-controls" }, [
+          _c("label", [
+            _vm._v("Bet\n                "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.amount,
+                  expression: "amount"
+                }
+              ],
+              staticClass: "cr-input",
+              attrs: {
+                type: "number",
+                min: _vm.minBet,
+                disabled: _vm.phase === "running"
+              },
+              domProps: { value: _vm.amount },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.amount = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "cr-quick" }, [
+              _c(
+                "button",
+                {
+                  attrs: { disabled: _vm.phase === "running" },
+                  on: {
+                    click: function($event) {
+                      _vm.amount = Math.max(_vm.minBet, _vm.amount / 2)
+                    }
+                  }
+                },
+                [_vm._v("½")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: { disabled: _vm.phase === "running" },
+                  on: {
+                    click: function($event) {
+                      _vm.amount = _vm.amount * 2
+                    }
+                  }
+                },
+                [_vm._v("2×")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("label", [
+            _vm._v("Auto cash-out (optional)\n                "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.auto,
+                  expression: "auto"
+                }
+              ],
+              staticClass: "cr-input",
+              attrs: {
+                type: "number",
+                min: "1.01",
+                step: "0.01",
+                placeholder: "e.g. 2.00",
+                disabled: _vm.phase === "running"
+              },
+              domProps: { value: _vm.auto },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.auto = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _vm.phase !== "running"
+            ? _c(
+                "button",
+                {
+                  staticClass: "cr-btn cr-bet",
+                  attrs: { disabled: _vm.busy },
+                  on: { click: _vm.start }
+                },
+                [_vm._v("Bet " + _vm._s(_vm.fmt(_vm.amount)))]
+              )
+            : _c(
+                "button",
+                {
+                  staticClass: "cr-btn cr-cash",
+                  attrs: { disabled: _vm.busy },
+                  on: { click: _vm.cashout }
+                },
+                [
+                  _vm._v(
+                    "Cash out " + _vm._s(_vm.fmt(_vm.amount * _vm.multiplier))
+                  )
+                ]
+              )
+        ]),
+        _vm._v(" "),
+        _vm.error
+          ? _c("div", { staticClass: "cr-error" }, [_vm._v(_vm._s(_vm.error))])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.fair
+          ? _c("div", { staticClass: "cr-fair" }, [
+              _c("b", [_vm._v("Provably fair, round #" + _vm._s(_vm.fair.id))]),
+              _vm._v(" "),
+              _c("div", [
+                _vm._v("Server seed hash (shown before the round): "),
+                _c("code", [_vm._v(_vm._s(_vm.fair.server_seed_hash))])
+              ]),
+              _vm._v(" "),
+              _vm.fair.server_seed
+                ? _c("div", [
+                    _vm._v("Server seed (revealed): "),
+                    _c("code", [_vm._v(_vm._s(_vm.fair.server_seed))])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", [
+                _vm._v("Client seed: "),
+                _c("code", [_vm._v(_vm._s(_vm.fair.client_seed))]),
+                _vm._v(" · Nonce: "),
+                _c("code", [_vm._v(_vm._s(_vm.fair.nonce))])
+              ]),
+              _vm._v(" "),
+              _vm.fair.server_seed
+                ? _c("div", [
+                    _vm._v("\n                Result: "),
+                    _c("b", [
+                      _vm._v(_vm._s(_vm.fmt(_vm.fair.crash_point)) + "x")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "cr-verify",
+                        on: {
+                          click: function($event) {
+                            return _vm.verify(_vm.fair)
+                          }
+                        }
+                      },
+                      [_vm._v("Verify in browser")]
+                    ),
+                    _vm._v(" "),
+                    _vm.verified !== null
+                      ? _c("span", { class: _vm.verified ? "ok" : "bad" }, [
+                          _vm._v(
+                            _vm._s(
+                              _vm.verified ? "✔ matches" : "✖ does not match"
+                            )
+                          )
+                        ])
+                      : _vm._e()
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("small", [
+                _vm._v(
+                  "crash = floor((1 − " +
+                    _vm._s(_vm.houseEdge) +
+                    ') × 2^52 ÷ (2^52 − h) × 100) ÷ 100, where h is the first 52 bits of HMAC-SHA256(server seed, "client seed:nonce").'
+                )
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("p", { staticClass: "cr-rtp" }, [
+          _vm._v(
+            "RTP " +
+              _vm._s(((1 - _vm.houseEdge) * 100).toFixed(0)) +
+              "%. Play responsibly, 18+."
+          )
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -136234,6 +137316,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/dist/js/pages/Crash.vue":
+/*!*******************************************!*\
+  !*** ./resources/dist/js/pages/Crash.vue ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Crash_vue_vue_type_template_id_04e61d37_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Crash.vue?vue&type=template&id=04e61d37&scoped=true& */ "./resources/dist/js/pages/Crash.vue?vue&type=template&id=04e61d37&scoped=true&");
+/* harmony import */ var _Crash_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Crash.vue?vue&type=script&lang=js& */ "./resources/dist/js/pages/Crash.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Crash_vue_vue_type_style_index_0_id_04e61d37_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Crash.vue?vue&type=style&index=0&id=04e61d37&scoped=true&lang=css& */ "./resources/dist/js/pages/Crash.vue?vue&type=style&index=0&id=04e61d37&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Crash_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Crash_vue_vue_type_template_id_04e61d37_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Crash_vue_vue_type_template_id_04e61d37_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "04e61d37",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/dist/js/pages/Crash.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/dist/js/pages/Crash.vue?vue&type=script&lang=js&":
+/*!********************************************************************!*\
+  !*** ./resources/dist/js/pages/Crash.vue?vue&type=script&lang=js& ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Crash_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Crash.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/Crash.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Crash_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/dist/js/pages/Crash.vue?vue&type=style&index=0&id=04e61d37&scoped=true&lang=css&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/dist/js/pages/Crash.vue?vue&type=style&index=0&id=04e61d37&scoped=true&lang=css& ***!
+  \****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Crash_vue_vue_type_style_index_0_id_04e61d37_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--5-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--5-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Crash.vue?vue&type=style&index=0&id=04e61d37&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/Crash.vue?vue&type=style&index=0&id=04e61d37&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Crash_vue_vue_type_style_index_0_id_04e61d37_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Crash_vue_vue_type_style_index_0_id_04e61d37_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Crash_vue_vue_type_style_index_0_id_04e61d37_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Crash_vue_vue_type_style_index_0_id_04e61d37_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Crash_vue_vue_type_style_index_0_id_04e61d37_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/dist/js/pages/Crash.vue?vue&type=template&id=04e61d37&scoped=true&":
+/*!**************************************************************************************!*\
+  !*** ./resources/dist/js/pages/Crash.vue?vue&type=template&id=04e61d37&scoped=true& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Crash_vue_vue_type_template_id_04e61d37_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Crash.vue?vue&type=template&id=04e61d37&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/Crash.vue?vue&type=template&id=04e61d37&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Crash_vue_vue_type_template_id_04e61d37_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Crash_vue_vue_type_template_id_04e61d37_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/dist/js/pages/Dice.vue":
 /*!******************************************!*\
   !*** ./resources/dist/js/pages/Dice.vue ***!
@@ -137765,19 +138934,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Wheel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/Wheel */ "./resources/dist/js/pages/Wheel.vue");
 /* harmony import */ var _pages_Plinko__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/Plinko */ "./resources/dist/js/pages/Plinko.vue");
 /* harmony import */ var _pages_Sports__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/Sports */ "./resources/dist/js/pages/Sports.vue");
-/* harmony import */ var _pages_ResponsibleGaming__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/ResponsibleGaming */ "./resources/dist/js/pages/ResponsibleGaming.vue");
-/* harmony import */ var _pages_Slots__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/Slots */ "./resources/dist/js/pages/Slots.vue");
-/* harmony import */ var _pages_Lives__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/Lives */ "./resources/dist/js/pages/Lives.vue");
-/* harmony import */ var _pages_SlotsGame__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/SlotsGame */ "./resources/dist/js/pages/SlotsGame.vue");
-/* harmony import */ var _pages_LivesGame__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/LivesGame */ "./resources/dist/js/pages/LivesGame.vue");
-/* harmony import */ var _pages_Bonus_Bonus__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/Bonus/Bonus */ "./resources/dist/js/pages/Bonus/Bonus.vue");
-/* harmony import */ var _pages_Ref__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/Ref */ "./resources/dist/js/pages/Ref.vue");
-/* harmony import */ var _pages_Faq__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pages/Faq */ "./resources/dist/js/pages/Faq.vue");
-/* harmony import */ var _pages_Profile__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/Profile */ "./resources/dist/js/pages/Profile.vue");
-/* harmony import */ var _pages_Payment__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/Payment */ "./resources/dist/js/pages/Payment.vue");
-/* harmony import */ var _pages_Withdraw__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/Withdraw */ "./resources/dist/js/pages/Withdraw.vue");
-/* harmony import */ var _pages_Tournament_Tournament__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/Tournament/Tournament */ "./resources/dist/js/pages/Tournament/Tournament.vue");
-/* harmony import */ var _pages_Tournament_Tournaments__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./pages/Tournament/Tournaments */ "./resources/dist/js/pages/Tournament/Tournaments.vue");
+/* harmony import */ var _pages_Crash__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/Crash */ "./resources/dist/js/pages/Crash.vue");
+/* harmony import */ var _pages_ResponsibleGaming__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/ResponsibleGaming */ "./resources/dist/js/pages/ResponsibleGaming.vue");
+/* harmony import */ var _pages_Slots__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/Slots */ "./resources/dist/js/pages/Slots.vue");
+/* harmony import */ var _pages_Lives__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/Lives */ "./resources/dist/js/pages/Lives.vue");
+/* harmony import */ var _pages_SlotsGame__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/SlotsGame */ "./resources/dist/js/pages/SlotsGame.vue");
+/* harmony import */ var _pages_LivesGame__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/LivesGame */ "./resources/dist/js/pages/LivesGame.vue");
+/* harmony import */ var _pages_Bonus_Bonus__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/Bonus/Bonus */ "./resources/dist/js/pages/Bonus/Bonus.vue");
+/* harmony import */ var _pages_Ref__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pages/Ref */ "./resources/dist/js/pages/Ref.vue");
+/* harmony import */ var _pages_Faq__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/Faq */ "./resources/dist/js/pages/Faq.vue");
+/* harmony import */ var _pages_Profile__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/Profile */ "./resources/dist/js/pages/Profile.vue");
+/* harmony import */ var _pages_Payment__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/Payment */ "./resources/dist/js/pages/Payment.vue");
+/* harmony import */ var _pages_Withdraw__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/Withdraw */ "./resources/dist/js/pages/Withdraw.vue");
+/* harmony import */ var _pages_Tournament_Tournament__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./pages/Tournament/Tournament */ "./resources/dist/js/pages/Tournament/Tournament.vue");
+/* harmony import */ var _pages_Tournament_Tournaments__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./pages/Tournament/Tournaments */ "./resources/dist/js/pages/Tournament/Tournaments.vue");
+
 
 
 
@@ -137808,7 +138979,7 @@ var routes = [{
 }, {
   path: '/profile',
   name: 'profile',
-  component: _pages_Profile__WEBPACK_IMPORTED_MODULE_17__["default"]
+  component: _pages_Profile__WEBPACK_IMPORTED_MODULE_18__["default"]
 }, {
   path: '/dice',
   name: 'dice',
@@ -137832,7 +139003,11 @@ var routes = [{
 }, {
   path: '/responsible-gaming',
   name: 'responsible-gaming',
-  component: _pages_ResponsibleGaming__WEBPACK_IMPORTED_MODULE_9__["default"]
+  component: _pages_ResponsibleGaming__WEBPACK_IMPORTED_MODULE_10__["default"]
+}, {
+  path: '/crash/:theme?',
+  name: 'crash',
+  component: _pages_Crash__WEBPACK_IMPORTED_MODULE_9__["default"]
 }, {
   path: '/sports',
   name: 'sports',
@@ -137840,47 +139015,47 @@ var routes = [{
 }, {
   path: '/slots',
   name: 'slots',
-  component: _pages_Slots__WEBPACK_IMPORTED_MODULE_10__["default"]
+  component: _pages_Slots__WEBPACK_IMPORTED_MODULE_11__["default"]
 }, {
   path: '/live',
   name: 'live',
-  component: _pages_Lives__WEBPACK_IMPORTED_MODULE_11__["default"]
+  component: _pages_Lives__WEBPACK_IMPORTED_MODULE_12__["default"]
 }, {
   path: '/slots/game/:id/:type?',
   name: 'slots',
-  component: _pages_SlotsGame__WEBPACK_IMPORTED_MODULE_12__["default"]
+  component: _pages_SlotsGame__WEBPACK_IMPORTED_MODULE_13__["default"]
 }, {
   path: '/live/game/:id',
   name: 'live',
-  component: _pages_LivesGame__WEBPACK_IMPORTED_MODULE_13__["default"]
+  component: _pages_LivesGame__WEBPACK_IMPORTED_MODULE_14__["default"]
 }, {
   path: '/ref',
   name: 'ref',
-  component: _pages_Ref__WEBPACK_IMPORTED_MODULE_15__["default"]
+  component: _pages_Ref__WEBPACK_IMPORTED_MODULE_16__["default"]
 }, {
   path: '/bonus',
   name: 'bonus',
-  component: _pages_Bonus_Bonus__WEBPACK_IMPORTED_MODULE_14__["default"]
+  component: _pages_Bonus_Bonus__WEBPACK_IMPORTED_MODULE_15__["default"]
 }, {
   path: '/pay',
   name: 'payment',
-  component: _pages_Payment__WEBPACK_IMPORTED_MODULE_18__["default"]
+  component: _pages_Payment__WEBPACK_IMPORTED_MODULE_19__["default"]
 }, {
   path: '/withdraw',
   name: 'withdraw',
-  component: _pages_Withdraw__WEBPACK_IMPORTED_MODULE_19__["default"]
+  component: _pages_Withdraw__WEBPACK_IMPORTED_MODULE_20__["default"]
 }, {
   path: '/faq',
   name: 'faq',
-  component: _pages_Faq__WEBPACK_IMPORTED_MODULE_16__["default"]
+  component: _pages_Faq__WEBPACK_IMPORTED_MODULE_17__["default"]
 }, {
   path: '/tournaments',
   name: 'tournaments',
-  component: _pages_Tournament_Tournaments__WEBPACK_IMPORTED_MODULE_21__["default"]
+  component: _pages_Tournament_Tournaments__WEBPACK_IMPORTED_MODULE_22__["default"]
 }, {
   path: '/tournament/:id',
   name: 'tournament',
-  component: _pages_Tournament_Tournament__WEBPACK_IMPORTED_MODULE_20__["default"]
+  component: _pages_Tournament_Tournament__WEBPACK_IMPORTED_MODULE_21__["default"]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',

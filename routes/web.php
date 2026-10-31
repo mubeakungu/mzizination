@@ -148,6 +148,13 @@ Route::group(['prefix' => 'sports'], function () {
         Route::post('/my', 'SportsController@myBets');
     });
 });
+Route::group(['prefix' => 'crash', 'middleware' => 'auth'], function () {
+    Route::post('/init', 'CrashController@init');
+    Route::post('/start', 'CrashController@start')->middleware('rg:bet');
+    Route::post('/cashout', 'CrashController@cashout');
+    Route::post('/status', 'CrashController@status');
+});
+
 Route::group(['prefix' => 'dice', 'middleware' => 'auth'], function () {
     Route::post('/bet', 'DiceController@bet')->middleware('rg:bet');
 });
