@@ -8973,6 +8973,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     this.loadSports();
     this.loadMyBets();
   },
+  watch: {
+    '$root.user': function $rootUser(u, old) {
+      if (u && !old) this.loadMyBets();
+    }
+  },
   methods: {
     loadSports: function loadSports() {
       var _this = this;

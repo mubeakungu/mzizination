@@ -92,6 +92,9 @@ export default {
         this.loadSports()
         this.loadMyBets()
     },
+    watch: {
+        '$root.user'(u, old) { if (u && !old) this.loadMyBets() }
+    },
     methods: {
         loadSports() {
             this.$root.axios.post('/sports/list').then(({ data }) => {
