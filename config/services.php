@@ -36,4 +36,15 @@ return [
         'redirect' => env('VKONTAKTE_REDIRECT_URI'),
         'lang' => 'ru'
     ],
+    // The Odds API (free tier: 500 credits/month) powers the sportsbook.
+    'odds_api' => [
+        'key' => env('ODDS_API_KEY'),
+        'base_url' => env('ODDS_API_BASE_URL', 'https://api.the-odds-api.com/v4'),
+        'region' => env('ODDS_API_REGION', 'eu'),
+        // Comma-separated sport keys to show; empty shows every in-season sport.
+        'sports' => env('ODDS_API_SPORTS', 'soccer_epl,soccer_uefa_champs_league,soccer_spain_la_liga,basketball_nba'),
+        'cache_minutes' => env('ODDS_API_CACHE_MINUTES', 15),
+        'min_bet' => env('SPORTS_MIN_BET', 10),
+        'max_bet' => env('SPORTS_MAX_BET', 100000),
+    ],
 ];

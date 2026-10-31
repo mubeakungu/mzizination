@@ -62,6 +62,12 @@ services:
       - key: BROADCAST_DRIVER
         value: log
       
+      # Sportsbook odds (The Odds API, free tier: https://the-odds-api.com)
+      - key: ODDS_API_KEY
+        sync: false
+      - key: ODDS_API_SPORTS
+        value: soccer_epl,soccer_uefa_champs_league,soccer_spain_la_liga,basketball_nba
+
       # M-Pesa Daraja (Primary)
       - key: MPESA_SANDBOX
         value: true

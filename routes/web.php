@@ -135,6 +135,14 @@ Route::group(['prefix' => 'referral', 'middleware' => 'auth'], function () {
     Route::post('/take', 'ReferralController@take');
 });
 
+Route::group(['prefix' => 'sports'], function () {
+    Route::post('/list', 'SportsController@sports');
+    Route::post('/events', 'SportsController@events');
+    Route::group(['middleware' => 'auth'], function () {
+        Route::post('/bet', 'SportsController@bet');
+        Route::post('/my', 'SportsController@myBets');
+    });
+});
 Route::group(['prefix' => 'dice', 'middleware' => 'auth'], function () {
     Route::post('/bet', 'DiceController@bet');
 });
