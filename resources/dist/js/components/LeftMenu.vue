@@ -18,6 +18,17 @@
                 <router-link
                     tag="div"
                     class="game-item"
+                    :class="[page == 'sports' ? 'isActive' : '']"
+                    :title="isCollapsed ? 'Sports' : ''"
+                    v-b-tooltip:left-main.hover.right="isCollapsed ? 'Sports' : false"
+                    to="/sports"
+                >
+                    <div class="games-img sports" style="background: none; display: flex; align-items: center; justify-content: center; font-size: 18px;">&#9917;</div>
+                    <span class="game-text">Sports</span>
+                </router-link>
+                <router-link
+                    tag="div"
+                    class="game-item"
                     :class="[page == 'dice' ? 'isActive' : '']"
                     :title="isCollapsed ? 'Dice' : ''"
                     v-b-tooltip:left-main.hover.right="isCollapsed ? 'Dice' : false"
