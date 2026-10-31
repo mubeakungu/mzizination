@@ -68,6 +68,20 @@ services:
       - key: ODDS_API_SPORTS
         value: soccer_epl,soccer_uefa_champs_league,soccer_spain_la_liga,basketball_nba
 
+      # Licensed provider games: set once you have a contract (see PROVIDERS.md)
+      - key: SPRIBE_SECRET
+        sync: false
+      - key: SPRIBE_LAUNCH_URL
+        sync: false
+      - key: SMARTSOFT_SECRET
+        sync: false
+      - key: SMARTSOFT_LAUNCH_URL
+        sync: false
+      - key: AVIATRIX_SECRET
+        sync: false
+      - key: AVIATRIX_LAUNCH_URL
+        sync: false
+
       # M-Pesa Daraja (Primary)
       - key: MPESA_SANDBOX
         value: true

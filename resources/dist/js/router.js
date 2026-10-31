@@ -7,6 +7,7 @@ import Bubbles from './pages/Bubbles'
 import Wheel from './pages/Wheel'
 import Plinko from './pages/Plinko'
 import Sports from './pages/Sports'
+import LicensedGames from './pages/LicensedGames'
 import Crash from './pages/Crash'
 import ResponsibleGaming from './pages/ResponsibleGaming'
 import Slots from './pages/Slots'
@@ -69,6 +70,11 @@ const routes = [
         path: '/crash/:theme?',
         name: 'crash',
         component: Crash
+    },
+    {
+        path: '/licensed/:provider?/:game?',
+        name: 'licensed',
+        component: LicensedGames
     },
     {
         path: '/sports',

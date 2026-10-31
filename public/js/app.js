@@ -2646,6 +2646,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['page'],
@@ -6512,6 +6523,100 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.last_page = 1;
       this.slots = [];
       this.getSlots();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/LicensedGames.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/dist/js/pages/LicensedGames.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      games: [],
+      loaded: false,
+      url: null,
+      error: null
+    };
+  },
+  watch: {
+    '$route.params.game': function $routeParamsGame() {
+      this.load();
+    },
+    '$root.user': function $rootUser(u, old) {
+      if (u && !old) this.load();
+    }
+  },
+  mounted: function mounted() {
+    this.load();
+  },
+  methods: {
+    load: function load() {
+      var _this = this;
+
+      this.url = null;
+      this.error = null;
+
+      if (!this.$route.params.game) {
+        this.$root.axios.post('/provider/catalog').then(function (_ref) {
+          var data = _ref.data;
+          _this.games = data.games || [];
+          _this.loaded = true;
+        });
+        return;
+      }
+
+      if (!this.$root.user) {
+        this.error = 'Please log in to play';
+        return;
+      }
+
+      this.$root.axios.post('/provider/launch', {
+        provider: this.$route.params.provider,
+        game: this.$route.params.game
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+        if (data.error) _this.error = data.message;else _this.url = data.url;
+      });
     }
   }
 });
@@ -58240,7 +58345,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Hide desktop menu on mobile */\n@media screen and (max-width: 992px) {\n.floating-games-menu[data-v-5d46b43a] {\n        display: none !important;\n}\n}\n\n/* Hide mobile nav on desktop */\n@media screen and (min-width: 993px) {\n.mob-nav-bottom[data-v-5d46b43a] {\n        display: none !important;\n}\n}\n.rg-link[data-v-5d46b43a] { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 8px 0; font-size: 12px; opacity: .75; color: inherit; text-decoration: none;\n}\n.rg-link[data-v-5d46b43a]:hover { opacity: 1;\n}\n.rg-18[data-v-5d46b43a] { border: 1.5px solid #eb5757; color: #eb5757; border-radius: 50%; font-size: 10px; font-weight: 700; width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Hide desktop menu on mobile */\n@media screen and (max-width: 992px) {\n.floating-games-menu[data-v-5d46b43a] {\n        display: none !important;\n}\n}\n\n/* Hide mobile nav on desktop */\n@media screen and (min-width: 993px) {\n.mob-nav-bottom[data-v-5d46b43a] {\n        display: none !important;\n}\n}\n.rg-link[data-v-5d46b43a] { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 8px 0; font-size: 12px; opacity: .75; color: inherit; text-decoration: none;\n}\n.rg-link[data-v-5d46b43a]:hover { opacity: 1;\n}\n.rg-18[data-v-5d46b43a] { border: 1.5px solid #eb5757; color: #eb5757; border-radius: 50%; font-size: 10px; font-weight: 700; width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center;\n}\n", ""]);
 
 // exports
 
@@ -58431,6 +58536,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 // module
 exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Desktop Banner Slider */\n.banner-slider-desktop[data-v-10e99c82] {\n    display: block;\n    margin-bottom: 18px;\n}\n.slider-container[data-v-10e99c82] {\n    position: relative;\n    overflow: hidden;\n    border-radius: 12px;\n    box-shadow: 0 15px 30px rgba(88, 88, 88, 0.25);\n}\n.slider-track[data-v-10e99c82] {\n    display: flex;\n    transition: transform 0.5s ease-in-out;\n}\n.slider-slide[data-v-10e99c82] {\n    min-width: 100%;\n    flex-shrink: 0;\n}\n.slider-item[data-v-10e99c82] {\n    position: relative;\n    height: 200px;\n    overflow: hidden;\n}\n.slider-img[data-v-10e99c82] {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    object-position: center;\n}\n.slider-content[data-v-10e99c82] {\n    position: absolute;\n    top: 50%;\n    left: 80px;\n    transform: translateY(-50%);\n}\n.slider-text[data-v-10e99c82] {\n    color: #fff;\n    font-size: 28px;\n    font-weight: 700;\n    margin-bottom: 15px;\n    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);\n}\n.slider-btn[data-v-10e99c82] {\n    background: rgba(255,255,255,0.2);\n    backdrop-filter: blur(10px);\n    border: none;\n    border-radius: 8px;\n    color: #fff;\n    font-size: 16px;\n    font-weight: 600;\n    padding: 12px 28px;\n    cursor: pointer;\n    transition: all 0.3s ease;\n}\n.slider-btn[data-v-10e99c82]:hover {\n    background: rgba(255,255,255,0.35);\n    transform: scale(1.05);\n}\n.slider-arrow[data-v-10e99c82] {\n    position: absolute;\n    top: 50%;\n    transform: translateY(-50%);\n    background: rgba(0,0,0,0.5);\n    border: none;\n    border-radius: 50%;\n    width: 32px;\n    height: 32px;\n    min-width: 32px;\n    min-height: 32px;\n    padding: 0;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    z-index: 10;\n}\n.slider-arrow[data-v-10e99c82]:hover {\n    background: rgba(0,0,0,0.8);\n}\n.arrow-icon[data-v-10e99c82] {\n    width: 12px;\n    height: 12px;\n    filter: invert(1);\n}\n.arrow-left[data-v-10e99c82] {\n    transform: rotate(180deg);\n}\n.slider-prev[data-v-10e99c82] { left: 15px;\n}\n.slider-next[data-v-10e99c82] { right: 15px;\n}\n.slider-dots[data-v-10e99c82] {\n    position: absolute;\n    bottom: 15px;\n    left: 50%;\n    transform: translateX(-50%);\n    display: flex;\n    gap: 8px;\n    z-index: 2;\n}\n.slider-dot[data-v-10e99c82] {\n    width: 10px;\n    height: 10px;\n    border-radius: 50%;\n    background: rgba(255,255,255,0.4);\n    cursor: pointer;\n    transition: all 0.3s ease;\n}\n.slider-dot.active[data-v-10e99c82] {\n    background: #fff;\n    transform: scale(1.2);\n}\n/* Hide desktop slider on mobile */\n@media (max-width: 992px) {\n.banner-slider-desktop[data-v-10e99c82] {\n        display: none !important;\n}\n}\n/* Hide mobile banners on desktop */\n.main-mobile[data-v-10e99c82] {\n    display: none !important;\n}\n@media (max-width: 992px) {\n.main-mobile[data-v-10e99c82] {\n        display: grid !important;\n}\n}\n.b1_[data-v-10e99c82] {\n    display: flex;\n}\n.game_badges[data-v-10e99c82] {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: flex-end;\n    position: absolute;\n    right: 0;\n    top: 0;\n}\n.game_badge[data-v-10e99c82] {\n    box-sizing: border-box;\n    height: 2rem;\n    opacity: 1;\n    padding: 0;\n    position: relative;\n    width: 2rem;\n}\n.rtp_badge[data-v-10e99c82] {\n    position: absolute;\n    top: 5px;\n    left: 5px;\n    background: rgba(16, 185, 129, 0.7);\n    color: #fff;\n    font-size: 9px;\n    font-weight: 600;\n    padding: 2px 6px;\n    border-radius: 4px;\n    z-index: 5;\n    opacity: 0;\n    transition: opacity 0.3s ease;\n    pointer-events: none;\n}\n.game_:hover .rtp_badge[data-v-10e99c82] {\n    opacity: 1;\n}\n.slots_box[data-v-10e99c82] {\n    display: inline-flex;\n    padding: 10px 35px 10px 30px;\n    width: 100%;\n}\n.search_[data-v-10e99c82] {\n    margin-right: 5px;\n    width: 100%;\n}\n.infinite-loading-container[data-v-10e99c82] {\n    clear: both;\n    text-align: center;\n}\n.infinite-loading-container [class^=loading-][data-v-10e99c82] {\n    display: inline-block;\n    margin: 5px 0;\n    width: 28px;\n    height: 28px;\n    font-size: 28px;\n    line-height: 28px;\n    border-radius: 50%;\n}\n.btn-try-infinite[data-v-10e99c82] {\n    margin-top: 5px;\n    padding: 5px 10px;\n    color: #999;\n    font-size: 14px;\n    line-height: 1;\n    background: transparent;\n    border: 1px solid #ccc;\n    border-radius: 3px;\n    outline: none;\n    cursor: pointer;\n}\n.btn-try-infinite[data-v-10e99c82]:not(:active):hover {\n    opacity: .8;\n}\n.search_ input[data-v-10e99c82] {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n    background: #fff;\n    border: 2px solid rgb(33 85 237/20%);\n    border-radius: 6px;\n    color: #333;\n    font-size: 16px;\n    font-weight: 400;\n    height: 33px;\n    margin-top: 5px;\n    padding-left: 35px;\n    width: 100%;\n}\n.loading-default[data-v-10e99c82] {\n    position: relative;\n    border: 1px solid #999;\n    -webkit-animation: loading-rotating-data-v-10e99c82 ease 1.5s infinite;\n    animation: loading-rotating-data ease 1.5s infinite;\n}\n@-webkit-keyframes loading-rotating-data-v-10e99c82 {\n0% {\n        -webkit-transform: rotate(0);\n        transform: rotate(0);\n}\nto {\n        -webkit-transform: rotate(1turn);\n        transform: rotate(1turn);\n}\n}\n@keyframes loading-rotating-data-v-10e99c82 {\n0% {\n        -webkit-transform: rotate(0);\n        transform: rotate(0);\n}\nto {\n        -webkit-transform: rotate(1turn);\n        transform: rotate(1turn);\n}\n}\n.loading-default[data-v-10e99c82]:before {\n    content: \"\";\n    position: absolute;\n    display: block;\n    top: 0;\n    left: 50%;\n    margin-top: -3px;\n    margin-left: -3px;\n    width: 6px;\n    height: 6px;\n    background-color: #999;\n    border-radius: 50%;\n}\n.search_[data-v-10e99c82]:before {\n    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAHxqAAB8agGqO5LeAAAE7WlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNi4wLWMwMDIgNzkuMTY0NDg4LCAyMDIwLzA3LzEwLTIyOjA2OjUzICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjIuMCAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIzLTA0LTA2VDIxOjI3OjMxKzAzOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMy0wNC0wNlQyMTozNToxMyswMzowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMy0wNC0wNlQyMTozNToxMyswMzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MDg5NDM0YWYtYmI4ZS00MDQ2LWEwNzQtY2E4ZjU1MmVmOTk5IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjA4OTQzNGFmLWJiOGUtNDA0Ni1hMDc0LWNhOGY1NTJlZjk5OSIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjA4OTQzNGFmLWJiOGUtNDA0Ni1hMDc0LWNhOGY1NTJlZjk5OSI+IDx4bXBNTTpIaXN0b3J5PiA8cmRmOlNlcT4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImNyZWF0ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6MDg5NDM0YWYtYmI4ZS00MDQ2LWEwNzQtY2E4ZjU1MmVmOTk5IiBzdEV2dDp3aGVuPSIyMDIzLTA0LTA2VDIxOjI3OjMxKzAzOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjIuMCAoV2luZG93cykiLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+h8ZO7wAAA6JJREFUaIHVmV1IFUEYhh/XwlRKsT9LwwKVoCjIEhK9iMjACKIugqAoiagugopuCgwFkSCwIgqSbrqIiiDrqj+irCAthIiK8AeFjAzTzP4I83Qx53D0OLOzuzPnnHpgbnZ23u/9zp6dnfkmBTMWA1VACbAIyAOyAQcYAfqAHuA1cBtoBUKGMa0xDTgAvEOY8tP6gQZgdsJdx1APjOE/AVm7BGQl1j6sBgYMjavazkQlcTxOCYxv101Npmj6LwLVmntGgedAC9CFeMlDQCawACgHyoAMjU4b4smPae7zzTXcf8VeRJLpHvWqiM5aqtZuz77ghEuwP8B+A+31wGcX/WYD7QlsdgnSDsy0FOeGS5xaU/EMxFwvE79nKi6hURErBKw0ET6pEG01EdVwQRHzUVDBeYgZKFbwe7gvnrRJ4oYQE4RvGhRiu2w41bBcEftuELEeidALGy49ovqLFfsRqVCI7LDpVMNShYfDfkTqJAIfgFSbTj3QIvFx08tAB1gILJP0PUR8/BLJHcm1Ui8DHWAJ4rHG8tTEUUBk72QuUKAbGHkieZK+TjNPgXiruK5dTTjAHMSuL5ZBE0cBGQZ+SK7P0A10UC/lrS+nPRDZfcai227gAN8UfZkmjgKSjnxbIHtKE3CA98AnSV+uoakgzEd4iuWLbqCDqIbIXuxVZp4CsUJy7RfwUTfQAToQdadYygxNBaFccu0lYhLwxHbky4MSG+48koa8UnPGj0i+RCAEnLPpVEO1wkOlX6FbCqEiW041dEhi9wYR2igRCiH21vGmRhG7Lqigqlxz0NSpC2sUMUeAnKCilQrRELDJyK6cQsT0Kot31FS8SSFse9tbgbogbqVQl4oofaqSOW8hxhEX/T7EGYsVioGfLsEGgX0BdDegP1d5Zuh9EqXoz0IGgbPAOmAuk1epOYivdS3QrdEa3x7bTqYIf+cifYhdXlvYuKxO5rXJtr1GpAEPDAzp2gDwW9HnqfDgl21Ezz5stWNh7VMu91yJRzJTEPP7kIH5UcTMF/uxu+wypikeyYB4qbeEA3R6MN8PXAX2ANNddJtdNE7rDNmggOg5e6TiMUz0nL0b7zWA+8BaRV8jcCiwyyQgqzhGWn0SfQXiCepkapLoyzcpiG+SKhlfxe1kMxV4gzqZvcmz5p8s5Gc3kbY1ac4CMAtxzCFLZAjYLSuG/YsMIMpTXyV92YgN2n9FPmLFPf6JdBGf3WvcKQReIZLoIVyd/AvlAEtjj4f/kQAAAABJRU5ErkJggg==);\n    background-repeat: no-repeat;\n    background-size: 16px 16px;\n    content: \"\";\n    height: 16px;\n    position: absolute;\n    transform: translateY(78%) translatex(50%);\n    width: 16px;\n}\n.search_ input[data-v-10e99c82]:focus {\n    background-color: #fff;\n    border-color: #80bdff;\n    box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);\n    color: #495057;\n    outline: 0;\n}\n.vue-load-image .loading[data-v-10e99c82] {\n    background-color: #fff;\n    height: 100%;\n    position: relative;\n    width: 100%;\n    z-index: 2;\n}\n.vue-load-image[data-v-10e99c82] {\n    background-color: initial;\n    display: inline-block;\n    height: 207px;\n    overflow: hidden;\n    position: relative;\n    width: 140px;\n}\n.vue-load-image img[data-v-10e99c82] {\n    height: 207px;\n    width: 140px;\n}\n.info[data-v-10e99c82],.vue-load-image img[data-v-10e99c82] {\n    left: 0;\n    position: absolute;\n    top: 0;\n}\n.info[data-v-10e99c82] {\n    display: flex;\n    flex-direction: column;\n    height: 100%;\n    justify-content: space-between;\n    opacity: 0;\n    pointer-events: none;\n    text-align: center;\n    transition: .45s ease;\n    width: 100%;\n}\n.provider_container[data-v-10e99c82] {\n    align-items: center;\n    background: linear-gradient(180deg,rgba(3,25,58,0),#0a0a0a);\n    bottom: 0;\n    display: flex;\n    justify-content: center;\n    left: 0;\n    opacity: 1;\n    padding: 5px 0;\n    position: absolute;\n    right: 0;\n    z-index: 1;\n}\n.provider_container2[data-v-10e99c82] {\n    color: #fff;\n    opacity: 1;\n}\n.small_provider[data-v-10e99c82] {\n    font-size: 8px;\n    letter-spacing: .14em;\n    line-height: 100%;\n    margin-bottom: 0;\n    text-transform: uppercase;\n}\ninput.form-control.form.search[data-v-10e99c82] {\n    height: 33px;\n    text-align: left;\n    width: 100%;\n}\n.game_ .loading[data-v-10e99c82]:before {\n    background-image: url(/image/mob_logo.png?v=2);\n}\n.game_ .loading[data-v-10e99c82]:before,.game_ .loading_error[data-v-10e99c82]:before {\n    -webkit-animation: pulse-loading-data-v-10e99c82 1.5s infinite;\n    animation: pulse-loading-data-v-10e99c82 1.5s infinite;\n    background-position: 50%;\n    background-repeat: no-repeat;\n    background-size: contain;\n    content: \"\";\n    display: block;\n    height: 100%;\n    left: 23%;\n    margin: 0 auto;\n    position: absolute;\n    top: 0;\n    width: 50%;\n}\n.game_ .loading_error[data-v-10e99c82]:before {\n    background-image: url(/image/mob_logo.png?v=2);\n}\n@-webkit-keyframes pulse-loading-data-v-10e99c82 {\n50% {\n        transform: scale(1.15);\n}\n}\n@keyframes pulse-loading-data-v-10e99c82 {\n50% {\n        transform: scale(1.15);\n}\n}\n.b1_ .dropdown__inner[data-v-10e99c82] {\n    background-color: #f1f2fd;\n    border-radius: 10px;\n    box-shadow: 5px 10px 15px rgb(0 0 0/10%);\n    color: #333;\n    display: block;\n    margin-bottom: 0!important;\n    margin-left: 6%;\n    margin-top: 2%;\n    padding: 5px 5px 0 0;\n    position: absolute;\n    width: 190px;\n    z-index: 4;\n}\n.b1_ .dropdown__inner ul[data-v-10e99c82] {\n    -webkit-padding-start: 10px;\n    -webkit-margin-before: 0;\n    -webkit-margin-after: 0;\n    margin-block-end: 0;\n    margin-block-start: 0;\n    max-height: 280px!important;\n    overflow-y: auto;\n    overscroll-behavior-y: contain;\n    padding-right: 10px;\n    padding-inline-start: 10px;\n    position: relative;\n    scrollbar-color: #333;\n    scrollbar-width: thin;\n}\n.b1_ .dropdown__inner ul li[data-v-10e99c82] {\n    align-items: center;\n    border-left: 4px solid transparent;\n    color: #333;\n    cursor: pointer;\n    display: flex;\n    font-size: 14px;\n    font-weight: 500;\n    line-height: 32px;\n    overflow-x: hidden;\n    text-overflow: ellipsis;\n    transition: all .2s ease-in-out;\n    white-space: nowrap;\n}\n.b1_ .dropdown__inner ul li.active[data-v-10e99c82],.b1_ .dropdown__inner ul li.active[data-v-10e99c82]:hover,.b1_ .dropdown__inner ul li[data-v-10e99c82]:hover {\n    color: #496db0;\n}\n.b1_ .dropdown__inner ul li span[data-v-10e99c82] {\n    color: #2155ed;\n}\n.b1_ .dropdown__inner ul li.active:hover span[data-v-10e99c82],.b1_ .dropdown__inner ul li.active span[data-v-10e99c82],.b1_ .dropdown__inner ul li:hover span[data-v-10e99c82] {\n    color: #333;\n}\n.game_list[data-v-10e99c82] {\n    text-align: center;\n}\n.slots[data-v-10e99c82] {\n    padding: 20px 0 14px;\n    text-align: center;\n}\n.go[data-v-10e99c82] {\n    background-image: url(/assets/image/button__play.svg);\n    background-repeat: no-repeat;\n    background-size: 100%;\n    height: 42px;\n    margin: 0 auto;\n    opacity: .95;\n    width: 42px;\n    z-index: 1;\n}\n.game_:hover .info[data-v-10e99c82] {\n    opacity: 1;\n    pointer-events: all;\n}\n.info .title[data-v-10e99c82] {\n    font-size: .875rem;\n    line-height: 1rem;\n    padding-bottom: 20px;\n    padding-top: 25px;\n    width: 90%;\n    color: #fff;\n    display: flex;\n    font-weight: 700;\n    height: 30px;\n    justify-content: center;\n    margin: 0 auto;\n    text-align: center;\n    z-index: 1;\n}\n.info .title2[data-v-10e99c82] {\n    border: 2px solid rgb(255 255 255/50%);\n    border-radius: 8px;\n    flex-direction: column;\n    font-size: .677rem;\n    opacity: .95;\n    transition: all .2s ease-out;\n    width: 40%;\n    color: #fff;\n    display: flex;\n    font-weight: 700;\n    height: 30px;\n    justify-content: center;\n    margin: 0 auto;\n    text-align: center;\n    z-index: 1;\n}\n.info .title2[data-v-10e99c82]:hover {\n    background: rgb(255 255 255/20%);\n    color: #ffde58;\n}\n.info .title3[data-v-10e99c82] {\n    color: #fff;\n    font-size: 8px;\n    font-weight: 500;\n    letter-spacing: .14em;\n    line-height: 100%;\n    padding-bottom: 5px;\n    text-transform: uppercase;\n    z-index: 1;\n}\n.info[data-v-10e99c82]:before {\n    background-color: rgba(32,43,77,.9);\n    content: \"\";\n    height: 100%;\n    left: 0;\n    opacity: .85;\n    position: absolute;\n    top: 0;\n    width: 100%;\n}\n.game_[data-v-10e99c82] {\n    align-items: center;\n    border: 0;\n    border-radius: 10px;\n    box-shadow: 0 5px 10px 2px rgb(8 10 12/5%);\n    cursor: pointer;\n    display: inline-flex;\n    height: 207px;\n    justify-content: center;\n    margin: 5px;\n    overflow: hidden;\n    position: relative;\n    transition: .2s ease;\n    width: 140px;\n}\n.game_[data-v-10e99c82]:hover {\n    transform: scale(1.05);\n}\n.game_ .game_image[data-v-10e99c82] {\n    height: 207px;\n    width: 140px;\n}\nimg.random_dice[data-v-10e99c82] {\n    height: 20px!important;\n    margin-bottom: 2px;\n    width: 20px!important;\n}\n.casino-set[data-v-10e99c82] {\n    align-items: center;\n    background: #2155ed;\n    border-radius: 5px;\n    cursor: pointer;\n    display: inline-block;\n    justify-content: center;\n    margin: 5px;\n    min-width: 36px;\n    padding: 4px;\n    text-align: center;\n    transition: all .2s ease-out;\n    width: 90px;\n}\n.casino-set[data-v-10e99c82]:hover {\n    background-image: linear-gradient(45deg,#4d84ea,#486ef7);\n    box-shadow: 0 0 16px 0 #b2b8fb;\n    transition: all .2s ease-out;\n}\n.casino-icons[data-v-10e99c82] {\n    width: 30px;\n}\n.casino-provider>span[data-v-10e99c82] {\n    color: #fff;\n    font-size: 14px;\n    font-weight: 500;\n    margin-bottom: 2px;\n}\n@media (max-width:992px) {\n.info .title[data-v-10e99c82] {\n        font-size: .775rem;\n}\n.info .title2[data-v-10e99c82] {\n        font-size: .677rem;\n}\n.game_badge[data-v-10e99c82] {\n        height: 1.6rem;\n        width: 1.6rem;\n}\n.b1_ .dropdown__inner[data-v-10e99c82] {\n        right: 13px;\n}\n.b1_[data-v-10e99c82] {\n        display: block!important;\n        padding-top: 5px;\n}\n.slots_box[data-v-10e99c82] {\n        display: block;\n        padding: 10px!important;\n}\n.game_[data-v-10e99c82],.vue-load-image[data-v-10e99c82],.vue-load-image img[data-v-10e99c82] {\n        height: 170px;\n        width: 115px;\n}\n.game_[data-v-10e99c82] {\n        margin: 3px;\n}\n.game_ .game_image[data-v-10e99c82] {\n        height: 170px;\n        width: 115px;\n}\n.game_ .info[data-v-10e99c82] {\n        font-size: 12px;\n}\n.game_ .info .title[data-v-10e99c82] {\n        padding-top: 12px;\n}\n}\n@media (max-width:420px) {\n.casino-set[data-v-10e99c82] {\n        width: 90px;\n}\n}\n.games-grid[data-v-10e99c82] {\n    display: grid;\n    gap: 18px;\n    grid-template-columns: repeat(6,minmax(0,1fr));\n}\n@media screen and (max-width:992px) {\n.games-grid[data-v-10e99c82] {\n        gap: 10px;\n        grid-template-columns: repeat(3,minmax(0,1fr));\n}\n}\n.card-game[data-v-10e99c82] {\n    align-items: center;\n    display: flex;\n    flex-direction: column;\n    max-width: 100%;\n    overflow: hidden;\n    position: relative;\n    transition: all .3s;\n}\n.card-game[data-v-10e99c82]:hover {\n    transform: scale(1.06);\n    transition: all .3s;\n}\n.card-game_image[data-v-10e99c82] {\n    border-radius: 10px;\n    height: 100%;\n    width: 100%;\n}\n.games-select[data-v-10e99c82] {\n    margin-bottom: 18px!important;\n    margin-top: 18px!important;\n}\n@media screen and (max-width:992px) {\n.games-select[data-v-10e99c82] {\n        margin-bottom: 10px!important;\n        margin-top: 10px!important;\n}\n}\n.main[data-v-10e99c82] {\n    grid-template-columns: repeat(2,minmax(0,1fr));\n}\n.main[data-v-10e99c82],.main2[data-v-10e99c82] {\n    display: grid;\n    gap: 18px;\n}\n@media screen and (max-width:770px) {\n.main[data-v-10e99c82] {\n        grid-template-columns: repeat(1,minmax(0,1fr));\n}\n}\n@media (max-width:1000px) {\n.main[data-v-10e99c82] {\n        gap: 10px;\n}\n}\n.main-item[data-v-10e99c82] {\n    aspect-ratio: 545/140;\n    border-radius: 10px;\n    box-shadow: 0 15px 20px rgb(88 88 88/25%);\n    overflow: hidden;\n    position: relative;\n    z-index: 1;\n}\n.main-item-overlay[data-v-10e99c82] {\n    height: 100%;\n    left: 0;\n    position: absolute;\n    top: 0;\n    width: 50%;\n}\n.main-item-img-big[data-v-10e99c82] {\n    height: 100%;\n}\n.main-item-img-right[data-v-10e99c82] {\n    float: right;\n    height: 100%;\n    margin-left: auto;\n}\n.main-item-img-bg[data-v-10e99c82] {\n    height: 100%;\n    left: 0;\n    position: absolute;\n    top: 0;\n    width: 100%;\n    z-index: -1;\n}\n.main-item-btn[data-v-10e99c82] {\n    background-color: #ffffff61;\n    border-radius: 5px;\n    color: #fff!important;\n    color: #333;\n    cursor: pointer;\n    display: inline-block;\n    font-size: 13px;\n    font-weight: 700;\n    padding: 5px 9px;\n    text-align: center;\n    text-decoration: none;\n    transition: all .3s;\n    width: 140px;\n}\n.main-item-btn[data-v-10e99c82]:hover {\n    transform: scale(1.06);\n    transition: all .3s;\n}\n.main-item-left[data-v-10e99c82] {\n    align-items: flex-start;\n    display: flex;\n    flex-direction: column;\n    height: 100%;\n    justify-content: center;\n    left: 4.5%;\n    position: absolute;\n    top: 50%;\n    transform: translateY(-50%);\n    width: 100%;\n}\n.main-item-left-text[data-v-10e99c82] {\n    color: #fbfbfb;\n    font-size: 20px;\n    font-weight: 700;\n    margin-bottom: 10px;\n    white-space: nowrap;\n}\n@media screen and (max-width:992px) {\n.main-item-btn[data-v-10e99c82] {\n        margin: -5px 0 0 12px;\n        width: 130px;\n}\n.main-item-left[data-v-10e99c82] {\n        justify-content: center;\n        left: 0;\n}\n.slots_text[data-v-10e99c82] {\n        font-size: 12px;\n        margin-left: 14px;\n        margin-top: -5px;\n}\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/LicensedGames.vue?vue&type=style&index=0&id=5e970e4e&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/dist/js/pages/LicensedGames.vue?vue&type=style&index=0&id=5e970e4e&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.lg[data-v-5e970e4e] { padding: 20px;\n}\n.lg h2[data-v-5e970e4e] { margin: 0; font-weight: 700;\n}\n.lg-sub[data-v-5e970e4e] { opacity: .65;\n}\n.lg-grid[data-v-5e970e4e] { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 14px;\n}\n.lg-card[data-v-5e970e4e] { display: block; padding: 28px 16px; border-radius: 12px; background: linear-gradient(135deg, #4f46e5, #7c3aed); color: #fff !important; text-decoration: none;\n}\n.lg-title[data-v-5e970e4e] { font-size: 20px; font-weight: 800;\n}\n.lg-prov[data-v-5e970e4e] { opacity: .8; font-size: 12px;\n}\n.lg-empty[data-v-5e970e4e] { opacity: .8; padding: 14px 0;\n}\n.lg-bar[data-v-5e970e4e] { margin-bottom: 10px;\n}\n.lg-frame[data-v-5e970e4e] { width: 100%; height: 72vh; border: 0; border-radius: 12px; background: #000;\n}\n.lg-error[data-v-5e970e4e] { padding: 10px; border-radius: 8px; background: rgba(235,87,87,.15); color: #eb5757;\n}\n", ""]);
 
 // exports
 
@@ -99786,6 +99910,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/LicensedGames.vue?vue&type=style&index=0&id=5e970e4e&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/dist/js/pages/LicensedGames.vue?vue&type=style&index=0&id=5e970e4e&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--5-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--5-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./LicensedGames.vue?vue&type=style&index=0&id=5e970e4e&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/LicensedGames.vue?vue&type=style&index=0&id=5e970e4e&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/Lives.vue?vue&type=style&index=0&id=580512d2&scoped=true&lang=css&":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/dist/js/pages/Lives.vue?vue&type=style&index=0&id=580512d2&scoped=true&lang=css& ***!
@@ -102061,6 +102215,51 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("span", { staticClass: "game-text" }, [_vm._v("Sports")])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  directives: [
+                    {
+                      name: "b-tooltip",
+                      rawName: "v-b-tooltip:left-main.hover.right",
+                      value: _vm.isCollapsed ? "Licensed Games" : false,
+                      expression: "isCollapsed ? 'Licensed Games' : false",
+                      arg: "left-main",
+                      modifiers: { hover: true, right: true }
+                    }
+                  ],
+                  staticClass: "game-item",
+                  class: [
+                    _vm.$route.path.indexOf("/licensed") === 0 ? "isActive" : ""
+                  ],
+                  attrs: {
+                    tag: "div",
+                    title: _vm.isCollapsed ? "Licensed Games" : "",
+                    to: "/licensed"
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "games-img",
+                      staticStyle: {
+                        background: "none",
+                        display: "flex",
+                        "align-items": "center",
+                        "justify-content": "center",
+                        "font-size": "18px"
+                      }
+                    },
+                    [_vm._v("★")]
+                  ),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "game-text" }, [
+                    _vm._v("Licensed Games")
+                  ])
                 ]
               ),
               _vm._v(" "),
@@ -107931,6 +108130,127 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/LicensedGames.vue?vue&type=template&id=5e970e4e&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/dist/js/pages/LicensedGames.vue?vue&type=template&id=5e970e4e&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "content cards col-12 ml-auto mr-auto p-0" },
+    [
+      _c(
+        "div",
+        { staticClass: "lg" },
+        [
+          !_vm.$route.params.game
+            ? [
+                _c("h2", [_vm._v("Licensed Games")]),
+                _vm._v(" "),
+                _c("p", { staticClass: "lg-sub" }, [
+                  _vm._v(
+                    "Games from licensed studios, played with your Mzizination balance."
+                  )
+                ]),
+                _vm._v(" "),
+                _vm.loaded && !_vm.games.length
+                  ? _c(
+                      "div",
+                      { staticClass: "lg-empty" },
+                      [
+                        _vm._v(
+                          "\n                New games are coming soon. In the meantime, try our crash games:\n                "
+                        ),
+                        _c("router-link", { attrs: { to: "/crash/flight" } }, [
+                          _vm._v("Safari Flight")
+                        ]),
+                        _vm._v(",\n                "),
+                        _c("router-link", { attrs: { to: "/crash/rocket" } }, [
+                          _vm._v("Mzizi Rocket")
+                        ]),
+                        _vm._v(" and\n                "),
+                        _c("router-link", { attrs: { to: "/crash/jet" } }, [
+                          _vm._v("Savanna Jet")
+                        ]),
+                        _vm._v(".\n            ")
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "lg-grid" },
+                  _vm._l(_vm.games, function(g) {
+                    return _c(
+                      "router-link",
+                      {
+                        key: g.provider + g.game,
+                        staticClass: "lg-card",
+                        attrs: { to: "/licensed/" + g.provider + "/" + g.game }
+                      },
+                      [
+                        _c("div", { staticClass: "lg-title" }, [
+                          _vm._v(_vm._s(g.title))
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "lg-prov" }, [
+                          _vm._v(_vm._s(g.provider_name))
+                        ])
+                      ]
+                    )
+                  }),
+                  1
+                )
+              ]
+            : [
+                _c(
+                  "div",
+                  { staticClass: "lg-bar" },
+                  [
+                    _c("router-link", { attrs: { to: "/licensed" } }, [
+                      _vm._v("← All games")
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _vm.error
+                  ? _c("div", { staticClass: "lg-error" }, [
+                      _vm._v(_vm._s(_vm.error))
+                    ])
+                  : _vm.url
+                  ? _c("iframe", {
+                      staticClass: "lg-frame",
+                      attrs: { src: _vm.url, allow: "autoplay; fullscreen" }
+                    })
+                  : _c("div", { staticClass: "lg-empty" }, [
+                      _vm._v("Loading game...")
+                    ])
+              ]
+        ],
+        2
+      )
+    ]
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -137628,6 +137948,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/dist/js/pages/LicensedGames.vue":
+/*!***************************************************!*\
+  !*** ./resources/dist/js/pages/LicensedGames.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _LicensedGames_vue_vue_type_template_id_5e970e4e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LicensedGames.vue?vue&type=template&id=5e970e4e&scoped=true& */ "./resources/dist/js/pages/LicensedGames.vue?vue&type=template&id=5e970e4e&scoped=true&");
+/* harmony import */ var _LicensedGames_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LicensedGames.vue?vue&type=script&lang=js& */ "./resources/dist/js/pages/LicensedGames.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _LicensedGames_vue_vue_type_style_index_0_id_5e970e4e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LicensedGames.vue?vue&type=style&index=0&id=5e970e4e&scoped=true&lang=css& */ "./resources/dist/js/pages/LicensedGames.vue?vue&type=style&index=0&id=5e970e4e&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _LicensedGames_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _LicensedGames_vue_vue_type_template_id_5e970e4e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _LicensedGames_vue_vue_type_template_id_5e970e4e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "5e970e4e",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/dist/js/pages/LicensedGames.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/dist/js/pages/LicensedGames.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/dist/js/pages/LicensedGames.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LicensedGames_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./LicensedGames.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/LicensedGames.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LicensedGames_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/dist/js/pages/LicensedGames.vue?vue&type=style&index=0&id=5e970e4e&scoped=true&lang=css&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/dist/js/pages/LicensedGames.vue?vue&type=style&index=0&id=5e970e4e&scoped=true&lang=css& ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LicensedGames_vue_vue_type_style_index_0_id_5e970e4e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--5-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--5-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./LicensedGames.vue?vue&type=style&index=0&id=5e970e4e&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/LicensedGames.vue?vue&type=style&index=0&id=5e970e4e&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LicensedGames_vue_vue_type_style_index_0_id_5e970e4e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LicensedGames_vue_vue_type_style_index_0_id_5e970e4e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LicensedGames_vue_vue_type_style_index_0_id_5e970e4e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LicensedGames_vue_vue_type_style_index_0_id_5e970e4e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LicensedGames_vue_vue_type_style_index_0_id_5e970e4e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/dist/js/pages/LicensedGames.vue?vue&type=template&id=5e970e4e&scoped=true&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/dist/js/pages/LicensedGames.vue?vue&type=template&id=5e970e4e&scoped=true& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LicensedGames_vue_vue_type_template_id_5e970e4e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./LicensedGames.vue?vue&type=template&id=5e970e4e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/LicensedGames.vue?vue&type=template&id=5e970e4e&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LicensedGames_vue_vue_type_template_id_5e970e4e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LicensedGames_vue_vue_type_template_id_5e970e4e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/dist/js/pages/Lives.vue":
 /*!*******************************************!*\
   !*** ./resources/dist/js/pages/Lives.vue ***!
@@ -138934,20 +139341,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Wheel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/Wheel */ "./resources/dist/js/pages/Wheel.vue");
 /* harmony import */ var _pages_Plinko__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/Plinko */ "./resources/dist/js/pages/Plinko.vue");
 /* harmony import */ var _pages_Sports__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/Sports */ "./resources/dist/js/pages/Sports.vue");
-/* harmony import */ var _pages_Crash__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/Crash */ "./resources/dist/js/pages/Crash.vue");
-/* harmony import */ var _pages_ResponsibleGaming__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/ResponsibleGaming */ "./resources/dist/js/pages/ResponsibleGaming.vue");
-/* harmony import */ var _pages_Slots__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/Slots */ "./resources/dist/js/pages/Slots.vue");
-/* harmony import */ var _pages_Lives__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/Lives */ "./resources/dist/js/pages/Lives.vue");
-/* harmony import */ var _pages_SlotsGame__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/SlotsGame */ "./resources/dist/js/pages/SlotsGame.vue");
-/* harmony import */ var _pages_LivesGame__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/LivesGame */ "./resources/dist/js/pages/LivesGame.vue");
-/* harmony import */ var _pages_Bonus_Bonus__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/Bonus/Bonus */ "./resources/dist/js/pages/Bonus/Bonus.vue");
-/* harmony import */ var _pages_Ref__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pages/Ref */ "./resources/dist/js/pages/Ref.vue");
-/* harmony import */ var _pages_Faq__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/Faq */ "./resources/dist/js/pages/Faq.vue");
-/* harmony import */ var _pages_Profile__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/Profile */ "./resources/dist/js/pages/Profile.vue");
-/* harmony import */ var _pages_Payment__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/Payment */ "./resources/dist/js/pages/Payment.vue");
-/* harmony import */ var _pages_Withdraw__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/Withdraw */ "./resources/dist/js/pages/Withdraw.vue");
-/* harmony import */ var _pages_Tournament_Tournament__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./pages/Tournament/Tournament */ "./resources/dist/js/pages/Tournament/Tournament.vue");
-/* harmony import */ var _pages_Tournament_Tournaments__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./pages/Tournament/Tournaments */ "./resources/dist/js/pages/Tournament/Tournaments.vue");
+/* harmony import */ var _pages_LicensedGames__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/LicensedGames */ "./resources/dist/js/pages/LicensedGames.vue");
+/* harmony import */ var _pages_Crash__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/Crash */ "./resources/dist/js/pages/Crash.vue");
+/* harmony import */ var _pages_ResponsibleGaming__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/ResponsibleGaming */ "./resources/dist/js/pages/ResponsibleGaming.vue");
+/* harmony import */ var _pages_Slots__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/Slots */ "./resources/dist/js/pages/Slots.vue");
+/* harmony import */ var _pages_Lives__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/Lives */ "./resources/dist/js/pages/Lives.vue");
+/* harmony import */ var _pages_SlotsGame__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/SlotsGame */ "./resources/dist/js/pages/SlotsGame.vue");
+/* harmony import */ var _pages_LivesGame__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/LivesGame */ "./resources/dist/js/pages/LivesGame.vue");
+/* harmony import */ var _pages_Bonus_Bonus__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pages/Bonus/Bonus */ "./resources/dist/js/pages/Bonus/Bonus.vue");
+/* harmony import */ var _pages_Ref__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/Ref */ "./resources/dist/js/pages/Ref.vue");
+/* harmony import */ var _pages_Faq__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/Faq */ "./resources/dist/js/pages/Faq.vue");
+/* harmony import */ var _pages_Profile__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/Profile */ "./resources/dist/js/pages/Profile.vue");
+/* harmony import */ var _pages_Payment__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/Payment */ "./resources/dist/js/pages/Payment.vue");
+/* harmony import */ var _pages_Withdraw__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./pages/Withdraw */ "./resources/dist/js/pages/Withdraw.vue");
+/* harmony import */ var _pages_Tournament_Tournament__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./pages/Tournament/Tournament */ "./resources/dist/js/pages/Tournament/Tournament.vue");
+/* harmony import */ var _pages_Tournament_Tournaments__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./pages/Tournament/Tournaments */ "./resources/dist/js/pages/Tournament/Tournaments.vue");
+
 
 
 
@@ -138979,7 +139388,7 @@ var routes = [{
 }, {
   path: '/profile',
   name: 'profile',
-  component: _pages_Profile__WEBPACK_IMPORTED_MODULE_18__["default"]
+  component: _pages_Profile__WEBPACK_IMPORTED_MODULE_19__["default"]
 }, {
   path: '/dice',
   name: 'dice',
@@ -139003,11 +139412,15 @@ var routes = [{
 }, {
   path: '/responsible-gaming',
   name: 'responsible-gaming',
-  component: _pages_ResponsibleGaming__WEBPACK_IMPORTED_MODULE_10__["default"]
+  component: _pages_ResponsibleGaming__WEBPACK_IMPORTED_MODULE_11__["default"]
 }, {
   path: '/crash/:theme?',
   name: 'crash',
-  component: _pages_Crash__WEBPACK_IMPORTED_MODULE_9__["default"]
+  component: _pages_Crash__WEBPACK_IMPORTED_MODULE_10__["default"]
+}, {
+  path: '/licensed/:provider?/:game?',
+  name: 'licensed',
+  component: _pages_LicensedGames__WEBPACK_IMPORTED_MODULE_9__["default"]
 }, {
   path: '/sports',
   name: 'sports',
@@ -139015,47 +139428,47 @@ var routes = [{
 }, {
   path: '/slots',
   name: 'slots',
-  component: _pages_Slots__WEBPACK_IMPORTED_MODULE_11__["default"]
+  component: _pages_Slots__WEBPACK_IMPORTED_MODULE_12__["default"]
 }, {
   path: '/live',
   name: 'live',
-  component: _pages_Lives__WEBPACK_IMPORTED_MODULE_12__["default"]
+  component: _pages_Lives__WEBPACK_IMPORTED_MODULE_13__["default"]
 }, {
   path: '/slots/game/:id/:type?',
   name: 'slots',
-  component: _pages_SlotsGame__WEBPACK_IMPORTED_MODULE_13__["default"]
+  component: _pages_SlotsGame__WEBPACK_IMPORTED_MODULE_14__["default"]
 }, {
   path: '/live/game/:id',
   name: 'live',
-  component: _pages_LivesGame__WEBPACK_IMPORTED_MODULE_14__["default"]
+  component: _pages_LivesGame__WEBPACK_IMPORTED_MODULE_15__["default"]
 }, {
   path: '/ref',
   name: 'ref',
-  component: _pages_Ref__WEBPACK_IMPORTED_MODULE_16__["default"]
+  component: _pages_Ref__WEBPACK_IMPORTED_MODULE_17__["default"]
 }, {
   path: '/bonus',
   name: 'bonus',
-  component: _pages_Bonus_Bonus__WEBPACK_IMPORTED_MODULE_15__["default"]
+  component: _pages_Bonus_Bonus__WEBPACK_IMPORTED_MODULE_16__["default"]
 }, {
   path: '/pay',
   name: 'payment',
-  component: _pages_Payment__WEBPACK_IMPORTED_MODULE_19__["default"]
+  component: _pages_Payment__WEBPACK_IMPORTED_MODULE_20__["default"]
 }, {
   path: '/withdraw',
   name: 'withdraw',
-  component: _pages_Withdraw__WEBPACK_IMPORTED_MODULE_20__["default"]
+  component: _pages_Withdraw__WEBPACK_IMPORTED_MODULE_21__["default"]
 }, {
   path: '/faq',
   name: 'faq',
-  component: _pages_Faq__WEBPACK_IMPORTED_MODULE_17__["default"]
+  component: _pages_Faq__WEBPACK_IMPORTED_MODULE_18__["default"]
 }, {
   path: '/tournaments',
   name: 'tournaments',
-  component: _pages_Tournament_Tournaments__WEBPACK_IMPORTED_MODULE_22__["default"]
+  component: _pages_Tournament_Tournaments__WEBPACK_IMPORTED_MODULE_23__["default"]
 }, {
   path: '/tournament/:id',
   name: 'tournament',
-  component: _pages_Tournament_Tournament__WEBPACK_IMPORTED_MODULE_21__["default"]
+  component: _pages_Tournament_Tournament__WEBPACK_IMPORTED_MODULE_22__["default"]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',

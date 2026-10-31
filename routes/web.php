@@ -148,6 +148,11 @@ Route::group(['prefix' => 'sports'], function () {
         Route::post('/my', 'SportsController@myBets');
     });
 });
+// Licensed provider games (seamless wallet)
+Route::post('/provider/catalog', 'ProviderController@catalog');
+Route::post('/provider/launch', 'ProviderController@launch')->middleware(['auth', 'rg:play']);
+Route::post('/provider/{provider}/wallet', 'ProviderController@wallet')->where('provider', '[a-z0-9_]+');
+
 Route::group(['prefix' => 'crash', 'middleware' => 'auth'], function () {
     Route::post('/init', 'CrashController@init');
     Route::post('/start', 'CrashController@start')->middleware('rg:bet');
