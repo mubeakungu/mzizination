@@ -93,6 +93,11 @@
                 </router-link>
             </div>
             
+            <!-- Responsible gaming -->
+            <router-link to="/responsible-gaming" class="rg-link" :title="'Responsible Gaming (18+)'">
+                <span class="rg-18">18+</span><span v-if="!isCollapsed"> Responsible Gaming</span>
+            </router-link>
+
             <!-- Online Counter -->
             <div class="floating-online">
                 <div class="circle-online"></div>
@@ -234,4 +239,7 @@ export default {
         display: none !important;
     }
 }
+.rg-link { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 8px 0; font-size: 12px; opacity: .75; color: inherit; text-decoration: none; }
+.rg-link:hover { opacity: 1; }
+.rg-18 { border: 1.5px solid #eb5757; color: #eb5757; border-radius: 50%; font-size: 10px; font-weight: 700; width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; }
 </style>

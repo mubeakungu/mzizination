@@ -2608,6 +2608,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['page'],
@@ -8402,6 +8407,179 @@ __webpack_require__.r(__webpack_exports__);
     qrCodeUrl: function qrCodeUrl() {
       if (!this.link) return '';
       return "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=".concat(encodeURIComponent(this.link));
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      s: null,
+      msg: null,
+      msgType: 'ok',
+      kyc: {
+        date_of_birth: '',
+        id_number: ''
+      },
+      limits: {
+        deposit: '',
+        stake: ''
+      },
+      period: '7'
+    };
+  },
+  computed: {
+    kycLabel: function kycLabel() {
+      return {
+        none: 'Not submitted',
+        pending: 'Under review',
+        verified: 'Verified',
+        rejected: 'Rejected'
+      }[this.s.kyc_status] || this.s.kyc_status;
+    }
+  },
+  mounted: function mounted() {
+    this.load();
+  },
+  watch: {
+    '$root.user': function $rootUser(u, old) {
+      if (u && !old) this.load();
+    }
+  },
+  methods: {
+    load: function load() {
+      var _this = this;
+
+      if (!this.$root.user) return;
+      this.$root.axios.post('/profile/rg/init').then(function (_ref) {
+        var data = _ref.data;
+        return _this.apply(data);
+      });
+    },
+    apply: function apply(data) {
+      this.s = data;
+      this.limits.deposit = data.daily_deposit_limit === null ? '' : data.daily_deposit_limit;
+      this.limits.stake = data.daily_stake_limit === null ? '' : data.daily_stake_limit;
+    },
+    post: function post(url, body, okMsg) {
+      var _this2 = this;
+
+      return this.$root.axios.post(url, body).then(function (_ref2) {
+        var data = _ref2.data;
+
+        if (data.error) {
+          _this2.msgType = 'err';
+          _this2.msg = data.message;
+          return;
+        }
+
+        _this2.apply(data);
+
+        _this2.msgType = 'ok';
+        _this2.msg = okMsg;
+      });
+    },
+    saveLimits: function saveLimits() {
+      var v = function v(x) {
+        return x === '' || x === null ? null : x;
+      };
+
+      this.post('/profile/rg/limits', {
+        deposit: v(this.limits.deposit),
+        stake: v(this.limits.stake)
+      }, 'Limits saved.');
+    },
+    exclude: function exclude() {
+      var label = this.period === 'permanent' ? 'permanently' : "for ".concat(this.period, " day(s)");
+      if (!confirm("Exclude yourself ".concat(label, "? You will not be able to deposit or play, and this cannot be undone early."))) return;
+      this.post('/profile/rg/self-exclude', {
+        period: this.period
+      }, 'Self-exclusion is active.');
+    },
+    fmt: function fmt(n) {
+      return Number(n || 0).toFixed(2);
     }
   }
 });
@@ -57456,7 +57634,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Hide desktop menu on mobile */\n@media screen and (max-width: 992px) {\n.floating-games-menu[data-v-5d46b43a] {\n        display: none !important;\n}\n}\n\n/* Hide mobile nav on desktop */\n@media screen and (min-width: 993px) {\n.mob-nav-bottom[data-v-5d46b43a] {\n        display: none !important;\n}\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Hide desktop menu on mobile */\n@media screen and (max-width: 992px) {\n.floating-games-menu[data-v-5d46b43a] {\n        display: none !important;\n}\n}\n\n/* Hide mobile nav on desktop */\n@media screen and (min-width: 993px) {\n.mob-nav-bottom[data-v-5d46b43a] {\n        display: none !important;\n}\n}\n.rg-link[data-v-5d46b43a] { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 8px 0; font-size: 12px; opacity: .75; color: inherit; text-decoration: none;\n}\n.rg-link[data-v-5d46b43a]:hover { opacity: 1;\n}\n.rg-18[data-v-5d46b43a] { border: 1.5px solid #eb5757; color: #eb5757; border-radius: 50%; font-size: 10px; font-weight: 700; width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center;\n}\n", ""]);
 
 // exports
 
@@ -57761,6 +57939,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 // module
 exports.push([module.i, "\n.ref[data-v-5fe54bba] {\n    padding: 10 15px;\n}\n.ref .desc[data-v-5fe54bba] {\n    font-size: 15px;\n}\n.refBox[data-v-5fe54bba] {\n    border: 1px solid #87919a;\n    border-radius: 5px;\n    flex: auto;\n    margin-right: 15px;\n    padding: 5px;\n}\n.refCount[data-v-5fe54bba] {\n    font-size: 14px;\n}\n.refIncome[data-v-5fe54bba] {\n    font-size: 15px;\n}\n.refBox[data-v-5fe54bba]:last-child {\n    margin: 0;\n}\n.refLvl[data-v-5fe54bba] {\n    font-size: 12px;\n}\n.blue[data-v-5fe54bba] {\n    font-size: 14px;\n}\n.ref-title[data-v-5fe54bba] {\n    border-radius: 3px;\n    color: #fff;\n    font-size: 15px;\n    margin-bottom: 1rem;\n    padding: 10px;\n    text-align: center;\n}\n.text-success_[data-v-5fe54bba] {\n    color: #28a745!important;\n}\n.all_[data-v-5fe54bba] {\n    font-weight: 700;\n}\n/* QR Code styles */\n.qr-code-block[data-v-5fe54bba] {\n    text-align: center;\n    padding: 15px;\n    background: rgba(37, 97, 208, 0.05);\n    border-radius: 10px;\n    border: 1px solid rgba(37, 97, 208, 0.2);\n}\n.qr-code-wrapper[data-v-5fe54bba] {\n    display: inline-block;\n    padding: 10px;\n    background: #fff;\n    border-radius: 8px;\n    box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n}\n.qr-code-img[data-v-5fe54bba] {\n    width: 150px;\n    height: 150px;\n    display: block;\n}\n.qr-hint[data-v-5fe54bba] {\n    display: block;\n    margin-top: 10px;\n    color: #6c757d;\n    font-size: 12px;\n}\n.qr-download-btn[data-v-5fe54bba] {\n    display: inline-flex;\n    align-items: center;\n    gap: 6px;\n    margin-top: 12px;\n    padding: 8px 16px;\n    background: linear-gradient(45deg, #2561d0, #1e4eff);\n    color: #fff;\n    border: none;\n    border-radius: 6px;\n    font-size: 13px;\n    cursor: pointer;\n    transition: all 0.2s ease;\n}\n.qr-download-btn[data-v-5fe54bba]:hover {\n    transform: translateY(-1px);\n    box-shadow: 0 4px 12px rgba(37, 97, 208, 0.3);\n}\n.qr-download-btn svg[data-v-5fe54bba] {\n    width: 16px;\n    height: 16px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=style&index=0&id=50b24556&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=style&index=0&id=50b24556&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.rg[data-v-50b24556] { padding: 20px; max-width: 820px;\n}\n.rg h2[data-v-50b24556] { font-weight: 700; margin: 0;\n}\n.rg-sub[data-v-50b24556] { opacity: .65;\n}\n.rg-card[data-v-50b24556] { border: 1px solid rgba(127,127,127,.2); border-radius: 10px; padding: 16px; margin-bottom: 14px;\n}\n.rg-card h3[data-v-50b24556] { font-size: 17px; font-weight: 700;\n}\n.rg-note[data-v-50b24556] { opacity: .75; font-size: 13px;\n}\n.rg-row[data-v-50b24556] { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; margin-bottom: 10px;\n}\n.rg-row label[data-v-50b24556] { display: flex; flex-direction: column; font-size: 13px; flex: 1; min-width: 200px;\n}\n.rg-row small[data-v-50b24556] { opacity: .6; margin-top: 4px;\n}\n.rg-input[data-v-50b24556] { padding: 8px; border-radius: 8px; border: 1px solid rgba(127,127,127,.3); background: transparent; color: inherit; margin-top: 4px;\n}\n.rg-input option[data-v-50b24556] { color: #000;\n}\n.rg-btn[data-v-50b24556] { padding: 9px 18px; border: 0; border-radius: 8px; background: #2f80ed; color: #fff; font-weight: 600; cursor: pointer;\n}\n.rg-danger[data-v-50b24556] { background: #eb5757;\n}\n.rg-badge[data-v-50b24556] { font-size: 11px; padding: 3px 8px; border-radius: 10px; margin-left: 8px; vertical-align: middle; background: rgba(127,127,127,.25);\n}\n.k-verified[data-v-50b24556] { background: rgba(39,174,96,.25); color: #27ae60;\n}\n.k-pending[data-v-50b24556] { background: rgba(242,201,76,.25); color: #f2c94c;\n}\n.k-rejected[data-v-50b24556] { background: rgba(235,87,87,.25); color: #eb5757;\n}\n.rg-alert[data-v-50b24556] { padding: 10px; border-radius: 8px; margin-bottom: 12px;\n}\n.rg-alert.ok[data-v-50b24556] { background: rgba(39,174,96,.15); color: #27ae60;\n}\n.rg-alert.err[data-v-50b24556] { background: rgba(235,87,87,.15); color: #eb5757;\n}\n.rg-help[data-v-50b24556] { font-size: 13px; opacity: .8;\n}\n", ""]);
 
 // exports
 
@@ -99144,6 +99341,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=style&index=0&id=50b24556&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=style&index=0&id=50b24556&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--5-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--5-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./ResponsibleGaming.vue?vue&type=style&index=0&id=50b24556&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=style&index=0&id=50b24556&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/Slots.vue?vue&type=style&index=0&id=7e65ce76&scoped=true&lang=css&":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/dist/js/pages/Slots.vue?vue&type=style&index=0&id=7e65ce76&scoped=true&lang=css& ***!
@@ -101105,349 +101332,376 @@ var render = function() {
       attrs: { id: "left-main" }
     },
     [
-      _c("div", { staticClass: "floating-games-menu" }, [
-        _c(
-          "div",
-          { staticClass: "games-list" },
-          [
-            _c(
-              "router-link",
-              {
-                directives: [
-                  {
-                    name: "b-tooltip",
-                    rawName: "v-b-tooltip:left-main.hover.right",
-                    value: _vm.isCollapsed ? "Live" : false,
-                    expression: "isCollapsed ? 'Live' : false",
-                    arg: "left-main",
-                    modifiers: { hover: true, right: true }
-                  }
-                ],
-                staticClass: "game-item",
-                class: [_vm.page == "live" ? "isActive" : ""],
-                attrs: {
-                  tag: "div",
-                  title: _vm.isCollapsed ? "Live" : "",
-                  to: "/live"
-                }
-              },
-              [
-                _c("div", { staticClass: "games-img live" }),
-                _vm._v(" "),
-                _c("span", { staticClass: "game-text" }, [_vm._v("Live")])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "router-link",
-              {
-                directives: [
-                  {
-                    name: "b-tooltip",
-                    rawName: "v-b-tooltip:left-main.hover.right",
-                    value: _vm.isCollapsed ? "Sports" : false,
-                    expression: "isCollapsed ? 'Sports' : false",
-                    arg: "left-main",
-                    modifiers: { hover: true, right: true }
-                  }
-                ],
-                staticClass: "game-item",
-                class: [_vm.page == "sports" ? "isActive" : ""],
-                attrs: {
-                  tag: "div",
-                  title: _vm.isCollapsed ? "Sports" : "",
-                  to: "/sports"
-                }
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass: "games-img sports",
-                    staticStyle: {
-                      background: "none",
-                      display: "flex",
-                      "align-items": "center",
-                      "justify-content": "center",
-                      "font-size": "18px"
+      _c(
+        "div",
+        { staticClass: "floating-games-menu" },
+        [
+          _c(
+            "div",
+            { staticClass: "games-list" },
+            [
+              _c(
+                "router-link",
+                {
+                  directives: [
+                    {
+                      name: "b-tooltip",
+                      rawName: "v-b-tooltip:left-main.hover.right",
+                      value: _vm.isCollapsed ? "Live" : false,
+                      expression: "isCollapsed ? 'Live' : false",
+                      arg: "left-main",
+                      modifiers: { hover: true, right: true }
                     }
-                  },
-                  [_vm._v("⚽")]
-                ),
-                _vm._v(" "),
-                _c("span", { staticClass: "game-text" }, [_vm._v("Sports")])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "router-link",
-              {
-                directives: [
-                  {
-                    name: "b-tooltip",
-                    rawName: "v-b-tooltip:left-main.hover.right",
-                    value: _vm.isCollapsed ? "Dice" : false,
-                    expression: "isCollapsed ? 'Dice' : false",
-                    arg: "left-main",
-                    modifiers: { hover: true, right: true }
+                  ],
+                  staticClass: "game-item",
+                  class: [_vm.page == "live" ? "isActive" : ""],
+                  attrs: {
+                    tag: "div",
+                    title: _vm.isCollapsed ? "Live" : "",
+                    to: "/live"
                   }
-                ],
-                staticClass: "game-item",
-                class: [_vm.page == "dice" ? "isActive" : ""],
-                attrs: {
-                  tag: "div",
-                  title: _vm.isCollapsed ? "Dice" : "",
-                  to: "/dice"
-                }
-              },
-              [
-                _c("div", { staticClass: "games-img dice" }),
-                _vm._v(" "),
-                _c("span", { staticClass: "game-text" }, [_vm._v("Dice")])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "router-link",
-              {
-                directives: [
-                  {
-                    name: "b-tooltip",
-                    rawName: "v-b-tooltip:left-main.hover.right",
-                    value: _vm.isCollapsed ? "Mines" : false,
-                    expression: "isCollapsed ? 'Mines' : false",
-                    arg: "left-main",
-                    modifiers: { hover: true, right: true }
+                },
+                [
+                  _c("div", { staticClass: "games-img live" }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "game-text" }, [_vm._v("Live")])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  directives: [
+                    {
+                      name: "b-tooltip",
+                      rawName: "v-b-tooltip:left-main.hover.right",
+                      value: _vm.isCollapsed ? "Sports" : false,
+                      expression: "isCollapsed ? 'Sports' : false",
+                      arg: "left-main",
+                      modifiers: { hover: true, right: true }
+                    }
+                  ],
+                  staticClass: "game-item",
+                  class: [_vm.page == "sports" ? "isActive" : ""],
+                  attrs: {
+                    tag: "div",
+                    title: _vm.isCollapsed ? "Sports" : "",
+                    to: "/sports"
                   }
-                ],
-                staticClass: "game-item",
-                class: [_vm.page == "mines" ? "isActive" : ""],
-                attrs: {
-                  tag: "div",
-                  title: _vm.isCollapsed ? "Mines" : "",
-                  to: "/mines"
-                }
-              },
-              [
-                _c("div", { staticClass: "games-img mines" }),
-                _vm._v(" "),
-                _c("span", { staticClass: "game-text" }, [_vm._v("Mines")])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "router-link",
-              {
-                directives: [
-                  {
-                    name: "b-tooltip",
-                    rawName: "v-b-tooltip:left-main.hover.right",
-                    value: _vm.isCollapsed ? "Bubbles" : false,
-                    expression: "isCollapsed ? 'Bubbles' : false",
-                    arg: "left-main",
-                    modifiers: { hover: true, right: true }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "games-img sports",
+                      staticStyle: {
+                        background: "none",
+                        display: "flex",
+                        "align-items": "center",
+                        "justify-content": "center",
+                        "font-size": "18px"
+                      }
+                    },
+                    [_vm._v("⚽")]
+                  ),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "game-text" }, [_vm._v("Sports")])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  directives: [
+                    {
+                      name: "b-tooltip",
+                      rawName: "v-b-tooltip:left-main.hover.right",
+                      value: _vm.isCollapsed ? "Dice" : false,
+                      expression: "isCollapsed ? 'Dice' : false",
+                      arg: "left-main",
+                      modifiers: { hover: true, right: true }
+                    }
+                  ],
+                  staticClass: "game-item",
+                  class: [_vm.page == "dice" ? "isActive" : ""],
+                  attrs: {
+                    tag: "div",
+                    title: _vm.isCollapsed ? "Dice" : "",
+                    to: "/dice"
                   }
-                ],
-                staticClass: "game-item",
-                class: [_vm.page == "bubbles" ? "isActive" : ""],
-                attrs: {
-                  tag: "div",
-                  title: _vm.isCollapsed ? "Bubbles" : "",
-                  to: "/bubbles"
-                }
-              },
-              [
-                _c("div", { staticClass: "games-img bubbles" }),
-                _vm._v(" "),
-                _c("span", { staticClass: "game-text" }, [_vm._v("Bubbles")])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "router-link",
-              {
-                directives: [
-                  {
-                    name: "b-tooltip",
-                    rawName: "v-b-tooltip:left-main.hover.right",
-                    value: _vm.isCollapsed ? "Wheel" : false,
-                    expression: "isCollapsed ? 'Wheel' : false",
-                    arg: "left-main",
-                    modifiers: { hover: true, right: true }
+                },
+                [
+                  _c("div", { staticClass: "games-img dice" }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "game-text" }, [_vm._v("Dice")])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  directives: [
+                    {
+                      name: "b-tooltip",
+                      rawName: "v-b-tooltip:left-main.hover.right",
+                      value: _vm.isCollapsed ? "Mines" : false,
+                      expression: "isCollapsed ? 'Mines' : false",
+                      arg: "left-main",
+                      modifiers: { hover: true, right: true }
+                    }
+                  ],
+                  staticClass: "game-item",
+                  class: [_vm.page == "mines" ? "isActive" : ""],
+                  attrs: {
+                    tag: "div",
+                    title: _vm.isCollapsed ? "Mines" : "",
+                    to: "/mines"
                   }
-                ],
-                staticClass: "game-item",
-                class: [_vm.page == "wheel" ? "isActive" : ""],
-                attrs: {
-                  tag: "div",
-                  title: _vm.isCollapsed ? "Wheel" : "",
-                  to: "/wheel"
-                }
-              },
-              [
-                _c("div", { staticClass: "games-img wheel" }),
-                _vm._v(" "),
-                _c("span", { staticClass: "game-text" }, [_vm._v("Wheel")])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "router-link",
-              {
-                directives: [
-                  {
-                    name: "b-tooltip",
-                    rawName: "v-b-tooltip:left-main.hover.right",
-                    value: _vm.isCollapsed ? "Plinko" : false,
-                    expression: "isCollapsed ? 'Plinko' : false",
-                    arg: "left-main",
-                    modifiers: { hover: true, right: true }
+                },
+                [
+                  _c("div", { staticClass: "games-img mines" }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "game-text" }, [_vm._v("Mines")])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  directives: [
+                    {
+                      name: "b-tooltip",
+                      rawName: "v-b-tooltip:left-main.hover.right",
+                      value: _vm.isCollapsed ? "Bubbles" : false,
+                      expression: "isCollapsed ? 'Bubbles' : false",
+                      arg: "left-main",
+                      modifiers: { hover: true, right: true }
+                    }
+                  ],
+                  staticClass: "game-item",
+                  class: [_vm.page == "bubbles" ? "isActive" : ""],
+                  attrs: {
+                    tag: "div",
+                    title: _vm.isCollapsed ? "Bubbles" : "",
+                    to: "/bubbles"
                   }
-                ],
-                staticClass: "game-item",
-                class: [_vm.page == "plinko" ? "isActive" : ""],
-                attrs: {
-                  tag: "div",
-                  title: _vm.isCollapsed ? "Plinko" : "",
-                  to: "/plinko"
-                }
-              },
-              [
-                _c("div", { staticClass: "games-img plinko" }),
-                _vm._v(" "),
-                _c("span", { staticClass: "game-text" }, [_vm._v("Plinko")])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "router-link",
-              {
-                directives: [
-                  {
-                    name: "b-tooltip",
-                    rawName: "v-b-tooltip:left-main.hover.right",
-                    value: _vm.isCollapsed ? "BlackJack" : false,
-                    expression: "isCollapsed ? 'BlackJack' : false",
-                    arg: "left-main",
-                    modifiers: { hover: true, right: true }
+                },
+                [
+                  _c("div", { staticClass: "games-img bubbles" }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "game-text" }, [_vm._v("Bubbles")])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  directives: [
+                    {
+                      name: "b-tooltip",
+                      rawName: "v-b-tooltip:left-main.hover.right",
+                      value: _vm.isCollapsed ? "Wheel" : false,
+                      expression: "isCollapsed ? 'Wheel' : false",
+                      arg: "left-main",
+                      modifiers: { hover: true, right: true }
+                    }
+                  ],
+                  staticClass: "game-item",
+                  class: [_vm.page == "wheel" ? "isActive" : ""],
+                  attrs: {
+                    tag: "div",
+                    title: _vm.isCollapsed ? "Wheel" : "",
+                    to: "/wheel"
                   }
-                ],
-                staticClass: "game-item",
-                attrs: {
-                  tag: "div",
-                  title: _vm.isCollapsed ? "BlackJack" : "",
-                  to: "/live/game/463"
-                }
-              },
-              [
-                _c("div", { staticClass: "games-img blackjack" }),
-                _vm._v(" "),
-                _c("span", { staticClass: "game-text" }, [_vm._v("BlackJack")])
-              ]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "floating-online" }, [
-          _c("div", { staticClass: "circle-online" }),
+                },
+                [
+                  _c("div", { staticClass: "games-img wheel" }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "game-text" }, [_vm._v("Wheel")])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  directives: [
+                    {
+                      name: "b-tooltip",
+                      rawName: "v-b-tooltip:left-main.hover.right",
+                      value: _vm.isCollapsed ? "Plinko" : false,
+                      expression: "isCollapsed ? 'Plinko' : false",
+                      arg: "left-main",
+                      modifiers: { hover: true, right: true }
+                    }
+                  ],
+                  staticClass: "game-item",
+                  class: [_vm.page == "plinko" ? "isActive" : ""],
+                  attrs: {
+                    tag: "div",
+                    title: _vm.isCollapsed ? "Plinko" : "",
+                    to: "/plinko"
+                  }
+                },
+                [
+                  _c("div", { staticClass: "games-img plinko" }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "game-text" }, [_vm._v("Plinko")])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  directives: [
+                    {
+                      name: "b-tooltip",
+                      rawName: "v-b-tooltip:left-main.hover.right",
+                      value: _vm.isCollapsed ? "BlackJack" : false,
+                      expression: "isCollapsed ? 'BlackJack' : false",
+                      arg: "left-main",
+                      modifiers: { hover: true, right: true }
+                    }
+                  ],
+                  staticClass: "game-item",
+                  attrs: {
+                    tag: "div",
+                    title: _vm.isCollapsed ? "BlackJack" : "",
+                    to: "/live/game/463"
+                  }
+                },
+                [
+                  _c("div", { staticClass: "games-img blackjack" }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "game-text" }, [
+                    _vm._v("BlackJack")
+                  ])
+                ]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            {
+              staticClass: "rg-link",
+              attrs: {
+                to: "/responsible-gaming",
+                title: "Responsible Gaming (18+)"
+              }
+            },
+            [
+              _c("span", { staticClass: "rg-18" }, [_vm._v("18+")]),
+              !_vm.isCollapsed
+                ? _c("span", [_vm._v(" Responsible Gaming")])
+                : _vm._e()
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "floating-online" }, [
+            _c("div", { staticClass: "circle-online" }),
+            _vm._v(" "),
+            !_vm.isCollapsed
+              ? _c("span", { staticClass: "online-count" }, [
+                  _vm._v(_vm._s(_vm.$root.online))
+                ])
+              : _vm._e()
+          ]),
           _vm._v(" "),
           !_vm.isCollapsed
-            ? _c("span", { staticClass: "online-count" }, [
-                _vm._v(_vm._s(_vm.$root.online))
+            ? _c("div", { staticClass: "floating-social" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "social-btn",
+                    attrs: {
+                      href: _vm.$root.config.tg_channel,
+                      target: "_blank"
+                    }
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: "/assets/image/tg.svg", width: "20px" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "social-btn",
+                    attrs: { href: _vm.$root.config.vk_url, target: "_blank" }
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: "/assets/image/vk.svg", width: "20px" }
+                    })
+                  ]
+                )
               ])
-            : _vm._e()
-        ]),
-        _vm._v(" "),
-        !_vm.isCollapsed
-          ? _c("div", { staticClass: "floating-social" }, [
+            : _c("div", { staticClass: "floating-social-collapsed" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "social-btn-small",
+                    attrs: {
+                      href: _vm.$root.config.tg_channel,
+                      target: "_blank",
+                      title: "Telegram"
+                    }
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: "/assets/image/tg.svg", width: "18px" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "social-btn-small",
+                    attrs: {
+                      href: _vm.$root.config.vk_url,
+                      target: "_blank",
+                      title: "VK"
+                    }
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: "/assets/image/vk.svg", width: "18px" }
+                    })
+                  ]
+                )
+              ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "menu-toggle-btn", on: { click: _vm.toggleMenu } },
+            [
               _c(
-                "a",
+                "svg",
                 {
-                  staticClass: "social-btn",
-                  attrs: { href: _vm.$root.config.tg_channel, target: "_blank" }
-                },
-                [
-                  _c("img", {
-                    attrs: { src: "/assets/image/tg.svg", width: "20px" }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "social-btn",
-                  attrs: { href: _vm.$root.config.vk_url, target: "_blank" }
-                },
-                [
-                  _c("img", {
-                    attrs: { src: "/assets/image/vk.svg", width: "20px" }
-                  })
-                ]
-              )
-            ])
-          : _c("div", { staticClass: "floating-social-collapsed" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "social-btn-small",
                   attrs: {
-                    href: _vm.$root.config.tg_channel,
-                    target: "_blank",
-                    title: "Telegram"
+                    width: "16",
+                    height: "16",
+                    viewBox: "0 0 24 24",
+                    fill: "none",
+                    stroke: "currentColor",
+                    "stroke-width": "2"
                   }
                 },
                 [
-                  _c("img", {
-                    attrs: { src: "/assets/image/tg.svg", width: "18px" }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "social-btn-small",
-                  attrs: {
-                    href: _vm.$root.config.vk_url,
-                    target: "_blank",
-                    title: "VK"
-                  }
-                },
-                [
-                  _c("img", {
-                    attrs: { src: "/assets/image/vk.svg", width: "18px" }
-                  })
+                  !_vm.isCollapsed
+                    ? _c("path", { attrs: { d: "M15 18l-6-6 6-6" } })
+                    : _c("path", { attrs: { d: "M9 18l6-6-6-6" } })
                 ]
               )
-            ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "menu-toggle-btn", on: { click: _vm.toggleMenu } },
-          [
-            _c(
-              "svg",
-              {
-                attrs: {
-                  width: "16",
-                  height: "16",
-                  viewBox: "0 0 24 24",
-                  fill: "none",
-                  stroke: "currentColor",
-                  "stroke-width": "2"
-                }
-              },
-              [
-                !_vm.isCollapsed
-                  ? _c("path", { attrs: { d: "M15 18l-6-6 6-6" } })
-                  : _c("path", { attrs: { d: "M9 18l6-6-6-6" } })
-              ]
-            )
-          ]
-        )
-      ]),
+            ]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "div",
@@ -109445,6 +109699,409 @@ var render = function() {
           ])
     ],
     1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=template&id=50b24556&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=template&id=50b24556&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "content cards col-12 ml-auto mr-auto p-0" },
+    [
+      _c(
+        "div",
+        { staticClass: "rg" },
+        [
+          _c("h2", [_vm._v("Responsible Gaming")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "rg-sub" }, [
+            _vm._v(
+              "Gambling should be fun. Set limits, take a break, and verify your age here. 18+ only."
+            )
+          ]),
+          _vm._v(" "),
+          !_vm.$root.user
+            ? _c("div", { staticClass: "rg-card" }, [
+                _vm._v("Please log in to manage your settings.")
+              ])
+            : _vm.s
+            ? [
+                _vm.msg
+                  ? _c("div", { staticClass: "rg-alert", class: _vm.msgType }, [
+                      _vm._v(_vm._s(_vm.msg))
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "rg-card" },
+                  [
+                    _c("h3", [
+                      _vm._v("Age & identity verification "),
+                      _c(
+                        "span",
+                        {
+                          staticClass: "rg-badge",
+                          class: "k-" + _vm.s.kyc_status
+                        },
+                        [_vm._v(_vm._s(_vm.kycLabel))]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm.s.kyc_status === "none" ||
+                    _vm.s.kyc_status === "rejected"
+                      ? [
+                          _vm.s.kyc_status === "rejected"
+                            ? _c("p", { staticClass: "rg-note" }, [
+                                _vm._v(
+                                  "Your last submission was rejected. Please check your details and try again."
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "rg-note" }, [
+                            _vm._v(
+                              "You must be 18 or older. We need this before you can deposit or play, and withdrawals need a verified ID."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "rg-row" }, [
+                            _c("label", [
+                              _vm._v("Date of birth"),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.kyc.date_of_birth,
+                                    expression: "kyc.date_of_birth"
+                                  }
+                                ],
+                                staticClass: "rg-input",
+                                attrs: { type: "date" },
+                                domProps: { value: _vm.kyc.date_of_birth },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.kyc,
+                                      "date_of_birth",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("label", [
+                              _vm._v("National ID / passport no."),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.kyc.id_number,
+                                    expression: "kyc.id_number"
+                                  }
+                                ],
+                                staticClass: "rg-input",
+                                attrs: { type: "text", maxlength: "20" },
+                                domProps: { value: _vm.kyc.id_number },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.kyc,
+                                      "id_number",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "rg-btn",
+                              on: {
+                                click: function($event) {
+                                  return _vm.post(
+                                    "/profile/rg/kyc",
+                                    _vm.kyc,
+                                    "Details submitted. You can now play; withdrawals unlock once we verify your ID."
+                                  )
+                                }
+                              }
+                            },
+                            [_vm._v("Submit")]
+                          )
+                        ]
+                      : _c("p", { staticClass: "rg-note" }, [
+                          _vm._v(
+                            "Date of birth: " +
+                              _vm._s(_vm.s.date_of_birth) +
+                              " · ID: " +
+                              _vm._s(_vm.s.id_number_masked)
+                          )
+                        ])
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "rg-card" }, [
+                  _c("h3", [_vm._v("Daily limits")]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "rg-note" }, [
+                    _vm._v(
+                      "Lowering a limit applies immediately. Raising or removing one takes effect after 24 hours. Leave blank for no limit."
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "rg-row" }, [
+                    _c("label", [
+                      _vm._v("Deposit limit per day\n                        "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.limits.deposit,
+                            expression: "limits.deposit"
+                          }
+                        ],
+                        staticClass: "rg-input",
+                        attrs: {
+                          type: "number",
+                          min: "0",
+                          placeholder: "No limit"
+                        },
+                        domProps: { value: _vm.limits.deposit },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.limits, "deposit", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("small", [
+                        _vm._v(
+                          "Deposited today: " +
+                            _vm._s(_vm.fmt(_vm.s.deposited_today))
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("label", [
+                      _vm._v("Stake limit per day\n                        "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.limits.stake,
+                            expression: "limits.stake"
+                          }
+                        ],
+                        staticClass: "rg-input",
+                        attrs: {
+                          type: "number",
+                          min: "0",
+                          placeholder: "No limit"
+                        },
+                        domProps: { value: _vm.limits.stake },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.limits, "stake", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("small", [
+                        _vm._v(
+                          "Staked today: " + _vm._s(_vm.fmt(_vm.s.staked_today))
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm.s.pending
+                    ? _c("p", { staticClass: "rg-note" }, [
+                        _vm._v(
+                          "\n                    Pending change from " +
+                            _vm._s(
+                              new Date(
+                                _vm.s.pending.effective_at
+                              ).toLocaleString()
+                            ) +
+                            ":\n                    "
+                        ),
+                        _vm.s.pending.deposit !== null
+                          ? _c("span", [
+                              _vm._v(
+                                "deposit → " +
+                                  _vm._s(
+                                    _vm.s.pending.deposit === "none"
+                                      ? "no limit"
+                                      : _vm.fmt(_vm.s.pending.deposit)
+                                  )
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.s.pending.stake !== null
+                          ? _c("span", [
+                              _vm._v(
+                                "stake → " +
+                                  _vm._s(
+                                    _vm.s.pending.stake === "none"
+                                      ? "no limit"
+                                      : _vm.fmt(_vm.s.pending.stake)
+                                  )
+                              )
+                            ])
+                          : _vm._e()
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    { staticClass: "rg-btn", on: { click: _vm.saveLimits } },
+                    [_vm._v("Save limits")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "rg-card" },
+                  [
+                    _c("h3", [_vm._v("Take a break (self-exclusion)")]),
+                    _vm._v(" "),
+                    _vm.s.self_excluded_until
+                      ? _c("p", { staticClass: "rg-note" }, [
+                          _c("b", [
+                            _vm._v(
+                              "You are excluded until " +
+                                _vm._s(
+                                  new Date(
+                                    _vm.s.self_excluded_until
+                                  ).toLocaleString()
+                                ) +
+                                "."
+                            )
+                          ]),
+                          _vm._v(" You can still withdraw your balance.")
+                        ])
+                      : [
+                          _c("p", { staticClass: "rg-note" }, [
+                            _vm._v(
+                              "You won't be able to deposit or play for the chosen period. This can't be undone early."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "rg-row" }, [
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.period,
+                                    expression: "period"
+                                  }
+                                ],
+                                staticClass: "rg-input",
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.period = $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  }
+                                }
+                              },
+                              _vm._l(_vm.s.exclusion_options, function(o) {
+                                return _c(
+                                  "option",
+                                  { key: o, domProps: { value: String(o) } },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        o === "permanent"
+                                          ? "Permanently"
+                                          : o + (o === 1 ? " day" : " days")
+                                      )
+                                    )
+                                  ]
+                                )
+                              }),
+                              0
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "rg-btn rg-danger",
+                                on: { click: _vm.exclude }
+                              },
+                              [_vm._v("Exclude me")]
+                            )
+                          ])
+                        ]
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "rg-card rg-help" }, [
+                  _vm._v(
+                    "\n                Need to talk to someone? Contact the Betting Control and Licensing Board (BCLB) or a counselling service such as Gamblers Anonymous Kenya.\n            "
+                  )
+                ])
+              ]
+            : _vm._e()
+        ],
+        2
+      )
+    ]
   )
 }
 var staticRenderFns = []
@@ -136406,6 +137063,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/dist/js/pages/ResponsibleGaming.vue":
+/*!*******************************************************!*\
+  !*** ./resources/dist/js/pages/ResponsibleGaming.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ResponsibleGaming_vue_vue_type_template_id_50b24556_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ResponsibleGaming.vue?vue&type=template&id=50b24556&scoped=true& */ "./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=template&id=50b24556&scoped=true&");
+/* harmony import */ var _ResponsibleGaming_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ResponsibleGaming.vue?vue&type=script&lang=js& */ "./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ResponsibleGaming_vue_vue_type_style_index_0_id_50b24556_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ResponsibleGaming.vue?vue&type=style&index=0&id=50b24556&scoped=true&lang=css& */ "./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=style&index=0&id=50b24556&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ResponsibleGaming_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ResponsibleGaming_vue_vue_type_template_id_50b24556_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ResponsibleGaming_vue_vue_type_template_id_50b24556_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "50b24556",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/dist/js/pages/ResponsibleGaming.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResponsibleGaming_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ResponsibleGaming.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResponsibleGaming_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=style&index=0&id=50b24556&scoped=true&lang=css&":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=style&index=0&id=50b24556&scoped=true&lang=css& ***!
+  \****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ResponsibleGaming_vue_vue_type_style_index_0_id_50b24556_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--5-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--5-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./ResponsibleGaming.vue?vue&type=style&index=0&id=50b24556&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=style&index=0&id=50b24556&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ResponsibleGaming_vue_vue_type_style_index_0_id_50b24556_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ResponsibleGaming_vue_vue_type_style_index_0_id_50b24556_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ResponsibleGaming_vue_vue_type_style_index_0_id_50b24556_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ResponsibleGaming_vue_vue_type_style_index_0_id_50b24556_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ResponsibleGaming_vue_vue_type_style_index_0_id_50b24556_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=template&id=50b24556&scoped=true&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=template&id=50b24556&scoped=true& ***!
+  \**************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResponsibleGaming_vue_vue_type_template_id_50b24556_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ResponsibleGaming.vue?vue&type=template&id=50b24556&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/dist/js/pages/ResponsibleGaming.vue?vue&type=template&id=50b24556&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResponsibleGaming_vue_vue_type_template_id_50b24556_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResponsibleGaming_vue_vue_type_template_id_50b24556_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/dist/js/pages/Slots.vue":
 /*!*******************************************!*\
   !*** ./resources/dist/js/pages/Slots.vue ***!
@@ -137016,18 +137760,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Wheel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/Wheel */ "./resources/dist/js/pages/Wheel.vue");
 /* harmony import */ var _pages_Plinko__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/Plinko */ "./resources/dist/js/pages/Plinko.vue");
 /* harmony import */ var _pages_Sports__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/Sports */ "./resources/dist/js/pages/Sports.vue");
-/* harmony import */ var _pages_Slots__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/Slots */ "./resources/dist/js/pages/Slots.vue");
-/* harmony import */ var _pages_Lives__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/Lives */ "./resources/dist/js/pages/Lives.vue");
-/* harmony import */ var _pages_SlotsGame__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/SlotsGame */ "./resources/dist/js/pages/SlotsGame.vue");
-/* harmony import */ var _pages_LivesGame__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/LivesGame */ "./resources/dist/js/pages/LivesGame.vue");
-/* harmony import */ var _pages_Bonus_Bonus__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/Bonus/Bonus */ "./resources/dist/js/pages/Bonus/Bonus.vue");
-/* harmony import */ var _pages_Ref__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/Ref */ "./resources/dist/js/pages/Ref.vue");
-/* harmony import */ var _pages_Faq__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/Faq */ "./resources/dist/js/pages/Faq.vue");
-/* harmony import */ var _pages_Profile__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pages/Profile */ "./resources/dist/js/pages/Profile.vue");
-/* harmony import */ var _pages_Payment__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/Payment */ "./resources/dist/js/pages/Payment.vue");
-/* harmony import */ var _pages_Withdraw__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/Withdraw */ "./resources/dist/js/pages/Withdraw.vue");
-/* harmony import */ var _pages_Tournament_Tournament__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/Tournament/Tournament */ "./resources/dist/js/pages/Tournament/Tournament.vue");
-/* harmony import */ var _pages_Tournament_Tournaments__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/Tournament/Tournaments */ "./resources/dist/js/pages/Tournament/Tournaments.vue");
+/* harmony import */ var _pages_ResponsibleGaming__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/ResponsibleGaming */ "./resources/dist/js/pages/ResponsibleGaming.vue");
+/* harmony import */ var _pages_Slots__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/Slots */ "./resources/dist/js/pages/Slots.vue");
+/* harmony import */ var _pages_Lives__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/Lives */ "./resources/dist/js/pages/Lives.vue");
+/* harmony import */ var _pages_SlotsGame__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/SlotsGame */ "./resources/dist/js/pages/SlotsGame.vue");
+/* harmony import */ var _pages_LivesGame__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/LivesGame */ "./resources/dist/js/pages/LivesGame.vue");
+/* harmony import */ var _pages_Bonus_Bonus__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/Bonus/Bonus */ "./resources/dist/js/pages/Bonus/Bonus.vue");
+/* harmony import */ var _pages_Ref__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/Ref */ "./resources/dist/js/pages/Ref.vue");
+/* harmony import */ var _pages_Faq__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pages/Faq */ "./resources/dist/js/pages/Faq.vue");
+/* harmony import */ var _pages_Profile__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/Profile */ "./resources/dist/js/pages/Profile.vue");
+/* harmony import */ var _pages_Payment__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/Payment */ "./resources/dist/js/pages/Payment.vue");
+/* harmony import */ var _pages_Withdraw__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/Withdraw */ "./resources/dist/js/pages/Withdraw.vue");
+/* harmony import */ var _pages_Tournament_Tournament__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/Tournament/Tournament */ "./resources/dist/js/pages/Tournament/Tournament.vue");
+/* harmony import */ var _pages_Tournament_Tournaments__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./pages/Tournament/Tournaments */ "./resources/dist/js/pages/Tournament/Tournaments.vue");
+
 
 
 
@@ -137057,7 +137803,7 @@ var routes = [{
 }, {
   path: '/profile',
   name: 'profile',
-  component: _pages_Profile__WEBPACK_IMPORTED_MODULE_16__["default"]
+  component: _pages_Profile__WEBPACK_IMPORTED_MODULE_17__["default"]
 }, {
   path: '/dice',
   name: 'dice',
@@ -137079,53 +137825,57 @@ var routes = [{
   name: 'plinko',
   component: _pages_Plinko__WEBPACK_IMPORTED_MODULE_7__["default"]
 }, {
+  path: '/responsible-gaming',
+  name: 'responsible-gaming',
+  component: _pages_ResponsibleGaming__WEBPACK_IMPORTED_MODULE_9__["default"]
+}, {
   path: '/sports',
   name: 'sports',
   component: _pages_Sports__WEBPACK_IMPORTED_MODULE_8__["default"]
 }, {
   path: '/slots',
   name: 'slots',
-  component: _pages_Slots__WEBPACK_IMPORTED_MODULE_9__["default"]
+  component: _pages_Slots__WEBPACK_IMPORTED_MODULE_10__["default"]
 }, {
   path: '/live',
   name: 'live',
-  component: _pages_Lives__WEBPACK_IMPORTED_MODULE_10__["default"]
+  component: _pages_Lives__WEBPACK_IMPORTED_MODULE_11__["default"]
 }, {
   path: '/slots/game/:id/:type?',
   name: 'slots',
-  component: _pages_SlotsGame__WEBPACK_IMPORTED_MODULE_11__["default"]
+  component: _pages_SlotsGame__WEBPACK_IMPORTED_MODULE_12__["default"]
 }, {
   path: '/live/game/:id',
   name: 'live',
-  component: _pages_LivesGame__WEBPACK_IMPORTED_MODULE_12__["default"]
+  component: _pages_LivesGame__WEBPACK_IMPORTED_MODULE_13__["default"]
 }, {
   path: '/ref',
   name: 'ref',
-  component: _pages_Ref__WEBPACK_IMPORTED_MODULE_14__["default"]
+  component: _pages_Ref__WEBPACK_IMPORTED_MODULE_15__["default"]
 }, {
   path: '/bonus',
   name: 'bonus',
-  component: _pages_Bonus_Bonus__WEBPACK_IMPORTED_MODULE_13__["default"]
+  component: _pages_Bonus_Bonus__WEBPACK_IMPORTED_MODULE_14__["default"]
 }, {
   path: '/pay',
   name: 'payment',
-  component: _pages_Payment__WEBPACK_IMPORTED_MODULE_17__["default"]
+  component: _pages_Payment__WEBPACK_IMPORTED_MODULE_18__["default"]
 }, {
   path: '/withdraw',
   name: 'withdraw',
-  component: _pages_Withdraw__WEBPACK_IMPORTED_MODULE_18__["default"]
+  component: _pages_Withdraw__WEBPACK_IMPORTED_MODULE_19__["default"]
 }, {
   path: '/faq',
   name: 'faq',
-  component: _pages_Faq__WEBPACK_IMPORTED_MODULE_15__["default"]
+  component: _pages_Faq__WEBPACK_IMPORTED_MODULE_16__["default"]
 }, {
   path: '/tournaments',
   name: 'tournaments',
-  component: _pages_Tournament_Tournaments__WEBPACK_IMPORTED_MODULE_20__["default"]
+  component: _pages_Tournament_Tournaments__WEBPACK_IMPORTED_MODULE_21__["default"]
 }, {
   path: '/tournament/:id',
   name: 'tournament',
-  component: _pages_Tournament_Tournament__WEBPACK_IMPORTED_MODULE_19__["default"]
+  component: _pages_Tournament_Tournament__WEBPACK_IMPORTED_MODULE_20__["default"]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',

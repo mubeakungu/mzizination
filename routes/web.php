@@ -40,7 +40,7 @@ Route::group(['prefix' => 'methods'], function () {
 });
 Route::group(['prefix' => '/plinko'], function () {
     Route::post('/init', 'PlinkoController@getMultipliers');
-    Route::post('/play', 'PlinkoController@play');
+    Route::post('/play', 'PlinkoController@play')->middleware('rg:bet');
 });
 Route::group(['prefix' => 'casino'], function () {
     Route::post('/count', 'SlotsController@countCasino');
@@ -49,7 +49,7 @@ Route::group(['prefix' => 'casino'], function () {
 Route::group(['prefix' => 'lives'], function () {
     Route::post('/filter', 'SlotsController@LivesgetByFilter');
     Route::post('/getRandom', 'SlotsController@getRandomLives');
-    Route::post('/get/{id}', 'SlotsController@loadCasinoo');
+    Route::post('/get/{id}', 'SlotsController@loadCasinoo')->middleware('rg:play');
     Route::post('/callback', 'SlotsController@callbackCasino');
     Route::post('/load', 'SlotsController@loadCasino');
 });
@@ -58,7 +58,7 @@ Route::group(['prefix' => 'slots'], function () {
     Route::post('/casino/count', 'SlotsController@countCasino');
     Route::any('/callback/{method}', 'SlotsController@callback1');
     Route::post('/getRandom', 'SlotsController@getRandom');
-    Route::post('/load_slot/{id}', 'SlotsController@loadSlot');
+    Route::post('/load_slot/{id}', 'SlotsController@loadSlot')->middleware('rg:play');
     Route::post('/get', 'SlotsController@getSlotWithPagenate');
     Route::post('/filter', 'SlotsController@getByFilter');
 
@@ -111,6 +111,11 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
     Route::post('/cashback/claim', 'ProfileController@cashback');
     Route::post('/telegram/link', 'ProfileController@getTelegramLinkCode');
     Route::post('/telegram/unlink', 'ProfileController@unlinkTelegram');
+    // Responsible gaming & KYC
+    Route::post('/rg/init', 'ResponsibleGamblingController@init');
+    Route::post('/rg/kyc', 'ResponsibleGamblingController@submitKyc');
+    Route::post('/rg/limits', 'ResponsibleGamblingController@setLimits');
+    Route::post('/rg/self-exclude', 'ResponsibleGamblingController@selfExclude');
 });
 
 Route::group(['prefix' => 'bonus', 'middleware' => 'auth'], function () {
@@ -139,37 +144,37 @@ Route::group(['prefix' => 'sports'], function () {
     Route::post('/list', 'SportsController@sports');
     Route::post('/events', 'SportsController@events');
     Route::group(['middleware' => 'auth'], function () {
-        Route::post('/bet', 'SportsController@bet');
+        Route::post('/bet', 'SportsController@bet')->middleware('rg:bet');
         Route::post('/my', 'SportsController@myBets');
     });
 });
 Route::group(['prefix' => 'dice', 'middleware' => 'auth'], function () {
-    Route::post('/bet', 'DiceController@bet');
+    Route::post('/bet', 'DiceController@bet')->middleware('rg:bet');
 });
 
 Route::group(['prefix' => 'wheel', 'middleware' => 'auth'], function () {
-    Route::post('/start', 'WheelController@play');
+    Route::post('/start', 'WheelController@play')->middleware('rg:bet');
 });
 
 Route::group(['prefix' => 'bubbles', 'middleware' => 'auth'], function () {
-    Route::post('/play', 'BubblesController@play');
+    Route::post('/play', 'BubblesController@play')->middleware('rg:bet');
 });
 
 Route::group(['prefix' => 'mines', 'middleware' => 'auth'], function () {
     Route::post('/init', 'MinesController@init');
-    Route::post('/start', 'MinesController@createGame');
+    Route::post('/start', 'MinesController@createGame')->middleware('rg:bet');
     Route::post('/open', 'MinesController@openPath');
     Route::post('/take', 'MinesController@take');
 });
 
 Route::group(['prefix' => 'withdraw', 'middleware' => 'auth'], function () {
-    Route::post('/create', 'WithdrawController@create');
+    Route::post('/create', 'WithdrawController@create')->middleware('rg:withdraw');
     Route::post('/init', 'WithdrawController@init');
     Route::post('/decline', 'WithdrawController@decline');
 });
 
 Route::group(['prefix' => 'payment', 'middleware' => 'auth'], function () {
-    Route::post('/create', 'PaymentController@create');
+    Route::post('/create', 'PaymentController@create')->middleware('rg:deposit');
     Route::post('/init', 'PaymentController@init');
     Route::post('/worker', 'PaymentController@workerBalance');
 });
@@ -178,7 +183,7 @@ Route::group(['prefix' => 'payment', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'ton', 'middleware' => 'auth'], function () {
     Route::post('/info', 'TonPaymentController@getInfo');
     Route::post('/rate', 'TonPaymentController@getRate');
-    Route::post('/create', 'TonPaymentController@create');
+    Route::post('/create', 'TonPaymentController@create')->middleware('rg:deposit');
     Route::post('/check', 'TonPaymentController@checkStatus');
     Route::post('/check-all', 'TonPaymentController@checkAll');
     Route::post('/check-memo', 'TonPaymentController@checkMemo');

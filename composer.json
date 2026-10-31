@@ -20,8 +20,7 @@
         "laravel/tinker": "^2.0",
         "predis/predis": "^1.1",
         "socialiteproviders/vkontakte": "^4.2",
-        "yajra/laravel-datatables-oracle": "^9.0|^10.0",
-        "paystack/paystack-php": "^2.0"
+        "yajra/laravel-datatables-oracle": "^9.0|^10.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0|^3.0",

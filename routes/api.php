@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-# Mzizination Payment Routes
-    Route::get('/phone/status', 'UserController@getPhoneStatus');
-});
+// NOTE: a stray, unclosed "Mzizination Payment Routes" fragment here caused a PHP parse
+// error that stopped the whole app from booting. It referenced UserController@getPhoneStatus,
+// which doesn't exist, so it was removed.
 
 // ===== TRANSACTION HISTORY =====
 

@@ -7,6 +7,7 @@ import Bubbles from './pages/Bubbles'
 import Wheel from './pages/Wheel'
 import Plinko from './pages/Plinko'
 import Sports from './pages/Sports'
+import ResponsibleGaming from './pages/ResponsibleGaming'
 import Slots from './pages/Slots'
 import Lives from './pages/Lives'
 import SlotsGame from './pages/SlotsGame'
@@ -57,6 +58,11 @@ const routes = [
         path: '/plinko',
         name: 'plinko',
         component: Plinko
+    },
+    {
+        path: '/responsible-gaming',
+        name: 'responsible-gaming',
+        component: ResponsibleGaming
     },
     {
         path: '/sports',
