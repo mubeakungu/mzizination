@@ -40,6 +40,39 @@
                 <router-link
                     tag="div"
                     class="game-item"
+                    :class="[$route.path == '/crash/flight' ? 'isActive' : '']"
+                    :title="isCollapsed ? 'Safari Flight' : ''"
+                    v-b-tooltip:left-main.hover.right="isCollapsed ? 'Safari Flight' : false"
+                    to="/crash/flight"
+                >
+                    <div class="games-img" style="background: none; display: flex; align-items: center; justify-content: center; font-size: 18px;">&#9992;</div>
+                    <span class="game-text">Safari Flight</span>
+                </router-link>
+                <router-link
+                    tag="div"
+                    class="game-item"
+                    :class="[$route.path == '/crash/rocket' ? 'isActive' : '']"
+                    :title="isCollapsed ? 'Mzizi Rocket' : ''"
+                    v-b-tooltip:left-main.hover.right="isCollapsed ? 'Mzizi Rocket' : false"
+                    to="/crash/rocket"
+                >
+                    <div class="games-img" style="background: none; display: flex; align-items: center; justify-content: center; font-size: 18px;">&#128640;</div>
+                    <span class="game-text">Mzizi Rocket</span>
+                </router-link>
+                <router-link
+                    tag="div"
+                    class="game-item"
+                    :class="[$route.path == '/crash/jet' ? 'isActive' : '']"
+                    :title="isCollapsed ? 'Savanna Jet' : ''"
+                    v-b-tooltip:left-main.hover.right="isCollapsed ? 'Savanna Jet' : false"
+                    to="/crash/jet"
+                >
+                    <div class="games-img" style="background: none; display: flex; align-items: center; justify-content: center; font-size: 18px;">&#10148;</div>
+                    <span class="game-text">Savanna Jet</span>
+                </router-link>
+                <router-link
+                    tag="div"
+                    class="game-item"
                     :class="[page == 'dice' ? 'isActive' : '']"
                     :title="isCollapsed ? 'Dice' : ''"
                     v-b-tooltip:left-main.hover.right="isCollapsed ? 'Dice' : false"

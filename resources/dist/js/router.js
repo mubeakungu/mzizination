@@ -8,6 +8,7 @@ import Wheel from './pages/Wheel'
 import Plinko from './pages/Plinko'
 import Sports from './pages/Sports'
 import LicensedGames from './pages/LicensedGames'
+import Crash from './pages/Crash'
 import ResponsibleGaming from './pages/ResponsibleGaming'
 import Slots from './pages/Slots'
 import Lives from './pages/Lives'
@@ -64,6 +65,11 @@ const routes = [
         path: '/responsible-gaming',
         name: 'responsible-gaming',
         component: ResponsibleGaming
+    },
+    {
+        path: '/crash/:theme?',
+        name: 'crash',
+        component: Crash
     },
     {
         path: '/licensed/:provider?/:game?',
