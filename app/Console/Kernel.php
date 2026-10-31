@@ -28,6 +28,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('ton:check')->everyMinute()->withoutOverlapping();
 
         // Settle sportsbook bets (each run costs 2 Odds API credits per sport with open bets)
+        $schedule->command('crash:settle')->everyMinute()->withoutOverlapping();
         $schedule->command('sports:settle')->everyThirtyMinutes()->withoutOverlapping();
     }
 
