@@ -29,6 +29,17 @@
                 <router-link
                     tag="div"
                     class="game-item"
+                    :class="[$route.path.indexOf('/licensed') === 0 ? 'isActive' : '']"
+                    :title="isCollapsed ? 'Licensed Games' : ''"
+                    v-b-tooltip:left-main.hover.right="isCollapsed ? 'Licensed Games' : false"
+                    to="/licensed"
+                >
+                    <div class="games-img" style="background: none; display: flex; align-items: center; justify-content: center; font-size: 18px;">&#9733;</div>
+                    <span class="game-text">Licensed Games</span>
+                </router-link>
+                <router-link
+                    tag="div"
+                    class="game-item"
                     :class="[page == 'dice' ? 'isActive' : '']"
                     :title="isCollapsed ? 'Dice' : ''"
                     v-b-tooltip:left-main.hover.right="isCollapsed ? 'Dice' : false"
