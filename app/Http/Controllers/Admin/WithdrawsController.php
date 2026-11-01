@@ -68,6 +68,10 @@ class WithdrawsController extends Controller
             ];
         }
 
+        if($withdraw->system === 'mpesa') {
+            return \App\Http\Controllers\MpesaController::sendWithdrawal($withdraw);
+        }
+
         $currency = 0;
 
         switch($withdraw->system) {

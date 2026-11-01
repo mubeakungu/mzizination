@@ -15,6 +15,10 @@ class Withdraw extends Model
         'system_title', 
         'reason', 
         'fake',
-        'status'
+        'status',
+        'conversation_id',
+        'originator_conversation_id',
+        'mpesa_receipt',
+        'result_desc',
     ];
 }

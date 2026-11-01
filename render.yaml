@@ -22,7 +22,7 @@ services:
       - key: APP_DEBUG
         value: false
       - key: APP_URL
-        scope: build
+        sync: false
       - key: APP_TIMEZONE
         value: Africa/Nairobi
       - key: APP_LOCALE
@@ -85,27 +85,35 @@ services:
       - key: AVIATRIX_LAUNCH_URL
         sync: false
 
-      # M-Pesa Daraja (Primary)
+      # M-Pesa Daraja (see MPESA.md). Sandbox values until Safaricom approves go-live.
       - key: MPESA_SANDBOX
-        value: true
+        value: "true"
       - key: MPESA_CONSUMER_KEY
-        scope: build
+        sync: false
       - key: MPESA_CONSUMER_SECRET
-        scope: build
+        sync: false
       - key: MPESA_SHORTCODE
         value: "174379"
       - key: MPESA_PASSKEY
-        scope: build
+        sync: false
+      - key: MPESA_TRANSACTION_TYPE
+        value: CustomerPayBillOnline
+      - key: MPESA_CALLBACK_SECRET
+        generateValue: true
+      - key: MPESA_B2C_SHORTCODE
+        sync: false
       - key: MPESA_INITIATOR_NAME
-        value: testapi
+        sync: false
       - key: MPESA_INITIATOR_PASSWORD
-        scope: build
-      
+        sync: false
+      - key: MPESA_CERT
+        sync: false
+
       # Paystack (Backup)
       - key: PAYSTACK_PUBLIC_KEY
-        scope: build
+        sync: false
       - key: PAYSTACK_SECRET_KEY
-        scope: build
+        sync: false
       
       # Payments
       - key: WITHDRAWAL_MIN_AMOUNT
