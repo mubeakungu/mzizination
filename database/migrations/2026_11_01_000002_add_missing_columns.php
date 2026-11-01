@@ -98,6 +98,7 @@ return new class extends Migration
         ],
         'promocodes' => [
             'wager' => ['double', 0],
+            'type' => ['string', 16, true], // 'balance' or 'deposit'
         ],
     ];
 
@@ -147,6 +148,11 @@ return new class extends Migration
         if (Schema::getColumnType('users', 'dice') === 'json') {
             Schema::table('users', fn (Blueprint $t) => $t->dropColumn('dice'));
             Schema::table('users', fn (Blueprint $t) => $t->double('dice')->default(0));
+        }
+
+        // withdraws.system holds a payment system name ('mpesa', 'card', ...), not a number.
+        if (in_array(Schema::getColumnType('withdraws', 'system'), ['int4', 'int8', 'integer', 'int'], true)) {
+            Schema::table('withdraws', fn (Blueprint $t) => $t->string('system', 32)->change());
         }
 
         // users.referral_use holds the inviter's user id (0 for none) and is
