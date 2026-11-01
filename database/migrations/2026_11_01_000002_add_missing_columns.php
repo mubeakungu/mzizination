@@ -149,11 +149,11 @@ return new class extends Migration
             Schema::table('users', fn (Blueprint $t) => $t->double('dice')->default(0));
         }
 
-        // users.referral_use holds the inviter's unique_id and is compared with
-        // a string, which PostgreSQL refuses to do against a JSON column.
+        // users.referral_use holds the inviter's user id (0 for none) and is
+        // compared with ids, which PostgreSQL refuses to do against a JSON column.
         if (Schema::getColumnType('users', 'referral_use') === 'json') {
             Schema::table('users', fn (Blueprint $t) => $t->dropColumn('referral_use'));
-            Schema::table('users', fn (Blueprint $t) => $t->string('referral_use', 32)->nullable()->index());
+            Schema::table('users', fn (Blueprint $t) => $t->unsignedBigInteger('referral_use')->nullable()->index());
         }
     }
 
