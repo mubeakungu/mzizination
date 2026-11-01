@@ -3,22 +3,19 @@ set -e
 
 echo "🔨 Building Mzizination for production..."
 
-# Generate APP_KEY if not set
-if [ -z "$APP_KEY" ]; then
-    echo "Generating APP_KEY..."
-    php artisan key:generate --force
-fi
+# Laravel's writable directories (not committed to git)
+mkdir -p storage/logs storage/app/public storage/framework/cache/data storage/framework/sessions storage/framework/views bootstrap/cache
 
 # Install PHP dependencies
 echo "📦 Installing PHP dependencies..."
-composer install --no-interaction --prefer-dist --optimize-autoloader
+composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
 
-# Install Node dependencies (if using frontend)
-if [ -f "package.json" ]; then
-    echo "📦 Installing Node dependencies..."
-    npm install --production
-    # Build frontend assets
-    npm run build
+# The frontend bundle (public/js/app.js) is committed, so no Node build is needed here.
+# To rebuild it locally: npm ci --legacy-peer-deps && NODE_OPTIONS=--openssl-legacy-provider npm run dev
+
+if [ -z "$APP_KEY" ]; then
+    echo "❌ APP_KEY is not set. Add it in Render's environment (generate one with: php artisan key:generate --show)."
+    exit 1
 fi
 
 # Cache configuration
