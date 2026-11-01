@@ -3260,6 +3260,46 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3268,11 +3308,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       isLoading: false,
       error: null,
       // Deposit Data
-      depSystem: 'fk',
+      depSystem: 'mpesa',
+      mpesa: {
+        phone: '',
+        waiting: false,
+        amount: 0,
+        id: null,
+        timer: null,
+        polls: 0,
+        notice: ''
+      },
       depSum: null,
       promocode: '',
       // Withdraw Data
-      withSystem: 'qiwi',
+      withSystem: 'mpesa',
       withAmount: null,
       withWallet: '',
       // History Data
@@ -3287,6 +3336,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       confirmItem: null,
       // Config
       withdrawSystemsConfig: [{
+        sys: "mpesa",
+        placeholder: "0712 345 678",
+        min: 50,
+        max: 150000,
+        title: "M-Pesa number",
+        title_short: "M-Pesa"
+      }, {
         sys: "qiwi",
         placeholder: "+7XXXXXXXXX",
         min: 500,
@@ -3323,6 +3379,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         title_short: "Карта"
       }],
       depositSystemsConfig: [{
+        sys: "mpesa",
+        title: "M-Pesa",
+        min: 10
+      }, {
         sys: "fk",
         title: "FK Wallet",
         min: 100
@@ -3380,7 +3440,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var deps = this.payments.map(function (p) {
         return _objectSpread({}, p, {
           type: 'deposit',
-          system_name: 'FK/Card',
+          system_name: p.method === 'mpesa' ? 'M-Pesa' : 'FK/Card',
           sum: p.sum
         });
       });
@@ -3432,32 +3492,116 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     close: function close() {
       this.visible = false;
+      this.stopMpesaPoll();
+    },
+    createMpesaDeposit: function createMpesaDeposit() {
+      var _this3 = this;
+
+      this.error = null;
+      this.mpesa.notice = '';
+      var amount = parseInt(this.depSum, 10);
+
+      if (!amount || amount < 10) {
+        this.error = 'Enter an amount of at least KES 10';
+        return;
+      }
+
+      if (!/^(?:\+?254|0)?[17]\d{8}$/.test((this.mpesa.phone || '').replace(/[\s-]/g, ''))) {
+        this.error = 'Enter a Safaricom number, e.g. 0712 345 678';
+        return;
+      }
+
+      this.isLoading = true;
+      this.$root.axios.post('/mpesa/deposit', {
+        amount: amount,
+        phone: this.mpesa.phone
+      }).then(function (res) {
+        _this3.isLoading = false;
+
+        if (res.data.error) {
+          _this3.error = res.data.message;
+          return;
+        }
+
+        _this3.mpesa.id = res.data.id;
+        _this3.mpesa.amount = amount;
+        _this3.mpesa.waiting = true;
+        _this3.mpesa.polls = 0;
+
+        _this3.stopMpesaPoll();
+
+        _this3.mpesa.timer = setInterval(_this3.pollMpesa, 4000);
+      })["catch"](function () {
+        _this3.isLoading = false;
+        _this3.error = 'Connection error';
+      });
+    },
+    pollMpesa: function pollMpesa() {
+      var _this4 = this;
+
+      this.mpesa.polls++;
+      this.$root.axios.post('/mpesa/deposit/status', {
+        id: this.mpesa.id
+      }).then(function (res) {
+        var d = res.data;
+
+        if (d.status === 1) {
+          _this4.stopMpesaPoll();
+
+          _this4.mpesa.waiting = false;
+          _this4.$root.user.balance = d.balance;
+          _this4.mpesa.notice = 'Deposit of KES ' + _this4.mpesa.amount + ' received.';
+
+          _this4.$root.$emit('noty', {
+            title: 'M-Pesa',
+            text: 'KES ' + _this4.mpesa.amount + ' added to your balance',
+            type: 'success'
+          });
+
+          _this4.loadData();
+        } else if (d.status === 2) {
+          _this4.stopMpesaPoll();
+
+          _this4.mpesa.waiting = false;
+          _this4.error = 'The M-Pesa payment did not go through' + (d.message ? ': ' + d.message : '') + '.';
+        } else if (_this4.mpesa.polls > 45) {
+          // ~3 minutes: stop waiting here; the deposit is still credited if it completes.
+          _this4.stopMpesaPoll();
+
+          _this4.mpesa.waiting = false;
+          _this4.mpesa.notice = 'Still waiting for M-Pesa. If you paid, your balance updates as soon as Safaricom confirms.';
+        }
+      })["catch"](function () {});
+    },
+    stopMpesaPoll: function stopMpesaPoll() {
+      if (this.mpesa.timer) clearInterval(this.mpesa.timer);
+      this.mpesa.timer = null;
     },
     loadData: function loadData() {
-      var _this3 = this;
+      var _this5 = this;
 
       this.isLoading = true; // Load Deposits History
 
       this.$root.axios.post('/payment/init').then(function (res) {
-        _this3.payments = res.data.payments || [];
+        _this5.payments = res.data.payments || [];
       }); // Load TON Payments History
 
       this.$root.axios.post('/ton/history').then(function (res) {
-        _this3.tonPayments = res.data.payments || [];
+        _this5.tonPayments = res.data.payments || [];
       })["catch"](function () {
-        _this3.tonPayments = [];
+        _this5.tonPayments = [];
       }); // Load Withdraws Data
 
       this.$root.axios.post('/withdraw/init').then(function (res) {
-        _this3.withdraws = res.data.data || [];
-        _this3.isLoading = false;
+        _this5.withdraws = res.data.data || [];
+        _this5.isLoading = false;
       }); // Load TON Info
 
       this.loadTonInfo();
     },
     // Deposit Action
     createDeposit: function createDeposit() {
-      var _this4 = this;
+      var _this6 = this;
 
       this.error = null;
 
@@ -3480,22 +3624,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         code: this.promocode,
         system: this.depSystem
       }).then(function (res) {
-        _this4.isLoading = false;
+        _this6.isLoading = false;
 
         if (res.data.error) {
-          _this4.error = res.data.message;
+          _this6.error = res.data.message;
           return;
         }
 
         location.href = res.data.url;
       })["catch"](function () {
-        _this4.isLoading = false;
-        _this4.error = 'Ошибка соединения';
+        _this6.isLoading = false;
+        _this6.error = 'Ошибка соединения';
       });
     },
     // Withdraw Action
     createWithdraw: function createWithdraw() {
-      var _this5 = this;
+      var _this7 = this;
 
       this.error = null;
 
@@ -3525,6 +3669,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       }
 
+      if (this.withSystem === 'mpesa') {
+        if (!/^(?:\+?254|0)?[17]\d{8}$/.test(wallet.replace(/[\s-]/g, ''))) {
+          this.error = 'Enter a Safaricom number, e.g. 0712 345 678';
+          return;
+        }
+      }
+
       if (this.withSystem === 'card') {
         // Card number validation (16 digits)
         var card = wallet.replace(/\s/g, '');
@@ -3549,27 +3700,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         wallet: this.withWallet,
         system: this.withSystem
       }).then(function (res) {
-        _this5.isLoading = false;
+        _this7.isLoading = false;
 
         if (res.data.error) {
-          _this5.error = res.data.message;
+          _this7.error = res.data.message;
           return;
         }
 
-        _this5.withdraws.unshift(res.data.withdraw);
+        _this7.withdraws.unshift(res.data.withdraw);
 
-        _this5.$root.user.balance = res.data.balance;
+        _this7.$root.user.balance = res.data.balance;
 
-        _this5.$root.$emit('noty', {
+        _this7.$root.$emit('noty', {
           title: 'Успешно',
           text: 'Заявка создана',
           type: 'success'
         });
 
-        _this5.activeTab = 'history'; // Switch to history
+        _this7.activeTab = 'history'; // Switch to history
       })["catch"](function () {
-        _this5.isLoading = false;
-        _this5.error = 'Ошибка соединения';
+        _this7.isLoading = false;
+        _this7.error = 'Ошибка соединения';
       });
     },
     // Helpers
@@ -3582,18 +3733,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.showConfirmModal = true;
     },
     confirmCancelWithdraw: function confirmCancelWithdraw() {
-      var _this6 = this;
+      var _this8 = this;
 
       if (this.cancelLoading || !this.confirmItem) return;
       this.cancelLoading = true;
       this.$root.axios.post('/withdraw/decline', {
         id: this.confirmItem.id
       }).then(function (res) {
-        _this6.cancelLoading = false;
-        _this6.showConfirmModal = false;
+        _this8.cancelLoading = false;
+        _this8.showConfirmModal = false;
 
         if (res.data.error) {
-          _this6.$root.$emit('noty', {
+          _this8.$root.$emit('noty', {
             title: 'Ошибка',
             text: res.data.message,
             type: 'error'
@@ -3603,28 +3754,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         } // Update local data
 
 
-        var idx = _this6.withdraws.findIndex(function (w) {
-          return w.id === _this6.confirmItem.id;
+        var idx = _this8.withdraws.findIndex(function (w) {
+          return w.id === _this8.confirmItem.id;
         });
 
         if (idx !== -1) {
-          _this6.withdraws[idx].status = 2;
+          _this8.withdraws[idx].status = 2;
         }
 
-        _this6.$root.user.balance = res.data.balance;
+        _this8.$root.user.balance = res.data.balance;
 
-        _this6.$root.$emit('noty', {
+        _this8.$root.$emit('noty', {
           title: 'Успешно',
           text: 'Вывод отменен, средства возвращены',
           type: 'success'
         });
 
-        _this6.expandedItem = null;
-        _this6.confirmItem = null;
+        _this8.expandedItem = null;
+        _this8.confirmItem = null;
       })["catch"](function () {
-        _this6.cancelLoading = false;
+        _this8.cancelLoading = false;
 
-        _this6.$root.$emit('noty', {
+        _this8.$root.$emit('noty', {
           title: 'Ошибка',
           text: 'Ошибка соединения',
           type: 'error'
@@ -3649,17 +3800,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     // TON Methods
     loadTonInfo: function loadTonInfo() {
-      var _this7 = this;
+      var _this9 = this;
 
       this.tonLoading = true;
       this.$root.axios.post('/ton/info').then(function (res) {
-        _this7.tonRate = res.data.rate || 500;
-        _this7.tonWallet = res.data.wallet || '';
-        _this7.tonLoading = false;
+        _this9.tonRate = res.data.rate || 500;
+        _this9.tonWallet = res.data.wallet || '';
+        _this9.tonLoading = false;
 
-        _this7.calcTonAmount();
+        _this9.calcTonAmount();
       })["catch"](function () {
-        _this7.tonLoading = false;
+        _this9.tonLoading = false;
       });
     },
     // TON - Open Modal
@@ -3669,10 +3820,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   mounted: function mounted() {
-    var _this8 = this;
+    var _this10 = this;
 
     this.$root.$on('openCashier', function (tab) {
-      return _this8.show(tab);
+      return _this10.show(tab);
     });
   }
 });
@@ -58383,7 +58534,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped styles are now moved to global CSS (app.css / dark.css) */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped styles are now moved to global CSS (app.css / dark.css) */\n.mpesa-waiting[data-v-6b1b5aef] { text-align: center; padding: 18px 8px; display: flex; flex-direction: column; gap: 8px; align-items: center;\n}\n.mpesa-waiting .fa-mobile[data-v-6b1b5aef] { font-size: 36px; color: #4caf50;\n}\n.mpesa-waiting-title[data-v-6b1b5aef] { font-weight: 700; font-size: 16px;\n}\n", ""]);
 
 // exports
 
@@ -103221,6 +103372,29 @@ var render = function() {
                         "div",
                         {
                           staticClass: "cashier-system",
+                          class: { active: _vm.depSystem === "mpesa" },
+                          on: {
+                            click: function($event) {
+                              _vm.depSystem = "mpesa"
+                            }
+                          }
+                        },
+                        [
+                          _c("img", {
+                            attrs: {
+                              src: "/assets/image/mpesa.svg",
+                              alt: "M-Pesa"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", [_vm._v("M-Pesa")])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "cashier-system",
                           class: { active: _vm.depSystem === "fk" },
                           on: {
                             click: function($event) {
@@ -103307,135 +103481,322 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "cashier-form" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Сумма пополнения (₽)")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.depSum,
-                              expression: "depSum"
-                            }
+                    _vm.depSystem === "mpesa"
+                      ? _c(
+                          "div",
+                          { staticClass: "cashier-form" },
+                          [
+                            _vm.mpesa.waiting
+                              ? _c("div", { staticClass: "mpesa-waiting" }, [
+                                  _c("i", { staticClass: "fa fa-mobile" }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "mpesa-waiting-title" },
+                                    [_vm._v("Check your phone")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", [
+                                    _vm._v("Enter your M-Pesa PIN to pay "),
+                                    _c("strong", [
+                                      _vm._v("KES " + _vm._s(_vm.mpesa.amount))
+                                    ]),
+                                    _vm._v(". This page updates by itself.")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("i", {
+                                    staticClass: "fa fa-spinner fa-spin"
+                                  })
+                                ])
+                              : [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("label", [
+                                      _vm._v("M-Pesa phone number")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.mpesa.phone,
+                                          expression: "mpesa.phone"
+                                        }
+                                      ],
+                                      staticClass: "cashier-input",
+                                      attrs: {
+                                        type: "tel",
+                                        placeholder: "0712 345 678"
+                                      },
+                                      domProps: { value: _vm.mpesa.phone },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.mpesa,
+                                            "phone",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("label", [_vm._v("Amount (KES)")]),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.depSum,
+                                          expression: "depSum"
+                                        }
+                                      ],
+                                      staticClass: "cashier-input",
+                                      attrs: {
+                                        type: "number",
+                                        min: "10",
+                                        step: "1",
+                                        placeholder: "Minimum KES 10"
+                                      },
+                                      domProps: { value: _vm.depSum },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.depSum = $event.target.value
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "quick-amounts" },
+                                      [
+                                        _c(
+                                          "button",
+                                          {
+                                            on: {
+                                              click: function($event) {
+                                                _vm.depSum = 100
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("100")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            on: {
+                                              click: function($event) {
+                                                _vm.depSum = 500
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("500")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            on: {
+                                              click: function($event) {
+                                                _vm.depSum = 1000
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("1,000")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            on: {
+                                              click: function($event) {
+                                                _vm.depSum = 5000
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("5,000")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "cashier-btn-action",
+                                      attrs: { disabled: _vm.isLoading },
+                                      on: { click: _vm.createMpesaDeposit }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                            " +
+                                          _vm._s(
+                                            _vm.isLoading
+                                              ? "Sending..."
+                                              : "Pay with M-Pesa"
+                                          ) +
+                                          "\n                        "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm.mpesa.notice
+                                    ? _c(
+                                        "div",
+                                        { staticClass: "deposit-warning" },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fa fa-info-circle"
+                                          }),
+                                          _vm._v(" "),
+                                          _c("span", [
+                                            _vm._v(_vm._s(_vm.mpesa.notice))
+                                          ])
+                                        ]
+                                      )
+                                    : _vm._e()
+                                ]
                           ],
-                          staticClass: "cashier-input",
-                          attrs: {
-                            type: "number",
-                            placeholder:
-                              "Минимум " + _vm.getDepSystemConfig.min + " ₽"
-                          },
-                          domProps: { value: _vm.depSum },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.depSum = $event.target.value
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "quick-amounts" }, [
-                          _c(
-                            "button",
-                            {
+                          2
+                        )
+                      : _c("div", { staticClass: "cashier-form" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", [_vm._v("Сумма пополнения (₽)")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.depSum,
+                                  expression: "depSum"
+                                }
+                              ],
+                              staticClass: "cashier-input",
+                              attrs: {
+                                type: "number",
+                                placeholder:
+                                  "Минимум " + _vm.getDepSystemConfig.min + " ₽"
+                              },
+                              domProps: { value: _vm.depSum },
                               on: {
-                                click: function($event) {
-                                  _vm.depSum = 100
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.depSum = $event.target.value
                                 }
                               }
-                            },
-                            [_vm._v("+100")]
-                          ),
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "quick-amounts" }, [
+                              _c(
+                                "button",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      _vm.depSum = 100
+                                    }
+                                  }
+                                },
+                                [_vm._v("+100")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      _vm.depSum = 500
+                                    }
+                                  }
+                                },
+                                [_vm._v("+500")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      _vm.depSum = 1000
+                                    }
+                                  }
+                                },
+                                [_vm._v("+1k")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      _vm.depSum = 5000
+                                    }
+                                  }
+                                },
+                                [_vm._v("+5k")]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", [_vm._v("Промокод (если есть)")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.promocode,
+                                  expression: "promocode"
+                                }
+                              ],
+                              staticClass: "cashier-input",
+                              attrs: { type: "text", placeholder: "PROMO" },
+                              domProps: { value: _vm.promocode },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.promocode = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
                           _vm._v(" "),
                           _c(
                             "button",
                             {
-                              on: {
-                                click: function($event) {
-                                  _vm.depSum = 500
-                                }
-                              }
+                              staticClass: "cashier-btn-action",
+                              attrs: { disabled: _vm.isLoading },
+                              on: { click: _vm.createDeposit }
                             },
-                            [_vm._v("+500")]
+                            [
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(
+                                    _vm.isLoading
+                                      ? "Загрузка..."
+                                      : "Перейти к оплате"
+                                  ) +
+                                  "\n                    "
+                              )
+                            ]
                           ),
                           _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              on: {
-                                click: function($event) {
-                                  _vm.depSum = 1000
-                                }
-                              }
-                            },
-                            [_vm._v("+1k")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              on: {
-                                click: function($event) {
-                                  _vm.depSum = 5000
-                                }
-                              }
-                            },
-                            [_vm._v("+5k")]
-                          )
+                          _vm._m(1)
                         ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Промокод (если есть)")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.promocode,
-                              expression: "promocode"
-                            }
-                          ],
-                          staticClass: "cashier-input",
-                          attrs: { type: "text", placeholder: "PROMO" },
-                          domProps: { value: _vm.promocode },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.promocode = $event.target.value
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "cashier-btn-action",
-                          attrs: { disabled: _vm.isLoading },
-                          on: { click: _vm.createDeposit }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(
-                                _vm.isLoading
-                                  ? "Загрузка..."
-                                  : "Перейти к оплате"
-                              ) +
-                              "\n                    "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm._m(1)
-                    ])
                   ])
                 : _vm._e(),
               _vm._v(" "),
@@ -103461,11 +103822,13 @@ var render = function() {
                             _c("img", {
                               attrs: {
                                 src:
-                                  "/assets/image/" +
-                                  (sys.sys == "fkwallet"
-                                    ? "fkwallet"
-                                    : sys.sys) +
-                                  ".png",
+                                  sys.sys === "mpesa"
+                                    ? "/assets/image/mpesa.svg"
+                                    : "/assets/image/" +
+                                      (sys.sys == "fkwallet"
+                                        ? "fkwallet"
+                                        : sys.sys) +
+                                      ".png",
                                 alt: sys.title
                               }
                             }),
@@ -103512,7 +103875,15 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Сумма вывода (₽)")]),
+                        _c("label", [
+                          _vm._v(
+                            _vm._s(
+                              _vm.withSystem === "mpesa"
+                                ? "Amount (KES)"
+                                : "Сумма вывода (₽)"
+                            )
+                          )
+                        ]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -103560,7 +103931,8 @@ var render = function() {
                                 _vm._s(_vm.getWithSystemConfig.min) +
                                 " - " +
                                 _vm._s(_vm.getWithSystemConfig.max) +
-                                " ₽"
+                                " " +
+                                _vm._s(_vm.withSystem === "mpesa" ? "KES" : "₽")
                             )
                           ])
                         ])
@@ -103580,7 +103952,11 @@ var render = function() {
                                         : 0)) /
                                       100)
                                   ).toFixed(2)
-                                ) + " ₽"
+                                ) +
+                                  " " +
+                                  _vm._s(
+                                    _vm.withSystem === "mpesa" ? "KES" : "₽"
+                                  )
                               )
                             ])
                           ])
