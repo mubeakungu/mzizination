@@ -112,7 +112,7 @@ class Controller extends BaseController
         ];
         $response = $this->curl('https://api.telegram.org/bot' . $this->config->telegram_token . '/getChatMember?' . http_build_query($data));
     
-        if(!$response['ok']) return false;
+        if(!is_array($response) || empty($response['ok'])) return false;
         if($response['result']['status'] == 'left') return false;
 
         return true;
@@ -128,8 +128,8 @@ class Controller extends BaseController
         ];
         $response = $this->curl('https://api.vk.com/method/groups.isMember?' . http_build_query($data));
 
-        if(isset($response['error'])) return false;
-        if(!$response['response']) return false;
+        if(!is_array($response) || isset($response['error'])) return false;
+        if(empty($response['response'])) return false;
 
         return true;
     }

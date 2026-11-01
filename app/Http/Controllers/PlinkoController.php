@@ -145,7 +145,9 @@ class PlinkoController extends Controller
         }
 
         // Генерируем случайное число в диапазоне от 0 до общей суммы вероятностей
-        $randomValue = mt_rand(0, $totalProbability);
+        // Uniform float in [0, total). mt_rand(0, $total) truncated the float total to
+        // an integer, which skewed the odds away from the multiplier table.
+        $randomValue = random_int(0, PHP_INT_MAX - 1) / PHP_INT_MAX * $totalProbability;
 
         // Определяем индекс числа, соответствующего сгенерированному значению
         $accumulatedProbability = 0;

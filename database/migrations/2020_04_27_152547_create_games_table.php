@@ -17,9 +17,9 @@ class CreateGamesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('game');
-            $table->float('bet', 255,2);
-            $table->float('chance', 255, 2);
-            $table->float('win', 255,2);
+            $table->double('bet');
+            $table->double('chance');
+            $table->double('win');
             $table->string('type')->nullable();
             $table->json('dice')->nullable();
             $table->json('mine')->nullable();
