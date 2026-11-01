@@ -16,7 +16,7 @@ class CreateWithdrawsTable extends Migration
         Schema::create('withdraws', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->float('sum', 255, 2);
+            $table->double('sum');
             $table->string('wallet');
             $table->integer('system');
             $table->integer('status')->default(0);

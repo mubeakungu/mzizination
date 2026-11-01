@@ -20,8 +20,18 @@ class IndexController extends Controller
 
         return view('admin.index', compact('profitDice', 'profitMines', 'profitBubbles'));
     }
+    // "dd.mm" label for the admin charts, in the current database's dialect.
+    private function dayLabel(): string
+    {
+        return match (DB::connection()->getDriverName()) {
+            'pgsql' => "to_char(created_at, 'DD.MM')",
+            'sqlite' => "strftime('%d.%m', created_at)",
+            default => "DATE_FORMAT(created_at, '%d.%m')",
+        };
+    }
+
     public function getUserByMonth() {
-        $chart = User::select(DB::raw('DATE_FORMAT(created_at, "%d.%m") as date'), DB::raw('count(*) as count'))
+        $chart = User::select(DB::raw($this->dayLabel() . ' as date'), DB::raw('count(*) as count'))
             ->where('is_bot', 0)
             ->whereMonth('created_at', '=', date('m'))
             ->groupBy('date')
@@ -31,7 +41,7 @@ class IndexController extends Controller
     }
     
     public function getDepsByMonth() {
-        $chart = Payment::where('status', 1)->where('fake', 0)->select(DB::raw('DATE_FORMAT(created_at, "%d.%m") as date'), DB::raw('SUM(sum) as sum'))
+        $chart = Payment::where('status', 1)->where('fake', 0)->select(DB::raw($this->dayLabel() . ' as date'), DB::raw('SUM(sum) as sum'))
             ->whereMonth('created_at', '=', date('m'))
             ->groupBy('date')
             ->get();

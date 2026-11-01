@@ -25,11 +25,10 @@ class WithdrawController extends Controller
     public function init()
     {
         $withdraws = Withdraw::where('user_id', $this->user->id)->orderBy('id', 'desc')->get();
-        $unq = Withdraw::where('user_id', $this->user->id)
-            ->select('wallet', 'system', 'id')
-            ->groupBy('wallet')
-            ->limit(3)
-            ->get();
+        // Last three distinct wallets (a GROUP BY on wallet alone is rejected by PostgreSQL).
+        $unq = $withdraws->unique('wallet')->take(3)
+            ->map(fn ($w) => ['wallet' => $w->wallet, 'system' => $w->system, 'id' => $w->id])
+            ->values();
         
         return [
             'data' => $withdraws,
