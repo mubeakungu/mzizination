@@ -16,7 +16,7 @@ class CreatePromocodesTable extends Migration
         Schema::create('promocodes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->float('sum', 255, 2);
+            $table->double('sum');
             $table->integer('activation');
             $table->timestamps();
         });

@@ -94,7 +94,8 @@ class SlotsController extends Controller
         $db->where('show', 1)->where('is_live', 0);
         $db = $db->orderBy('priority', 'desc')->get();
 
-        $slots = $this->paginate($db, $r->count, $r->page);
+        $perPage = max(1, min(100, (int) $r->count ?: 18));
+        $slots = $this->paginate($db, $perPage, $r->page);
         return $slots;
     }
 

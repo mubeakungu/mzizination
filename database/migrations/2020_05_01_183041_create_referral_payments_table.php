@@ -17,7 +17,7 @@ class CreateReferralPaymentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('referral_id');
-            $table->float('sum', 255, 2);
+            $table->double('sum');
             $table->timestamps();
         });
     }

@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
                 ->unique()
                 ->nullable()
                 ->default(null);
-            $table->double('balance',255, 2)->default(0.00);
+            $table->double('balance')->default(0.00);
             $table->boolean('is_vk');
             $table->bigInteger('vk_id')->nullable();
             $table->string('vk_username')->nullable();
