@@ -19,7 +19,8 @@ class WithdrawController extends Controller
         'fkwallet' => 10,
         'sbp' => 10,
         'trc20' => 10,
-        'card' => 10
+        'card' => 10,
+        'mpesa' => 0
     ];
 
     public function init()
@@ -103,6 +104,25 @@ class WithdrawController extends Controller
                 return [
                     'error' => true,
                     'message' => 'Введите корректный кошелек'
+                ];
+            }
+        }
+
+        if($system == 'mpesa') {
+            if(!\App\Services\MpesaService::validatePhoneNumber($wallet)) {
+                return [
+                    'error' => true,
+                    'message' => 'Enter a Safaricom number, e.g. 0712 345 678'
+                ];
+            }
+            $wallet = \App\Services\MpesaService::formatPhoneNumber($wallet);
+
+            $min = config('mpesa.min_withdraw');
+            $max = config('mpesa.max_withdraw');
+            if(!is_numeric($sum) || (int) $sum != $sum || $sum < $min || $sum > $max) {
+                return [
+                    'error' => true,
+                    'message' => "Withdrawals are whole amounts between KES {$min} and KES " . number_format($max)
                 ];
             }
         }

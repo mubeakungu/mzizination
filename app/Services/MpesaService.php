@@ -2,264 +2,208 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * Thin client for Safaricom's Daraja API: STK push (deposits), STK query
+ * (to confirm a deposit really went through) and B2C (withdrawals).
+ */
 class MpesaService
 {
-    private $consumerKey;
-    private $consumerSecret;
-    private $shortcode;
-    private $passkey;
-    private $callbackUrl;
-    private $timeoutUrl;
-    private $baseUrl = 'https://api.safaricom.co.ke';
-    private $sandboxUrl = 'https://sandbox.safaricom.co.ke';
-    private $isSandbox = false;
-
-    public function __construct()
+    public function baseUrl(): string
     {
-        $this->consumerKey = env('MPESA_CONSUMER_KEY');
-        $this->consumerSecret = env('MPESA_CONSUMER_SECRET');
-        $this->shortcode = env('MPESA_SHORTCODE');
-        $this->passkey = env('MPESA_PASSKEY');
-        $this->callbackUrl = env('MPESA_CALLBACK_URL');
-        $this->timeoutUrl = env('MPESA_TIMEOUT_URL');
-        $this->isSandbox = env('MPESA_SANDBOX', false);
+        return config('mpesa.sandbox') ? 'https://sandbox.safaricom.co.ke' : 'https://api.safaricom.co.ke';
     }
 
-    /**
-     * Get OAuth access token
-     */
-    public function getAccessToken()
+    public function isConfigured(): bool
     {
-        $url = ($this->isSandbox ? $this->sandboxUrl : $this->baseUrl) . '/oauth/v1/generate?grant_type=client_credentials';
+        return config('mpesa.consumer_key') && config('mpesa.consumer_secret')
+            && config('mpesa.shortcode') && config('mpesa.passkey') && config('mpesa.callback_secret');
+    }
 
-        try {
-            $response = Http::withBasicAuth($this->consumerKey, $this->consumerSecret)
-                ->get($url);
+    public function b2cConfigured(): bool
+    {
+        return $this->isConfigured() && config('mpesa.initiator_name') && config('mpesa.initiator_password')
+            && (config('mpesa.certificate') || is_file((string) config('mpesa.certificate_path')));
+    }
 
-            if ($response->successful()) {
-                return $response->json()['access_token'];
+    public function callbackUrl(string $path): string
+    {
+        return rtrim((string) config('mpesa.callback_base'), '/') . '/mpesa/callback/' . config('mpesa.callback_secret') . '/' . $path;
+    }
+
+    public function getAccessToken(): ?string
+    {
+        // Tokens last an hour; a null result isn't kept, so a failure is retried next time.
+        return Cache::remember('mpesa_token_' . md5((string) config('mpesa.consumer_key')), 3000, function () {
+            $response = Http::timeout(15)
+                ->withBasicAuth((string) config('mpesa.consumer_key'), (string) config('mpesa.consumer_secret'))
+                ->get($this->baseUrl() . '/oauth/v1/generate', ['grant_type' => 'client_credentials']);
+
+            if (!$response->successful() || !$response->json('access_token')) {
+                Log::error('M-Pesa token error', ['status' => $response->status(), 'body' => $response->body()]);
+                return null;
             }
 
-            Log::error('M-Pesa Token Error', [
-                'status' => $response->status(),
-                'body' => $response->body()
-            ]);
+            return $response->json('access_token');
+        });
+    }
 
-            return null;
-        } catch (\Exception $e) {
-            Log::error('M-Pesa Token Exception', ['error' => $e->getMessage()]);
-            return null;
+    private function stkPassword(string $timestamp): string
+    {
+        return base64_encode(config('mpesa.shortcode') . config('mpesa.passkey') . $timestamp);
+    }
+
+    private function post(string $path, array $payload): array
+    {
+        $token = $this->getAccessToken();
+        if (!$token) {
+            return ['ok' => false, 'status' => 0, 'body' => ['errorMessage' => 'Could not authenticate with M-Pesa']];
         }
+
+        try {
+            $response = Http::timeout(30)->withToken($token)->post($this->baseUrl() . $path, $payload);
+        } catch (\Throwable $e) {
+            Log::error('M-Pesa request failed', ['path' => $path, 'error' => $e->getMessage()]);
+            return ['ok' => false, 'status' => 0, 'body' => ['errorMessage' => 'M-Pesa is not reachable']];
+        }
+
+        return ['ok' => $response->successful(), 'status' => $response->status(), 'body' => $response->json() ?? []];
     }
 
     /**
-     * STK Push for deposit (Customer Initiated STK)
-     *
-     * @param string $phone Phone number (format: 254XXXXXXXXX)
-     * @param int $amount Amount in KES
-     * @param int $accountReference Internal order ID
+     * Ask the customer's phone for their M-Pesa PIN.
+     * Returns ['success' => bool, 'checkout_request_id' => ?, 'message' => string].
      */
-    public function stkPush($phone, $amount, $accountReference)
+    public function stkPush(string $phone, int $amount, string $reference): array
     {
-        $accessToken = $this->getAccessToken();
-        if (!$accessToken) {
-            return [
-                'success' => false,
-                'error' => 'Failed to get access token'
-            ];
-        }
+        $timestamp = now('Africa/Nairobi')->format('YmdHis');
 
-        $timestamp = now()->format('YmdHis');
-        $password = base64_encode($this->shortcode . $this->passkey . $timestamp);
-
-        $url = ($this->isSandbox ? $this->sandboxUrl : $this->baseUrl) . '/mpesa/stkpush/v1/processrequest';
-
-        $payload = [
-            'BusinessShortCode' => $this->shortcode,
-            'Password' => $password,
+        $r = $this->post('/mpesa/stkpush/v1/processrequest', [
+            'BusinessShortCode' => config('mpesa.shortcode'),
+            'Password' => $this->stkPassword($timestamp),
             'Timestamp' => $timestamp,
-            'TransactionType' => 'CustomerPayBillOnline',
-            'Amount' => (int)$amount,
+            'TransactionType' => config('mpesa.transaction_type'),
+            'Amount' => $amount,
             'PartyA' => $phone,
-            'PartyB' => $this->shortcode,
+            'PartyB' => config('mpesa.party_b') ?: config('mpesa.shortcode'),
             'PhoneNumber' => $phone,
-            'CallBackURL' => $this->callbackUrl,
-            'AccountReference' => 'MZI-' . $accountReference,
-            'TransactionDesc' => 'Mzizination Casino Deposit'
-        ];
+            'CallBackURL' => $this->callbackUrl('stk'),
+            'AccountReference' => substr((string) config('mpesa.account_reference'), 0, 12),
+            'TransactionDesc' => substr('Deposit ' . $reference, 0, 13),
+        ]);
 
-        try {
-            $response = Http::withToken($accessToken)
-                ->post($url, $payload);
-
-            if ($response->successful()) {
-                $data = $response->json();
-                return [
-                    'success' => true,
-                    'checkout_request_id' => $data['CheckoutRequestID'] ?? null,
-                    'response_code' => $data['ResponseCode'] ?? null,
-                    'message' => $data['ResponseDescription'] ?? 'STK Sent'
-                ];
-            }
-
-            Log::error('M-Pesa STK Push Error', [
-                'status' => $response->status(),
-                'body' => $response->body()
-            ]);
-
-            return [
-                'success' => false,
-                'error' => 'STK push failed'
-            ];
-        } catch (\Exception $e) {
-            Log::error('M-Pesa STK Push Exception', ['error' => $e->getMessage()]);
-            return [
-                'success' => false,
-                'error' => $e->getMessage()
-            ];
+        $b = $r['body'];
+        if ($r['ok'] && ($b['ResponseCode'] ?? null) === '0' && !empty($b['CheckoutRequestID'])) {
+            return ['success' => true, 'checkout_request_id' => $b['CheckoutRequestID'], 'message' => $b['CustomerMessage'] ?? 'Check your phone'];
         }
+
+        Log::warning('M-Pesa STK push rejected', ['response' => $b, 'status' => $r['status']]);
+        return ['success' => false, 'checkout_request_id' => null, 'message' => $b['errorMessage'] ?? $b['ResponseDescription'] ?? 'M-Pesa request failed'];
     }
 
     /**
-     * B2C Payment (Business to Customer) for withdrawals
-     *
-     * @param string $phone Phone number (format: 254XXXXXXXXX)
-     * @param int $amount Amount in KES
-     * @param int $withdrawalId Withdrawal ID
+     * Ask Safaricom for the outcome of an STK push.
+     * Returns ['state' => 'paid'|'failed'|'pending', 'code' => ?, 'desc' => string].
      */
-    public function b2cWithdrawal($phone, $amount, $withdrawalId)
+    public function stkQuery(string $checkoutRequestId): array
     {
-        $accessToken = $this->getAccessToken();
-        if (!$accessToken) {
-            return [
-                'success' => false,
-                'error' => 'Failed to get access token'
-            ];
+        $timestamp = now('Africa/Nairobi')->format('YmdHis');
+
+        $r = $this->post('/mpesa/stkpushquery/v1/query', [
+            'BusinessShortCode' => config('mpesa.shortcode'),
+            'Password' => $this->stkPassword($timestamp),
+            'Timestamp' => $timestamp,
+            'CheckoutRequestID' => $checkoutRequestId,
+        ]);
+
+        $b = $r['body'];
+        if (isset($b['ResultCode'])) {
+            $code = (string) $b['ResultCode'];
+            return ['state' => $code === '0' ? 'paid' : 'failed', 'code' => $code, 'desc' => $b['ResultDesc'] ?? ''];
         }
 
-        $url = ($this->isSandbox ? $this->sandboxUrl : $this->baseUrl) . '/mpesa/b2c/v1/paymentrequest';
+        // "The transaction is being processed" (500.001.1001), rate limits and outages
+        return ['state' => 'pending', 'code' => null, 'desc' => $b['errorMessage'] ?? 'pending'];
+    }
 
-        $payload = [
-            'InitiatorName' => env('MPESA_INITIATOR_NAME', 'testapi'),
-            'SecurityCredential' => $this->getSecurityCredential(),
+    /**
+     * Send money to a customer. Returns ['success' => bool, 'conversation_id', 'originator_conversation_id', 'message'].
+     */
+    public function b2c(string $phone, int $amount, string $occasion): array
+    {
+        $credential = $this->securityCredential();
+        if (!$credential) {
+            return ['success' => false, 'message' => 'M-Pesa B2C certificate or initiator password is missing'];
+        }
+
+        $r = $this->post('/mpesa/b2c/v1/paymentrequest', [
+            'InitiatorName' => config('mpesa.initiator_name'),
+            'SecurityCredential' => $credential,
             'CommandID' => 'BusinessPayment',
-            'Amount' => (int)$amount,
-            'PartyA' => $this->shortcode,
+            'Amount' => $amount,
+            'PartyA' => config('mpesa.b2c_shortcode'),
             'PartyB' => $phone,
-            'Remarks' => 'Mzizination Withdrawal',
-            'QueueTimeOutURL' => $this->timeoutUrl,
-            'ResultURL' => env('MPESA_B2C_CALLBACK_URL', $this->callbackUrl),
-            'Occasion' => 'Withdrawal-' . $withdrawalId
-        ];
+            'Remarks' => 'Mzizination withdrawal',
+            'QueueTimeOutURL' => $this->callbackUrl('b2c/timeout'),
+            'ResultURL' => $this->callbackUrl('b2c/result'),
+            'Occasion' => substr($occasion, 0, 100),
+        ]);
 
-        try {
-            $response = Http::withToken($accessToken)
-                ->post($url, $payload);
-
-            if ($response->successful()) {
-                $data = $response->json();
-                return [
-                    'success' => true,
-                    'conversation_id' => $data['ConversationID'] ?? null,
-                    'originator_conversation_id' => $data['OriginatorConversationID'] ?? null,
-                    'response_code' => $data['ResponseCode'] ?? null,
-                    'message' => $data['ResponseDescription'] ?? 'Withdrawal initiated'
-                ];
-            }
-
-            Log::error('M-Pesa B2C Error', [
-                'status' => $response->status(),
-                'body' => $response->body(),
-                'withdrawal_id' => $withdrawalId
-            ]);
-
+        $b = $r['body'];
+        if ($r['ok'] && ($b['ResponseCode'] ?? null) === '0') {
             return [
-                'success' => false,
-                'error' => 'Withdrawal failed'
-            ];
-        } catch (\Exception $e) {
-            Log::error('M-Pesa B2C Exception', [
-                'error' => $e->getMessage(),
-                'withdrawal_id' => $withdrawalId
-            ]);
-            return [
-                'success' => false,
-                'error' => $e->getMessage()
+                'success' => true,
+                'conversation_id' => $b['ConversationID'] ?? null,
+                'originator_conversation_id' => $b['OriginatorConversationID'] ?? null,
+                'message' => $b['ResponseDescription'] ?? 'Accepted',
             ];
         }
+
+        Log::warning('M-Pesa B2C rejected', ['response' => $b, 'status' => $r['status']]);
+        return ['success' => false, 'message' => $b['errorMessage'] ?? $b['ResponseDescription'] ?? 'M-Pesa B2C request failed'];
     }
 
-    /**
-     * Get Security Credential for B2C
-     * Encrypt initiator password with M-Pesa's public certificate
-     */
-    private function getSecurityCredential()
+    /** Initiator password encrypted with Safaricom's public certificate. */
+    private function securityCredential(): ?string
     {
-        // For sandbox, return plain text
-        if ($this->isSandbox) {
-            return base64_encode(env('MPESA_INITIATOR_PASSWORD', 'testpass123'));
+        $pem = config('mpesa.certificate') ?: (is_file((string) config('mpesa.certificate_path')) ? file_get_contents(config('mpesa.certificate_path')) : null);
+        $password = config('mpesa.initiator_password');
+        if (!$pem || !$password) return null;
+
+        $key = openssl_pkey_get_public(str_replace('\n', "\n", $pem));
+        if (!$key || !openssl_public_encrypt($password, $encrypted, $key, OPENSSL_PKCS1_PADDING)) {
+            Log::error('M-Pesa certificate could not be used to encrypt the initiator password');
+            return null;
         }
 
-        // For production, use actual encryption with M-Pesa's certificate
-        $certificate = file_get_contents(storage_path('app/mpesa-certificate.pem'));
-        $publicKeyId = openssl_pkey_get_public($certificate);
-        $password = env('MPESA_INITIATOR_PASSWORD');
-
-        openssl_public_encrypt($password, $encrypted, $publicKeyId);
         return base64_encode($encrypted);
     }
 
-    /**
-     * Validate M-Pesa callback signature
-     */
-    public function validateCallback($signature, $payload)
+    /** 0712345678, 712345678, +254712345678, 254112345678 -> 2547XXXXXXXX / 2541XXXXXXXX */
+    public static function formatPhoneNumber($phone): string
     {
-        // M-Pesa provides a signature header for validation
-        // Implementation depends on their specific validation method
-        // For now, we trust HTTPS and log all callbacks
-
-        Log::info('M-Pesa Callback Received', [
-            'signature' => $signature,
-            'payload' => $payload
-        ]);
-
-        return true;
-    }
-
-    /**
-     * Format phone number to M-Pesa format
-     * Input: 0712345678, 254712345678, +254712345678
-     * Output: 254712345678
-     */
-    public static function formatPhoneNumber($phone)
-    {
-        // Remove spaces and common characters
-        $phone = str_replace([' ', '-', '+'], '', $phone);
-
-        // Handle different formats
-        if (str_starts_with($phone, '254')) {
-            return $phone; // Already correct format
-        }
-
-        if (str_starts_with($phone, '0')) {
-            return '254' . substr($phone, 1); // Replace 0 with 254
-        }
-
-        // Assume it needs 254 prefix
+        $phone = preg_replace('/\D/', '', (string) $phone);
+        if (str_starts_with($phone, '254')) return $phone;
+        if (str_starts_with($phone, '0')) return '254' . substr($phone, 1);
         return '254' . $phone;
     }
 
-    /**
-     * Validate phone number
-     */
-    public static function validatePhoneNumber($phone)
+    /** Safaricom numbers are 2547XXXXXXXX or 2541XXXXXXXX. */
+    public static function validatePhoneNumber($phone): bool
     {
-        $phone = self::formatPhoneNumber($phone);
+        return (bool) preg_match('/^254(7|1)\d{8}$/', self::formatPhoneNumber($phone));
+    }
 
-        // Must be 12 digits (254 + 9 digits)
-        return strlen($phone) === 12 && is_numeric($phone);
+    /** Pull "Name"/"Value" or "Key"/"Value" lists out of a callback into an array. */
+    public static function items(?array $list, string $keyField = 'Name'): array
+    {
+        $out = [];
+        foreach ($list ?? [] as $item) {
+            if (isset($item[$keyField])) $out[$item[$keyField]] = $item['Value'] ?? null;
+        }
+        return $out;
     }
 }

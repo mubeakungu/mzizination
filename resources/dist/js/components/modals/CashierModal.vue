@@ -44,6 +44,14 @@
                     <div class="cashier-systems">
                         <div 
                             class="cashier-system" 
+                            :class="{active: depSystem === 'mpesa'}"
+                            @click="depSystem = 'mpesa'"
+                        >
+                            <img src="/assets/image/mpesa.svg" alt="M-Pesa">
+                            <span>M-Pesa</span>
+                        </div>
+                        <div 
+                            class="cashier-system" 
                             :class="{active: depSystem === 'fk'}"
                             @click="depSystem = 'fk'"
                         >
@@ -76,7 +84,39 @@
                         </div>
                     </div>
 
-                    <div class="cashier-form">
+                    <div class="cashier-form" v-if="depSystem === 'mpesa'">
+                        <div v-if="mpesa.waiting" class="mpesa-waiting">
+                            <i class="fa fa-mobile"></i>
+                            <div class="mpesa-waiting-title">Check your phone</div>
+                            <div>Enter your M-Pesa PIN to pay <strong>KES {{ mpesa.amount }}</strong>. This page updates by itself.</div>
+                            <i class="fa fa-spinner fa-spin"></i>
+                        </div>
+                        <template v-else>
+                            <div class="form-group">
+                                <label>M-Pesa phone number</label>
+                                <input type="tel" v-model="mpesa.phone" class="cashier-input" placeholder="0712 345 678">
+                            </div>
+                            <div class="form-group">
+                                <label>Amount (KES)</label>
+                                <input type="number" v-model="depSum" class="cashier-input" min="10" step="1" placeholder="Minimum KES 10">
+                                <div class="quick-amounts">
+                                    <button @click="depSum = 100">100</button>
+                                    <button @click="depSum = 500">500</button>
+                                    <button @click="depSum = 1000">1,000</button>
+                                    <button @click="depSum = 5000">5,000</button>
+                                </div>
+                            </div>
+                            <button class="cashier-btn-action" @click="createMpesaDeposit" :disabled="isLoading">
+                                {{ isLoading ? 'Sending...' : 'Pay with M-Pesa' }}
+                            </button>
+                            <div class="deposit-warning" v-if="mpesa.notice">
+                                <i class="fa fa-info-circle"></i>
+                                <span>{{ mpesa.notice }}</span>
+                            </div>
+                        </template>
+                    </div>
+
+                    <div class="cashier-form" v-else>
                         <div class="form-group">
                             <label>Сумма пополнения (₽)</label>
                             <input type="number" v-model="depSum" class="cashier-input" :placeholder="`Минимум ${getDepSystemConfig.min} ₽`">
@@ -114,7 +154,7 @@
                             :class="{active: withSystem === sys.sys}"
                             @click="withSystem = sys.sys"
                         >
-                            <img :src="`/assets/image/${sys.sys == 'fkwallet' ? 'fkwallet' : sys.sys}.png`" :alt="sys.title">
+                            <img :src="sys.sys === 'mpesa' ? '/assets/image/mpesa.svg' : `/assets/image/${sys.sys == 'fkwallet' ? 'fkwallet' : sys.sys}.png`" :alt="sys.title">
                             <span>{{ sys.title_short || sys.title }}</span>
                         </div>
                     </div>
@@ -126,16 +166,16 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Сумма вывода (₽)</label>
+                            <label>{{ withSystem === 'mpesa' ? 'Amount (KES)' : 'Сумма вывода (₽)' }}</label>
                             <input type="number" v-model="withAmount" class="cashier-input" placeholder="Введите сумму">
                             <div class="withdraw-info">
                                 <span>Комиссия: {{ $root.user.rank ? parseFloat($root.user.rank.comission).toFixed(1) : 0 }}%</span>
-                                <span>Лимит: {{ getWithSystemConfig.min }} - {{ getWithSystemConfig.max }} ₽</span>
+                                <span>Лимит: {{ getWithSystemConfig.min }} - {{ getWithSystemConfig.max }} {{ withSystem === 'mpesa' ? 'KES' : '₽' }}</span>
                             </div>
                         </div>
 
                         <div class="withdraw-calc" v-if="withAmount">
-                            Получите: <strong>{{ (withAmount * ((100 - ($root.user.rank ? $root.user.rank.comission : 0)) / 100)).toFixed(2) }} ₽</strong>
+                            Получите: <strong>{{ (withAmount * ((100 - ($root.user.rank ? $root.user.rank.comission : 0)) / 100)).toFixed(2) }} {{ withSystem === 'mpesa' ? 'KES' : '₽' }}</strong>
                         </div>
 
                         <button class="cashier-btn-action withdraw-btn" @click="createWithdraw" :disabled="isLoading">
@@ -270,12 +310,13 @@ export default {
             error: null,
             
             // Deposit Data
-            depSystem: 'fk',
+            depSystem: 'mpesa',
+            mpesa: { phone: '', waiting: false, amount: 0, id: null, timer: null, polls: 0, notice: '' },
             depSum: null,
             promocode: '',
             
             // Withdraw Data
-            withSystem: 'qiwi',
+            withSystem: 'mpesa',
             withAmount: null,
             withWallet: '',
             
@@ -291,6 +332,7 @@ export default {
 
             // Config
             withdrawSystemsConfig: [
+                { sys: "mpesa", placeholder: "0712 345 678", min: 50, max: 150000, title: "M-Pesa number", title_short: "M-Pesa" },
                 { sys: "qiwi", placeholder: "+7XXXXXXXXX", min: 500, max: 5000, title: "QIWI", title_short: "QIWI" }, 
                 { sys: "fkwallet", placeholder: "FXXXXXXX", min: 200, max: 5000, title: "FK Wallet", title_short: "FK Wallet" }, 
                 { sys: "sbp", placeholder: "+7XXXXXXXXX", min: 1500, max: 10000, title: "СБП", title_short: "СБП" }, 
@@ -298,6 +340,7 @@ export default {
                 { sys: "card", placeholder: "Номер карты", min: 1500, max: 15000, title: "Банковская карта", title_short: "Карта" }
             ],
             depositSystemsConfig: [
+                { sys: "mpesa", title: "M-Pesa", min: 10 },
                 { sys: "fk", title: "FK Wallet", min: 100 },
                 { sys: "sbp", title: "СБП", min: 300 },
                 { sys: "card", title: "Карта", min: 500 },
@@ -329,7 +372,7 @@ export default {
             return this.depositSystemsConfig.find(x => x.sys === this.depSystem) || { min: 100 };
         },
         unifiedHistory() {
-            const deps = this.payments.map(p => ({...p, type: 'deposit', system_name: 'FK/Card', sum: p.sum}));
+            const deps = this.payments.map(p => ({...p, type: 'deposit', system_name: p.method === 'mpesa' ? 'M-Pesa' : 'FK/Card', sum: p.sum}));
             const tonDeps = this.tonPayments.map(p => ({
                 ...p, 
                 type: 'deposit', 
@@ -364,6 +407,64 @@ export default {
         },
         close() {
             this.visible = false;
+            this.stopMpesaPoll();
+        },
+        createMpesaDeposit() {
+            this.error = null;
+            this.mpesa.notice = '';
+            const amount = parseInt(this.depSum, 10);
+            if (!amount || amount < 10) {
+                this.error = 'Enter an amount of at least KES 10';
+                return;
+            }
+            if (!/^(?:\+?254|0)?[17]\d{8}$/.test((this.mpesa.phone || '').replace(/[\s-]/g, ''))) {
+                this.error = 'Enter a Safaricom number, e.g. 0712 345 678';
+                return;
+            }
+            this.isLoading = true;
+            this.$root.axios.post('/mpesa/deposit', { amount, phone: this.mpesa.phone }).then(res => {
+                this.isLoading = false;
+                if (res.data.error) {
+                    this.error = res.data.message;
+                    return;
+                }
+                this.mpesa.id = res.data.id;
+                this.mpesa.amount = amount;
+                this.mpesa.waiting = true;
+                this.mpesa.polls = 0;
+                this.stopMpesaPoll();
+                this.mpesa.timer = setInterval(this.pollMpesa, 4000);
+            }).catch(() => {
+                this.isLoading = false;
+                this.error = 'Connection error';
+            });
+        },
+        pollMpesa() {
+            this.mpesa.polls++;
+            this.$root.axios.post('/mpesa/deposit/status', { id: this.mpesa.id }).then(res => {
+                const d = res.data;
+                if (d.status === 1) {
+                    this.stopMpesaPoll();
+                    this.mpesa.waiting = false;
+                    this.$root.user.balance = d.balance;
+                    this.mpesa.notice = 'Deposit of KES ' + this.mpesa.amount + ' received.';
+                    this.$root.$emit('noty', { title: 'M-Pesa', text: 'KES ' + this.mpesa.amount + ' added to your balance', type: 'success' });
+                    this.loadData();
+                } else if (d.status === 2) {
+                    this.stopMpesaPoll();
+                    this.mpesa.waiting = false;
+                    this.error = 'The M-Pesa payment did not go through' + (d.message ? ': ' + d.message : '') + '.';
+                } else if (this.mpesa.polls > 45) {
+                    // ~3 minutes: stop waiting here; the deposit is still credited if it completes.
+                    this.stopMpesaPoll();
+                    this.mpesa.waiting = false;
+                    this.mpesa.notice = 'Still waiting for M-Pesa. If you paid, your balance updates as soon as Safaricom confirms.';
+                }
+            }).catch(() => {});
+        },
+        stopMpesaPoll() {
+            if (this.mpesa.timer) clearInterval(this.mpesa.timer);
+            this.mpesa.timer = null;
         },
         loadData() {
             this.isLoading = true;
@@ -445,6 +546,13 @@ export default {
                 }
             }
             
+            if(this.withSystem === 'mpesa') {
+                if(!/^(?:\+?254|0)?[17]\d{8}$/.test(wallet.replace(/[\s-]/g, ''))) {
+                    this.error = 'Enter a Safaricom number, e.g. 0712 345 678';
+                    return;
+                }
+            }
+
             if(this.withSystem === 'card') {
                 // Card number validation (16 digits)
                 const card = wallet.replace(/\s/g, '');
@@ -559,4 +667,7 @@ export default {
 
 <style scoped>
 /* Scoped styles are now moved to global CSS (app.css / dark.css) */
+.mpesa-waiting { text-align: center; padding: 18px 8px; display: flex; flex-direction: column; gap: 8px; align-items: center; }
+.mpesa-waiting .fa-mobile { font-size: 36px; color: #4caf50; }
+.mpesa-waiting-title { font-weight: 700; font-size: 16px; }
 </style>

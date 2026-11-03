@@ -148,6 +148,15 @@ Route::group(['prefix' => 'sports'], function () {
         Route::post('/my', 'SportsController@myBets');
     });
 });
+// M-Pesa (Safaricom Daraja). The callback URLs carry MPESA_CALLBACK_SECRET.
+Route::group(['prefix' => 'mpesa'], function () {
+    Route::post('/deposit', 'MpesaController@deposit')->middleware(['auth', 'rg:deposit']);
+    Route::post('/deposit/status', 'MpesaController@depositStatus')->middleware('auth');
+    Route::post('/callback/{secret}/stk', 'MpesaController@stkCallback');
+    Route::post('/callback/{secret}/b2c/result', 'MpesaController@b2cResult');
+    Route::post('/callback/{secret}/b2c/timeout', 'MpesaController@b2cTimeout');
+});
+
 // Licensed provider games (seamless wallet)
 Route::post('/provider/catalog', 'ProviderController@catalog');
 Route::post('/provider/launch', 'ProviderController@launch')->middleware(['auth', 'rg:play']);
